@@ -1,7 +1,7 @@
-<?php include_once "../database/class.MySQL.php";
-$oMySql = new MySql();
-//$oMySql->Select("test2");
-echo $oMySql->lastError;
+<?php
+include_once "../database/class.MySQL.php";
+$omysql= new MySQL();
+
 ?>
 <html>
 <title>Search</title>

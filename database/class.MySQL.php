@@ -65,8 +65,8 @@ class MySQL {
 	function __construct(){
 		$this->database = constant("DBNAME");
 		$this->username = constant("USERNAME");
-		$this->password = constant("password");
-		$this->hostname = constant("DB_HOST").':'."3306";
+		$this->password = constant("PASS");
+		$this->hostname = constant("DB_HOST");
 		
 		$this->Connect();
 	}
@@ -84,19 +84,19 @@ class MySQL {
 		$this->CloseConnection();
 		
 		if($persistant){
-			$this->databaseLink = mysql_pconnect($this->hostname, $this->username, $this->password);
+			$this->databaseLink = mysqli_connect('p:'.$this->hostname, $this->username, $this->password);// 'p:' is for persistant connection
 		}else{
-			//$this->databaseLink = mysql_connect($this->hostname, $this->username, $this->password);
-			$this->databaseLink = mysql_connect(constant("DB_HOST"), constant("USERNAME"), constant("PASS"));
+			$this->databaseLink = mysqli_connect($this->hostname, $this->username, $this->password);
+			
 		}
 		
 		if(!$this->databaseLink){
-   		$this->lastError = 'Could not connect to server: ' . mysql_error($this->databaseLink);
+   		$this->lastError = 'Could not connect to server: ' . mysqli_error($this->databaseLink);
 			return false;
 		}
 		
 		if(!$this->UseDB()){
-			$this->lastError = 'Could not connect to database: ' . mysql_error($this->databaseLink);
+			$this->lastError = 'Could not connect to database: ' . mysqli_error($this->databaseLink);
 			return false;
 		}
 		return true;
@@ -105,8 +105,8 @@ class MySQL {
 	
 	// Select database to use
 	private function UseDB(){
-		if(!mysql_select_db($this->database, $this->databaseLink)){
-			$this->lastError = 'Cannot select database: ' . mysql_error($this->databaseLink);
+		if(!mysqli_select_db($this->databaseLink,$this->database)){
+			$this->lastError = 'Cannot select database: ' . mysqli_error($this->databaseLink);
 			return false;
 		}else{
 			return true;
@@ -114,16 +114,16 @@ class MySQL {
 	}
 	
 	
-	// Performs a 'mysql_real_escape_string' on the entire array/string
+	// Performs a 'mysqli_real_escape_string' on the entire array/string
 	private function SecureData($data){
 		if(is_array($data)){
 			foreach($data as $key=>$val){
 				if(!is_array($data[$key])){
-					$data[$key] = mysql_real_escape_string($data[$key], $this->databaseLink);
+					$data[$key] = mysqli_real_escape_string($data[$key], $this->databaseLink);
 				}
 			}
 		}else{
-			$data = mysql_real_escape_string($data, $this->databaseLink);
+			$data = mysqli_real_escape_string($data, $this->databaseLink);
 		}
 		return $data;
 	}
@@ -137,9 +137,9 @@ class MySQL {
 	// Executes MySQL query
 	function ExecuteSQL($query){
 		$this->lastQuery 	= $query;
-		if($this->result 	= mysql_query($query, $this->databaseLink)){
-			$this->records 	= @mysql_num_rows($this->result);
-			$this->affected	= @mysql_affected_rows($this->databaseLink);	
+		if($this->result 	= mysqli_query($query, $this->databaseLink)){
+			$this->records 	= @mysqli_num_rows($this->result);
+			$this->affected	= @mysqli_affected_rows($this->databaseLink);	
 			if($this->records > 0){
                          $this->ArrayResults();
                          return $this->arrayedResult;
@@ -149,7 +149,7 @@ class MySQL {
 
 			
 		}else{
-			$this->lastError = mysql_error($this->databaseLink);
+			$this->lastError = mysqli_error($this->databaseLink);
 			return false;
 		}
 	}
@@ -294,7 +294,7 @@ class MySQL {
 	
 	// 'Arrays' a single result
 	function ArrayResult(){
-		$this->arrayedResult = mysql_fetch_assoc($this->result) or die (mysql_error($this->databaseLink));
+		$this->arrayedResult = mysqli_fetch_assoc($this->result) or die (mysqli_error($this->databaseLink));
 		return $this->arrayedResult;
 	}
 
@@ -306,7 +306,7 @@ class MySQL {
 		}
 		
 		$this->arrayedResult = array();
-		while ($data = mysql_fetch_assoc($this->result)){
+		while ($data = mysqli_fetch_assoc($this->result)){
 			$this->arrayedResult[] = $data;
 		}
 		return $this->arrayedResult;
@@ -318,7 +318,7 @@ class MySQL {
 			unset($this->arrayedResult);
 		}
 		$this->arrayedResult = array();
-		while($row = mysql_fetch_assoc($this->result)){
+		while($row = mysqli_fetch_assoc($this->result)){
 			foreach($row as $theKey => $theValue){
 				$this->arrayedResult[$row[$key]][$theKey] = $theValue;
 			}
@@ -328,7 +328,7 @@ class MySQL {
 
 	// Returns last insert ID
 	function LastInsertID(){
-		return mysql_insert_id();
+		return mysqli_insert_id();
 	}
 
 	// Return number of rows
@@ -340,7 +340,7 @@ class MySQL {
 	// Closes the connections
 	function CloseConnection(){
 		if($this->databaseLink){
-			mysql_close($this->databaseLink);
+			mysqli_close($this->databaseLink);
 		}
 	}
 }

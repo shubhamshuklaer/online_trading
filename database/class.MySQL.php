@@ -119,11 +119,11 @@ class MySQL {
 		if(is_array($data)){
 			foreach($data as $key=>$val){
 				if(!is_array($data[$key])){
-					$data[$key] = mysqli_real_escape_string($data[$key], $this->databaseLink);
+					$data[$key] = mysqli_real_escape_string($this->databaseLink,$data[$key]);
 				}
 			}
 		}else{
-			$data = mysqli_real_escape_string($data, $this->databaseLink);
+			$data = mysqli_real_escape_string($this->databaseLink,$data);
 		}
 		return $data;
 	}
@@ -137,7 +137,7 @@ class MySQL {
 	// Executes MySQL query
 	function ExecuteSQL($query){
 		$this->lastQuery 	= $query;
-		if($this->result 	= mysqli_query($query, $this->databaseLink)){
+		if($this->result 	= mysqli_query($this->databaseLink,$query)){
 			$this->records 	= @mysqli_num_rows($this->result);
 			$this->affected	= @mysqli_affected_rows($this->databaseLink);	
 			if($this->records > 0){

@@ -6,7 +6,8 @@ $("doccument").ready(function(){// short form of doccument load
 			search_text : search_text
 		},
 		function(data){
-			alert(data);
+			var autosuggest=document.getElementById("suggestions");
+			autosuggest.innerHTML=data;
 		});
 	});
 });

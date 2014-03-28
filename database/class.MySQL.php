@@ -211,7 +211,7 @@ class MySQL {
 	
 	
 	// Gets a single row from $from where $where is true
-	function Select($from, $where='', $orderBy='', $limit='', $like=false, $operand='AND',$cols='*'){
+	function Select($from, $where='', $orderBy='', $limit='', $like=false, $operand='AND',$cols='*'){// eg of $orderby "colname1,colname2 DESC" ,DESC for decending ordering and ASC for accending
 		// Catch Exceptions
 		if(trim($from) == ''){
 			return false;
@@ -226,7 +226,7 @@ class MySQL {
 			foreach($where as $key=>$value){
 				if($like){
 					//$query .= '`' . $key . '` LIKE "%' . $value . '%" ' . $operand . ' ';
-					$query .= "`{$key}` LIKE '%{$value}%' {$operand} ";
+					$query .= "`{$key}` LIKE '{$value}' {$operand} ";//removed % before and after {$value} add it while providing its value//shubham shukla
 				}else{
 					//$query .= '`' . $key . '` = "' . $value . '" ' . $operand . ' ';
 					$query .= "`{$key}` = '{$value}' {$operand} ";

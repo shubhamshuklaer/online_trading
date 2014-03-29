@@ -6,19 +6,17 @@ if(isset($_POST["search_text"])&&!empty($_POST["search_text"])){
 	$search_text=$_POST["search_text"];
 	$where=array("search_query" => $search_text."%" );// the % is to let any number of char appear after $serch_text
 	$result=$omysql->Select("search_history",$where,"num_reps DESC","",true,"AND");
-	echo $omysql->lastQuery;
-	echo "<br>".$omysql->records;
 	if($result){
-		echo '<ul>';
+ 		$suggestions=array();
 		if($omysql->records==1){
-			echo "<li>".$result["search_query"]."</li>";
+		 	$suggestions[]=$result["search_query"];
 		}else if($omysql->records>1){
-			 for($i=0;$i<$omysql->records;$i++)
-				echo "<li>".$result[$i]["search_query"]."</li>";
+		 	for($i=0;$i<$omysql->records;$i++)
+		 		$suggestions[]=$result[$i]["search_query"];
 		}
-		echo '</ul>';
+		echo json_encode($suggestions);
 	}else{
-		echo $omysql->lastError;
+		echo json_encode($omysql->lastError);
 	}
 }
 ?>

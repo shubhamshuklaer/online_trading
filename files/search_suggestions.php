@@ -25,6 +25,7 @@
 // if(isset($_SESSION("user_nm"))){
 	
 // }
-
+$testing= array("shubham","shukla");
+echo json_encode($testing);
 
 ?>

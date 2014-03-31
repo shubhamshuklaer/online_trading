@@ -2,10 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Template</title>
 	<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 </head>

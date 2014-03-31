@@ -18,7 +18,7 @@
 				<!--Main Content area--> 
 		        <div class="container-fluid">
 		            <div class="row">
-		        		<input  type="text" placeholder="search.." id="search_query" name="search_query" />
+		        		<input  type="search" placeholder="search.." id="search_query" name="search_query" />
 		        		<input type="button" value="Search" onclick="search()" />
 					</div>
 					

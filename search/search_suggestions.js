@@ -10,3 +10,7 @@ $("doccument").ready(function(){// short form of doccument load
       }
     });
 });
+
+function reload_suggestions(){
+	
+}

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"> 
-	<title></title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.css"  type="text/css"/>
 </head>
 <body>
@@ -28,7 +31,8 @@
 		</div>
 	</div>
 	<!--All javascript placed at the end so that the page loads faster-->
-	<script type="text/javascript" src="js/vendor/jquery.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 </html>

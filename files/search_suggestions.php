@@ -1,6 +1,6 @@
 <?php
-//handles the search_querry(serch suggestions as well as serch results)
-// require_once "../database/class.MySQL.php";
+// handles the search_querry(serch suggestions as well as serch results)
+// require_once "class.MySQL.php";
 // $omysql=new MySQL();
 // if(isset($_POST["search_text"])&&!empty($_POST["search_text"])){
 // 	$search_text=$_POST["search_text"];
@@ -20,9 +20,11 @@
 // 	}
 // }
 
-require_once "../database/class.MySQL.php";
-$omysql=new MySQL();
-if(isset($_SESSION("user_nm"))){
+// require_once "class.MySQL.php";
+// $omysql=new MySQL();
+// if(isset($_SESSION("user_nm"))){
 	
-}
+// }
+
+
 ?>

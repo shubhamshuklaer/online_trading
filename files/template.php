@@ -17,7 +17,14 @@
 	
 		<div class="container">
 				<!--Navigation sidebar-->
-				<?php include_once "navigation.php";?>
+				<div class="col-sm-3 col-md-2 sidebar">
+	                <ul class="nav nav-sidebar">
+		                <li class="active"><a href="#">Search</a></li>
+		                <li><a href="#">Profile</a></li>
+		                <li><a href="#">Bulk Order</a></li>
+		                <li><a href="#">Auction</a></li>
+	                </ul>
+                </div>
 				<!--Main Content area--> 
 		        <div class="container-fluid">
 		           <!--
@@ -32,10 +39,9 @@
 		</div>
 	</div>
 	<!--All javascript placed at the end so that the page loads faster-->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../js/jquery.js"><\/script>')</script>
+    <script src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
-	<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../js/custom/search_suggestions.js"></script>
 </body>
 </html>

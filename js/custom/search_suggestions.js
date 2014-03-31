@@ -22,7 +22,7 @@ $("document").ready(function(){// short form of doccument load
        delay: 500,
        minLength: 4,
        }).data("ui-autocomplete")._renderItem= function(ul,item){
-            var list_element=$("<li>").attr("value",item.value)
+            var list_element=$("<li>").attr("data-value","shubham")
             var link=$("<a>").text(item.label);
             link.css("color","blue");
             list_element.append(link);

@@ -6,7 +6,7 @@ $("document").ready(function(){// short form of doccument load
                 dataType: "json",
                 type: "GET",
                 data: {search_text : request.term},
-                success: function(response_data){ 
+                success: function(response_data){
                     response(response_data);// as we have written datatype as json so jquery automatically converts the result 
                     //from json... so responce_data is not json its already parsed
                 },
@@ -18,8 +18,18 @@ $("document").ready(function(){// short form of doccument load
                     alert(thrownError);
                 }
             });
-       }
-    });
+       },
+       delay: 500,
+       minLength: 4,
+       }).data("ui-autocomplete")._renderItem= function(ul,item){
+            var list_element=$("<li>").attr("value",item.value)
+            var link=$("<a>").text(item.label);
+            link.css("color","blue");
+            list_element.append(link);
+            return list_element.appendTo(ul);
+            // return $( "<li>" ).attr( "value", item.value ).append( $( "<a>" ).text( item.label )).appendTo( ul );
+       };
+    
 
 });
 

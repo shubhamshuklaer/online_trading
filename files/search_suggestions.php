@@ -20,12 +20,28 @@
 // 	}
 // }
 
-// require_once "class.MySQL.php";
-// $omysql=new MySQL();
+require_once "class.MySQL.php";
+$omysql=new MySQL();
+session_start();
 // if(isset($_SESSION("user_nm"))){
-	
+	 
 // }
-$testing= array("shubham","shukla");
-echo json_encode($testing);
+if(isset($_GET["search_text"])&&!empty($_GET["search_text"])){
+	$search_text=$_GET["search_text"];
+	$where=array("search_text" => $search_text."%" );// the % is to let any number of char appear after $serch_text
+	$result=$omysql->Select("search_history",$where,"num_reps DESC","",true,"AND");
+	if($result){
+ 		$suggestions=array();
+		if($omysql->records==1){
+		 	$suggestions[]=$result["search_text"];
+		}else if($omysql->records>1){
+		 	for($i=0;$i<$omysql->records;$i++)
+		 		$suggestions[]=$result[$i]["search_text"];
+		}
+		echo json_encode($suggestions);
+	}else{
+		echo json_encode($omysql->lastError);
+	}
+}
 
 ?>

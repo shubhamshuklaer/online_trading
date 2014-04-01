@@ -20,11 +20,12 @@ $("document").ready(function(){// short form of doccument load
             });
        },
        delay: 500,
-       minLength: 4,
+       minLength: 3,
        }).data("ui-autocomplete")._renderItem= function(ul,item){
-            var list_element=$("<li>").attr("data-value","shubham")
-            var link=$("<a>").text(item.label);
-            link.css("color","blue");
+            var list_element=$("<li>").attr("data-value",item.search_text)
+            var link=$("<a>").text(item.search_text);
+            if(item.personal)
+                link.css("color","blue");
             list_element.append(link);
             return list_element.appendTo(ul);
             // return $( "<li>" ).attr( "value", item.value ).append( $( "<a>" ).text( item.label )).appendTo( ul );
@@ -32,35 +33,3 @@ $("document").ready(function(){// short form of doccument load
     
 
 });
-
-
-
-/*
-$('.searchText').autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "/handlers/autocomplete.xml",
-                    dataType: "xml",
-                    type: "GET",
-                    data: {
-                         content: $('.searchText').val()
-                }, success: function (xmlResponse) {
-                    var data = $("product", xmlResponse).map(function (ul, item) {
-                        return {
-                            value: $.trim($("productName", this).text()),
-                            cat: $.trim($("productCatNr", this).text()),
-                            thumb: $.trim($("productThumb", this).text()),
-                            url: $.trim($("productUrl", this).text())
-                        };
-                    });
-                    response(data);
-                }
-            });
-        }
-    }).data("autocomplete")._renderItem = function (ul, item) {
-        return $("<li></li>")
-        .data("item.autocomplete", item)
-        .append("<a href='" + item.url + "'>" + "<img src='" + item.thumb + "'/>" + "<h4>" + item.value + "</h4>" + "<span>" + item.cat + "</span>" + "</a>")
-        .appendTo(ul);
-    };
-*/

@@ -1,47 +1,39 @@
 <?php
-// handles the search_querry(serch suggestions as well as serch results)
-// require_once "class.MySQL.php";
-// $omysql=new MySQL();
-// if(isset($_POST["search_text"])&&!empty($_POST["search_text"])){
-// 	$search_text=$_POST["search_text"];
-// 	$where=array("search_query" => $search_text."%" );// the % is to let any number of char appear after $serch_text
-// 	$result=$omysql->Select("search_history",$where,"num_reps DESC","",true,"AND");
-// 	if($result){
-//  		$suggestions=array();
-// 		if($omysql->records==1){
-// 		 	$suggestions[]=$result["search_query"];
-// 		}else if($omysql->records>1){
-// 		 	for($i=0;$i<$omysql->records;$i++)
-// 		 		$suggestions[]=$result[$i]["search_query"];
-// 		}
-// 		echo json_encode($suggestions);
-// 	}else{
-// 		echo json_encode($omysql->lastError);
-// 	}
-// }
-
 require_once "class.MySQL.php";
+$suggestions=array();
+$temp=array();
 $omysql=new MySQL();
-session_start();
-// if(isset($_SESSION("user_nm"))){
-	 
-// }
 if(isset($_GET["search_text"])&&!empty($_GET["search_text"])){
 	$search_text=$_GET["search_text"];
-	$where=array("search_text" => $search_text."%" );// the % is to let any number of char appear after $serch_text
-	$result=$omysql->Select("search_history",$where,"num_reps DESC","",true,"AND");
-	if($result){
- 		$suggestions=array();
-		if($omysql->records==1){
-		 	$suggestions[]=$result["search_text"];
-		}else if($omysql->records>1){
-		 	for($i=0;$i<$omysql->records;$i++)
-		 		$suggestions[]=$result[$i]["search_text"];
-		}
-		echo json_encode($suggestions);
+	session_start();
+	$_SESSION["user_nm"]="shubham";
+	if(isset($_SESSION["user_nm"])){
+		//personal history
+		$where=array("user_nm LIKE" =>$_SESSION['user_nm']," AND search_text LIKE "=>$search_text."%");// the % is to let any number of char appear after $serch_text
+		$result=$omysql->Select("search_history",$where,"num_reps DESC, timestamp DESC");
+			for($i=0;$i<$omysql->records;$i++){
+		 		$temp["search_text"]=$result[$i]["search_text"];
+		 		$temp["personal"]=true;
+		 		$suggestions[]=$temp;
+			}
+		//other's history
+		$where=array("user_nm NOT LIKE" =>$_SESSION['user_nm'],"AND search_text LIKE "=>$search_text."%");// the % is to let any number of char appear after $serch_text
+		$result=$omysql->Select("search_history",$where,"num_reps DESC, timestamp DESC");
+			for($i=0;$i<$omysql->records;$i++){
+		 		$temp["search_text"]=$result[$i]["search_text"];
+		 		$temp["personal"]=false;
+		 		$suggestions[]=$temp;
+			}
 	}else{
-		echo json_encode($omysql->lastError);
+		$where=array("search_text LIKE"=> $search_text."%");// the % is to let any number of char appear after $serch_text
+		$result=$omysql->Select("search_history",$where,"num_reps DESC, timestamp DESC");
+			for($i=0;$i<$omysql->records;$i++){
+		 		$temp["search_text"]=$result[$i]["search_text"];
+		 		$temp["personal"]=false;
+		 		$suggestions[]=$temp;
+			}
 	}
+	echo json_encode($suggestions);
 }
 
 ?>

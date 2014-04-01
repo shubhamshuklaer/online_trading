@@ -51,17 +51,6 @@ class MySQL {
 	/* *******************
 	 * Class Constructor *
 	 * *******************/
-	//////////////////////original
-	// function __construct($database, $username, $password, $hostname='localhost', $port=3306){
-	// 	$this->database = $database;
-	// 	$this->username = $username;
-	// 	$this->password = $password;
-	// 	$this->hostname = $hostname.':'.$port;
-		
-	// 	$this->Connect();
-	// }
-	///////////////////////////original end
-	//////////////////////////edited start
 	function __construct(){
 		$this->database = constant("DBNAME");
 		$this->username = constant("USERNAME");
@@ -117,7 +106,7 @@ class MySQL {
 	// Performs a 'mysqli_real_escape_string' on the entire array/string
 	private function SecureData($data){
 		if(is_array($data)){
-			foreach($data as $key=>$val){
+			foreach($data as $key=>$value){//edit the array value
 				if(!is_array($data[$key])){
 					$data[$key] = mysqli_real_escape_string($this->databaseLink,$data[$key]);
 				}
@@ -149,6 +138,7 @@ class MySQL {
 
 			
 		}else{
+			$this->records=-1;//shubham shukla
 			$this->lastError = mysqli_error($this->databaseLink);
 			return false;
 		}
@@ -183,23 +173,16 @@ class MySQL {
 	}
 	
 	// Deletes a record from the database
-	function Delete($table, $where='', $limit='', $like=false){
+	//shubham shukla for where syntax see the comment on select function
+	function Delete($table, $where='', $limit=''){
 		$query = "DELETE FROM `{$table}` WHERE ";
 		if(is_array($where) && $where != ''){
 			// Prepare Variables
 			$where = $this->SecureData($where);
 			
 			foreach($where as $key=>$value){
-				if($like){
-					//$query .= '`' . $key . '` LIKE "%' . $value . '%" AND ';
-					$query .= "`{$key}` LIKE '%{$value}%' AND ";
-				}else{
-					//$query .= '`' . $key . '` = "' . $value . '" AND ';
-					$query .= "`{$key}` = '{$value}' AND ";
-				}
+					$query .= $key." "."'".$value."'"." ";
 			}
-			
-			$query = substr($query, 0, -5);
 		}
 		
 		if($limit != ''){
@@ -211,7 +194,9 @@ class MySQL {
 	
 	
 	// Gets a single row from $from where $where is true
-	function Select($from, $where='', $orderBy='', $limit='', $like=false, $operand='AND',$cols='*'){// eg of $orderby "colname1,colname2 DESC" ,DESC for decending ordering and ASC for accending
+	//shubham shukla edited this..!!Format of where clause is associative array.. each  will make one where statement
+	//eg array("user_nm not like"=> shubham" ," AND name" => "dskfjsdk" ," or hdsjkahg like"=> "jjsdkhg") 
+	function Select($from, $where='', $orderBy='', $limit='',$cols='*'){// eg of $orderby "colname1,colname2 DESC" ,DESC for decending ordering and ASC for accending
 		// Catch Exceptions
 		if(trim($from) == ''){
 			return false;
@@ -224,17 +209,8 @@ class MySQL {
 			$where = $this->SecureData($where);
 			
 			foreach($where as $key=>$value){
-				if($like){
-					//$query .= '`' . $key . '` LIKE "%' . $value . '%" ' . $operand . ' ';
-					$query .= "`{$key}` LIKE '{$value}' {$operand} ";//removed % before and after {$value} add it while providing its value//shubham shukla
-				}else{
-					//$query .= '`' . $key . '` = "' . $value . '" ' . $operand . ' ';
-					$query .= "`{$key}` = '{$value}' {$operand} ";
-				}
+					$query .= $key." "."'".$value."'"." ";//removed % before and after {$value} add it while providing its value//shubham shukla
 			}
-			
-			$query = substr($query, 0, -(strlen($operand)+2));
-
 		}else{
 			$query = substr($query, 0, -6);
 		}
@@ -284,17 +260,17 @@ class MySQL {
 		$query .= ' WHERE ';
 		
 		foreach($where as $key=>$value){
-			$query .= "`{$key}` = '{$value}' AND ";
+			$query .= $key." "."'".$value."'"." ";
 		}
 		
-		$query = substr($query, 0, -5);
 		
 		return $this->ExecuteSQL($query);
 	}
 	
 	// 'Arrays' a single result
-	function ArrayResult(){
-		$this->arrayedResult = mysqli_fetch_assoc($this->result) or die (mysqli_error($this->databaseLink));
+	function ArrayResult(){// shubham shukla edited this to make the return datatype of ArrayResult and ArrayResults same i.e array of associative arrays
+		$this->arrayedResult=array();
+		$this->arrayedResult[] = mysqli_fetch_assoc($this->result) or die (mysqli_error($this->databaseLink));
 		return $this->arrayedResult;
 	}
 

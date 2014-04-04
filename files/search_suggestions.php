@@ -6,7 +6,6 @@ $omysql=new MySQL();
 if(isset($_GET["search_text"])&&!empty($_GET["search_text"])){
 	$search_text=$_GET["search_text"];
 	session_start();
-	$_SESSION["user_nm"]="shubham";
 	if(isset($_SESSION["user_nm"])){
 		//personal history
 		$where=array("user_nm LIKE" =>$_SESSION['user_nm']," AND search_text LIKE "=>$search_text."%");// the % is to let any number of char appear after $serch_text

@@ -1,5 +1,5 @@
 #Steps
-1. Include class.MySQL.php  -- include_once "class.MySQL.php";
+1. Require class.MySQL.php  -- require_once "class.MySQL.php";
 2. Create a new MySQL object -- $omysql=new MySQL();
 
 #Attributes

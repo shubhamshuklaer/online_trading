@@ -21,15 +21,18 @@ $("document").ready(function(){// short form of doccument load
        },
        delay: 500,
        minLength: 3,
+       select: function(event,ui){
+                    event.preventDefault();
+                    $(this).val(ui.item.search_text);                  
+               } 
        }).data("ui-autocomplete")._renderItem= function(ul,item){
-            var list_element=$("<li>").attr("data-value",item.search_text)
+            var list_element=$("<li>");
             var link=$("<a>").text(item.search_text);
             if(item.personal)
                 link.css("color","blue");
             list_element.append(link);
             return list_element.appendTo(ul);
-            // return $( "<li>" ).attr( "value", item.value ).append( $( "<a>" ).text( item.label )).appendTo( ul );
-       };
+        };
     
 
 });

@@ -17,8 +17,8 @@
                 <li><a href="#">Profile</a></li>
                 <li><a href="#">Help</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search..." id="search_bar">
+            <form class="navbar-form navbar-right" action="search.php" method="get">
+                <input type="text"  class="form-control" placeholder="Search..." id="search_bar" name="search_bar" >
             </form>
         </div>
     </div>

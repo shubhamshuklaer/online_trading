@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Don't edit this file, copy the code to use it in your module-->
 <html>
 <head>
 	<meta charset="utf-8">
@@ -12,7 +13,7 @@
 			<?php include_once "header.php";?> 
 		</div>
 	
-		<div class="container">
+		<div class="container"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
 				<div class="col-sm-3 col-md-2 sidebar">
 	                <ul class="nav nav-sidebar">

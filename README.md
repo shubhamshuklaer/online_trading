@@ -31,4 +31,3 @@ online_trading
     2. Create one branch for your module.
     3. Always work on your module branch,until the module is complete.
     4. After the module is complete we will merge everything in master branch.
-    5. Don't work on master branch, it will only contain the stable tested version of the code.

@@ -25,4 +25,3 @@ where clause will be of format array("user_nm NOT LIKE"=>"shubham","AND num_reps
 5.	function Update($table, $set, $where, $exclude = '')
 
 
-6.	function ArrayResults()

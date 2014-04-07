@@ -31,3 +31,10 @@ online_trading
     2. Create one branch for your module.
     3. Always work on your module branch,until the module is complete.
     4. After the module is complete we will merge everything in master branch.
+10. Users
+      1. Profile- Rishi
+      2. Auction- Shubhakar
+      3. search- shubham
+      4. cart-vrinda
+      5. bulk order- praveen
+      6. Recommendation- Swapnil

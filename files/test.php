@@ -24,7 +24,7 @@
 	                </ul>
                 </div>
 				<!--Main Content area--> 
-		        <div class="container-fluid clo-sm-9 col-md-10">
+		        <div class="container-fluid clo-sm-6 col-md-8">
 		           <!--
 						Write all
 						your code
@@ -50,6 +50,14 @@ Having determined the starting position, BMS continues down the page, breaking y
 If you text does not fit on the current page, BMS completes it by adding your trailer text, if any, at the bottom and disposes of it according to the disposition option you have established (TERMINAL, PAGING, or SET), just as it does for a mapped logical message. The trailer is optional, like the header; you use the TRAILER option to specify it (see Header and trailer format).
 BMS then goes to a new page and repeats from step 2 with the remaining data.		        
 	    		</div>
+	    		<div class="col-sm-3 col-md-2 sidebar">
+	                <ul class="nav nav-sidebar">
+		                <li class="active"><a href="#">Search</a></li>
+		                <li><a href="#">Profile</a></li>
+		                <li><a href="#">Bulk Order</a></li>
+		                <li><a href="#">Auction</a></li>
+	                </ul>
+                </div>
 		</div>
 	</div>
 	<!--All javascript placed at the end so that the page loads faster-->

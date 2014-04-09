@@ -195,7 +195,7 @@ class MySQL {
 	
 	// Gets a single row from $from where $where is true
 	//shubham shukla edited this..!!Format of where clause is associative array.. each  will make one where statement
-	//eg array("user_nm not like"=> shubham" ," AND name" => "dskfjsdk" ," or hdsjkahg like"=> "jjsdkhg") 
+	//eg array("user_nm not like"=> "shubham" ," AND name" => "dskfjsdk" ," or hdsjkahg like"=> "jjsdkhg") 
 	function Select($from, $where='', $orderBy='', $limit='',$cols='*'){// eg of $orderby "colname1,colname2 DESC" ,DESC for decending ordering and ASC for accending
 		// Catch Exceptions
 		if(trim($from) == ''){

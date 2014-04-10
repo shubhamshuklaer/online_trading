@@ -1,13 +1,12 @@
 <?php
 require_once "class.MySQL.php";
-if(isset($_GET["search_bar"])){
-	$search_text=$_GET["search_bar"];
-	if(isset($_GET["correct_spell"]))
-		$correct_spell=$_GET["correct_spell"];
-	else
-		$correct_spell=0;
+if(isset($_POST["where_clause"])){
 	$omysql=new MySQL();
-	$where=array("search_term ="=>$search_text);
+	$where_obj=json_decode($_POST["where_clause"]);
+	$where=array();
+	foreach ($where_obj as $key => $value) {
+		$where[$key]=$value;
+	}
 	$cols="item_id,rep_name as rank";
 	$order_by="rank DESC";
 	$omysql->Select("search_index",$where,$order_by,"",$cols);
@@ -23,6 +22,15 @@ if(isset($_GET["search_bar"])){
 		they are ints so no need for sanitization
 		*/
 		$omysql->ExecuteSQL($query);
+		if($omysql->records>0){
+			$result=$omysql->arrayedResult;
+			for($i=0;$i<count($result);$i++){
+				$result[$i]["pic_loc"]=constant("HOSTNAME")."/upload/".$result[$i]["pic_loc"];
+			}
+			echo json_encode($result);
+
+		}
 	}
+
 }
 ?>

@@ -22,7 +22,6 @@ function load_items(load_category){
             for (var row in response_data){
             	var item_div=$("<div>");
             	item_div.attr("id",response_data[row]["item_id"]);
-            	// item_div.attr("class","container");
             	var item_pic=$("<img>");
             	item_pic.attr("src",response_data[row]["pic_loc"]);
             	item_pic.css("width","100%");

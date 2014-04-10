@@ -13,14 +13,16 @@ if(isset($_GET["search_bar"])){
 	$omysql->Select("search_index",$where,$order_by,"",$cols);
 	$search_items=$omysql->arrayedResult;
 	$item_ids=array();
-	foreach ($search_items as $row) {
-		$item_ids[]=$row["item_id"];
+	if($omysql->records>0){
+		foreach ($search_items as $row) {
+			$item_ids[]=$row["item_id"];
+		}
+		$query="Select * from items where item_id IN (".implode(",",$item_ids).") order by FIELD( item_id,".implode(",",$item_ids).") ";
+		/* 
+		as item_ids are taken form database itself and 
+		they are ints so no need for sanitization
+		*/
+		$omysql->ExecuteSQL($query);
 	}
-	$query="Select * from items where item_id IN (".implode(",",$item_ids).") order by FIELD( item_id,".implode(",",$item_ids).") ";
-	/* 
-	as item_ids are taken form database itself and 
-	they are ints so no need for sanitization
-	*/
-	$omysql->ExecuteSQL($query);
 }
 ?>

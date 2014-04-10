@@ -13,7 +13,7 @@
 			<?php include_once "header.php";?> 
 		</div>
 	
-		<div class="container"><!-- you can delete this div if you don't want the side bar-->
+		<div class="container-fluid"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
 				<div class="col-sm-3 col-md-2 sidebar">
 	                <ul class="nav nav-sidebar">
@@ -22,9 +22,10 @@
                 </div>
 				<!--Main Content area--> 
 		        <div class="container-fluid col-sm-9 col-md-9">
-		        	<div id="item_col_1" class="container-fluid clo-sm-4 col-md-4"></div>
-		        	<div id="item_col_2" class="container-fluid clo-sm-4 col-md-4"></div>
-		        	<div id="item_col_3" class="container-fluid clo-sm-4 col-md-4"></div>
+		        	<div id="item_col_1" class="container-fluid clo-sm-3 col-md-3 col-xs-3"></div>
+		        	<div id="item_col_2" class="container-fluid clo-sm-3 col-md-3 col-xs-3"></div>
+		        	<div id="item_col_3" class="container-fluid clo-sm-3 col-md-3 col-xs-3"></div>
+		        	<div id="item_col_4" class="container-fluid clo-sm-3 col-md-3 col-xs-3"></div>
 		           <!--
 						Write all
 						your code

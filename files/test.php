@@ -20,7 +20,11 @@
 		                <li class="active"><a href="#">Search</a></li>
 		                <li><a href="#">Profile</a></li>
 		                <li><a href="#">Bulk Order</a></li>
-		                <li><a href="#">Auction</a></li>
+		                <li><a href="#" class="dropdown-toggle">Auction</a></li>
+		                	<ul>
+		                		<li>dsgasd</li>
+		                		<li>sdgdd</li>
+		                	</ul>
 	                </ul>
                 </div>
 				<!--Main Content area--> 

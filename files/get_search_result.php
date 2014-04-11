@@ -2,7 +2,7 @@
 require_once "class.MySQL.php";
 if(isset($_POST["where_clause"])){
 	$omysql=new MySQL();
-	$where_obj=json_decode($_POST["where_clause"]);
+	$where_obj=json_decode($_POST["where_clause"]);//$where_obj is stdclass object type and not array
 	$where=array();
 	foreach ($where_obj as $key => $value) {
 		$where[$key]=$value;

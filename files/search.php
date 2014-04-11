@@ -16,16 +16,13 @@
 		<div class="container">
 				<!--Navigation sidebar-->
 				<div class="col-sm-3 col-md-2 sidebar">
-	                <ul class="nav nav-sidebar">
-		                <li class="active"><a href="#">Search</a></li>
-		                <li><a href="#">Profile</a></li>
-		                <li><a href="#">Bulk Order</a></li>
-		                <li><a href="#">Auction</a></li>
+	                <ul class="nav nav-sidebar" id="filter_list">
+		                <!-- Area where filter will be loaded -->
 	                </ul>
                 </div>
 				<!--Main Content area--> 
 		        <div class="container-fluid col-sm-9 col-md-10">
-		        <table class="table table striped" id="item_list">
+		        <table class="table table-striped" id="item_list">
 		        	<tbody>
 		        		<!-- Area where all content will be loaded -->
 		        	</tbody>

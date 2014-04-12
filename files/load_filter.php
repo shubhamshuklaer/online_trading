@@ -35,10 +35,17 @@ if(isset($_POST["search_term"])){
 			}
 			//calulating type_distribution
 				$temp_category_distribution=array_count_values($categories);
+				$temp1=array();
 				foreach ($temp_category_distribution as $key=>$value) {
-					if(preg_match("/^[A-Za-z]+$/", $key)){
-						$category_distribution[]=array("category"=>$key,"sub_category"=>array());
-					}
+					$temp=explode(":",$key);
+					if(isset($temp1[$temp[0]]))
+						$temp1[$temp[0]]+=$value;
+					else
+						$temp1[$temp[0]]=$value;
+				}
+				// $temp1=array_count_values($temp1);
+				foreach ($temp1 as $key => $value) {
+					$category_distribution[]=array("category"=>$key,"count"=>$value,"sub_category"=>array());
 				}
 				foreach ($temp_category_distribution as $key=>$value) {
 					if(preg_match("/^[A-Za-z]+:[A-Za-z]+$/", $key)){
@@ -46,7 +53,8 @@ if(isset($_POST["search_term"])){
 						for($i=0;$i<count($category_distribution);$i++){
 							if($category_distribution[$i]["category"]==$temp[0])
 								$temp1=array();
-								$temp1[$temp[1]]=$value;
+								$temp1["sub_category_name"]=$temp[1];
+								$temp1["count"]=$value;
 								$category_distribution[$i]["sub_category"][] =$temp1;
 						}
 					}
@@ -62,7 +70,7 @@ if(isset($_POST["search_term"])){
 					if($min_cost>$value)
 						$min_cost=$value;
 				}
-				$cost_span=$max_cost-$min_cost;
+				// $cost_span=$max_cost-$min_cost;
 				$temp=100;
 				while($temp<=$min_cost){
 					if($temp==100)	
@@ -70,15 +78,16 @@ if(isset($_POST["search_term"])){
 					else
 						$temp+=500;
 				}
-				$temp1=array();
 				sort($costs);
 				$temp_count=0;
+				// print_r($costs);
 				foreach ($costs as $value) {
 					if($value>=$temp){
+						$temp1=array();
 						$temp1["less_than"]=$temp;
 						$temp1["count"]=$temp_count;
 						$cost_distribution[]=$temp1;
-						$temp_count=0;
+						$temp_count=1;
 						if($temp==100)
 							$temp=500;
 						else
@@ -87,6 +96,12 @@ if(isset($_POST["search_term"])){
 						$temp_count++;
 					}
 				}
+				$temp1=array();
+				$temp1["less_than"]=$temp;
+				$temp1["count"]=$temp_count;
+				$cost_distribution[]=$temp1;
+				// print_r($cost_distribution);
+				//the last cost_distribution will have to be added seperately as for that $value may not become >=$temp
 			//cost_distribution ends
 
 			$filter=array();

@@ -5,6 +5,7 @@
     <title>Template</title>
 	<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
+	<style> ul{list-style-type: none;}</style>
 </head>
 <body>
 
@@ -13,7 +14,7 @@
 			<?php include_once "header.php";?> 
 		</div>
 	
-		<div class="container">
+		<div class="container-fluid">
 				<!--Navigation sidebar-->
 				<div class="col-sm-3 col-md-2 sidebar">
 	                <ul class="nav nav-sidebar" id="filter_list">
@@ -21,8 +22,8 @@
 	                </ul>
                 </div>
 				<!--Main Content area--> 
-		        <div class="container-fluid col-sm-9 col-md-10">
-		        <table class="table table-striped" id="item_list">
+		        <div class="container-fluid col-sm-6 col-md-8">
+		        <table class="table table-hover " id="item_list">
 		        	<tbody>
 		        		<!-- Area where all content will be loaded -->
 		        	</tbody>
@@ -35,6 +36,10 @@
 						section of webpage
 		           -->
 		        <div id="paginator"></div>
+	    		</div>
+	    		<div  class="container-fluid col-sm-3 col-md-2 sidebar">
+	    			<ul class="nav nav-sidebar" id="promotions">
+	    			</ul>
 	    		</div>
 		</div>
 	</div>

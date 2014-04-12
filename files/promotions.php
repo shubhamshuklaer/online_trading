@@ -1,14 +1,9 @@
 <?php
 require_once "class.MySQL.php";
-if(isset($_POST["where_clause"])){
+if(isset($_POST["search_term"])){
 	$omysql=new MySQL();
-	$where_obj=json_decode($_POST["where_clause"]);//$where_obj is stdclass object type and not array
-	$where=array();
-	foreach ($where_obj as $key => $value) {
-		$where[$key]=$value;
-	}
 	$where_index=array();
-	$where_index["search_term like"]=$where["search_term"];
+	$where_index["search_term like"]=$_POST["search_term"];
 	$cols="item_id,rep_name as rank";
 	$order_by="rank DESC";
 	$omysql->Select("search_index",$where_index,$order_by,"",$cols);
@@ -18,18 +13,8 @@ if(isset($_POST["where_clause"])){
 		foreach ($search_items as $row) {
 			$item_ids[]=$row["item_id"];
 		}
-		$where_statement="";
-		// print_r($where);
-		foreach ($where as $key => $value) {
-			if($key!="search_term")
-				$where_statement.=	$key."'".$value."' AND ";
-		}
-		if($where_statement!=null){
-			$where_statement=substr($where_statement,0,-5);
-			$where_statement=" AND ". $where_statement;
-		}
 		// echo $where_statement;
-		$query="Select * from items where item_id IN (".implode(",",$item_ids).") ".$where_statement." order by FIELD( item_id,".implode(",",$item_ids).") ";
+		$query="Select * from items where item_id IN (".implode(",",$item_ids).") order by promotion_amnt DESC,FIELD( item_id,".implode(",",$item_ids).") limit 3";
 		/* 
 		as item_ids are taken form database itself and 
 		they are ints so no need for sanitization

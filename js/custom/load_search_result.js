@@ -1,6 +1,8 @@
 var get=[];
 $("document").ready(function(){
     get_url_variables();
+    $("#search_bar").attr("value",get["search_bar"]);
+    get["search_bar"]=get["search_bar"].replace(/\%/g,"\\%");
     var where_clause={"search_term" : get["search_bar"]};
     load_filter(get["search_bar"]);
     // console.log(JSON.stringify(where_clause));
@@ -79,11 +81,19 @@ function load_items(where_clause){
                 var detail_col=$("<td>");
                 detail_col.append("<a href='"+response_data[row]["type"]+".php?item_id="+response_data[row]["item_id"]+"'>"+response_data[row]["item_nm"]+"</a>");
                 detail_col.append("<br>Seller : "+response_data[row]["user_nm"]);
-                detail_col.append("<br> Cost: "+response_data[row]["cost"]);
+                detail_col.append("<br> Quantity: "+response_data[row]["quantity"]);
+                detail_col.append("<br> Condition: "+response_data[row]["item_condition"]);
+                detail_col.append("<br> Category: "+response_data[row]["category"]);
                 var type_col=$("<td>");
                 type_col.append("Type :"+response_data[row]["type"]);
-                if(response_data[row]["type"]=="auction")
-                    type_col.append("<br> Last Date :"+response_data[row]["last_date"]);
+                if(response_data[row]["type"]=="auction"){
+                    type_col.append("<br> Current Bid: "+response_data[row]["cost"]);
+                    var end_date=
+                    type_col.append("<br> End Date :"+response_data[row]["last_date"]);
+                }else{
+                    type_col.append("<br> Cost: "+response_data[row]["cost"]);
+                }
+                    
                 pic_col.appendTo(table_row);
                 detail_col.appendTo(table_row);
                 type_col.appendTo(table_row);
@@ -111,9 +121,12 @@ function load_items(where_clause){
 }
 
 function get_url_variables(){
+    // text_location=decodeURIComponent(location);
+    // alert(text_location);
     location.search.replace('?', '').split('&').forEach(function (val) {
+        // alert("hello");
         split = val.split("=", 2);
-        get[split[0]] = split[1];
+        get[split[0]] = (decodeURIComponent(split[1]).replace(/\+/g," "));
     });
 }   
 
@@ -160,7 +173,7 @@ function load_filter(search_term){
                 main_category.addClass("category");
                 main_category.appendTo(category_element);
                 category_element.append(category_distribution[row]["category"]+"("+category_distribution[row]["count"]+")");
-                if(category_distribution[row]["sub_category"]!=null){
+                if(category_distribution[row]["sub_category"].length>0){
                     var sub_category_list=$("<ul>");
                     ////////////////Default sub category
                         var sub_category_li=$("<li>");
@@ -255,7 +268,9 @@ function load_filter(search_term){
                     alert(thrownError);        
                 }else{
                     var filter_list=document.getElementById("filter_list");
-                    filter_list.append("<li>No filters</li>")
+                    var li_element=$("<li>");
+                    li_element.text("No filters");
+                    li_element.appendTo(filter_list);
                 }    
             }
         }
@@ -306,8 +321,9 @@ function load_promotions(search_term){
                 }else{
                     var promotion_list=document.getElementById("promotions");
                     var element=$("<li>");
-                    element.text("No search results");
-                    element.appendTo(item_list);
+                    element.text("No promotions");
+                    element.appendTo(promotion_list);
+
                 }    
             }
         }

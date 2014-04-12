@@ -1,4 +1,11 @@
-$("document").ready(function(){// short form of doccument load 
+$("document").ready(function(){// short form of doccument load
+    $("#cart_link").hover(function(){
+        $("#cart_icon").css("color","#fff");
+    });
+    $("#cart_link").on("mouseleave",function(){
+        $("#cart_icon").css("color","#aaa");
+    }); 
+
    $( "#search_bar" ).autocomplete({
        source: function(request,response){
             $.ajax({

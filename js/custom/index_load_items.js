@@ -25,13 +25,14 @@ function load_items(load_category){
             	var item_pic=$("<img>");
             	item_pic.attr("src",response_data[row]["pic_loc"]);
             	item_pic.css("width","100%");
+                item_pic.css("height","auto");
             	item_pic.appendTo(item_div);
             	item_div.append("<a>"+response_data[row]["item_nm"]+"</a>");
             	item_div.append("<br> Cost: "+response_data[row]["cost"]);
             	item_div.css("border", "1px solid #888");
             	item_div.css("border-radius","5px");
             	item_div.css("padding","5px");
-                alert(col_1_height+" "+col_2_height+" "+col_3_height+" "+col_4_height+" ");
+                // alert(col_1_height+" "+col_2_height+" "+col_3_height+" "+col_4_height+" ");
                 if(col_1_height<=col_2_height){//ranking 2,1
                     if(col_1_height<=col_3_height){//ranking (2,3),1
                         if(col_1_height<=col_4_height){//ranking (2,3,4),1// order is not there between brackets

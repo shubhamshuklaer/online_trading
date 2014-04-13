@@ -50,15 +50,18 @@ if(isset($_POST["where_clause"])){
 		$where_statement="";
 		// print_r($where);
 		foreach ($where as $key => $value) {
-			if($key!="search_term")
+			if($key!="search_term" & $key!="limit")
 				$where_statement.=	$key."'".$value."' AND ";
 		}
 		if($where_statement!=null){
 			$where_statement=substr($where_statement,0,-5);
 			$where_statement=" AND ". $where_statement;
 		}
+		$limit_statement=" ";
+		if(isset($where["limit"]))
+			$limit_statement=" limit ".$where["limit"]." ";
 		// echo $where_statement;
-		$query="Select * from items where item_id IN (".implode(",",$item_ids).") ".$where_statement." order by FIELD( item_id,".implode(",",$item_ids).") ";
+		$query="Select * from items where item_id IN (".implode(",",$item_ids).") ".$where_statement." order by FIELD( item_id,".implode(",",$item_ids).") ".$limit_statement;
 		/* 
 		as item_ids are taken form database itself and 
 		they are ints so no need for sanitization

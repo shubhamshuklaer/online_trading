@@ -1,14 +1,24 @@
 $("document").ready(function(){
 	load_items("Electronics");
+    $("#category_list").on("click","a",function(e){
+        load_items($(this).attr("href"));
+        e.preventDefault();
+    });
 });
 
 function load_items(load_category){
-	$.ajax({
+    document.getElementById("item_col_1").innerHTML="";
+    document.getElementById("item_col_2").innerHTML="";
+    document.getElementById("item_col_3").innerHTML="";
+    document.getElementById("item_col_4").innerHTML="";
+
+    $.ajax({
         url: "index_load_items.php",
         dataType: "json",
         type: "POST",
         data: {category : load_category},
         success: function(response_data){
+
             // as we have written datatype as json so jquery automatically converts the result 
             //from json... so responce_data is not json its already parsed
             var item_col_1=document.getElementById("item_col_1");
@@ -77,9 +87,16 @@ function load_items(load_category){
         /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
         error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
         */
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
+        error: function (request, status, error) {
+            if(request.readyState==4){// 4 means complete
+                if(request.status!=200){
+                    alert(ajaxOptions);
+                    alert(xhr.status);
+                    alert(thrownError);        
+                }else{
+                    
+                }    
+            }
         }
     });
 }

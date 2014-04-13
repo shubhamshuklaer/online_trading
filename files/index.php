@@ -16,7 +16,7 @@
 		<div class="container-fluid"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
 				<div class="col-sm-3 col-md-2 sidebar">
-	                <ul class="nav nav-sidebar">
+	                <ul class="nav nav-sidebar" id="category_list">
 	                	<?php include_once "index_load_categories.php";?>
 		            </ul>
                 </div>

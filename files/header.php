@@ -13,20 +13,57 @@
         <!--the collapsable content-->
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="profile.php">Profile</a></li>
                 <li>
-                    <a href="display_cart.php" id="cart_link">
-                        <span id="cart_icon" class="glyphicon glyphicon-shopping-cart" style="color:#aaa;font-size:1.2em"></span>
-                    Cart</a>
+                    <form class="navbar-form navbar-right" action="search.php" method="get">
+                        <input type="text"  class="form-control" placeholder="Search..." id="search_bar"  name="search_bar">
+                        <input type="text" class="hidden" name="spell_bit" id="spell_bit" value="1">
+                    </form>
+                </li>
+                <li>
+                    <a href="#" class="custom_icon_link" id="spell_correction">
+                    <span class="glyphicon glyphicon-check custom_navbar_icon"></span>
+                    Spell Correction</a>
+                </li>
+                <li>
+                    <a href="index.php" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-home custom_navbar_icon"></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="profile.php" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-user custom_navbar_icon"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="display_cart.php" class="custom_icon_link">
+                        <span id="cart_icon" class="glyphicon glyphicon-shopping-cart custom_navbar_icon"></span>
+                    </a>
                 </li>
                 <li><a href="create_auction.php">Auction</a></li>
                 <li><a href="create_sell.php">Sell</a></li>
                 <li><a href="bulk_order.php">Bulk Order</a></li>
+                <li>
+                    <a href="index.php" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-envelope custom_navbar_icon"></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="help.html" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-question-sign custom_navbar_icon"></span>
+                    </a>
+                </li>
             </ul>
-            <form class="navbar-form navbar-right" action="search.php" method="get">
-                <input type="text"  class="form-control" placeholder="Search..." id="search_bar" name="search_bar" >
-            </form>
+            
         </div>
     </div>
 </div>
-<!--Search suggestion.js also contain the code for colour change on hover of cart icon-->
+<!--Search suggestion.js also contain the code for colour change on hover of custom_navbar_icon-->
+
+<style>
+.custom_navbar_icon{
+    color:#aaa;
+    font-size: 1.2em;
+}
+</style>

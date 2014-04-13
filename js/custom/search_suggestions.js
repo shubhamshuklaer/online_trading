@@ -1,10 +1,29 @@
 $("document").ready(function(){// short form of doccument load
-    $("#cart_link").hover(function(){
-        $("#cart_icon").css("color","#fff");
+    $(".custom_icon_link").hover(function(){
+        $(this).find(".custom_navbar_icon").css("color","#fff");
     });
-    $("#cart_link").on("mouseleave",function(){
-        $("#cart_icon").css("color","#aaa");
+    $(".custom_icon_link").on("mouseleave",function(){
+        $(this).find(".custom_navbar_icon").css("color","#aaa");
     }); 
+
+    $('#search_bar').on("keydown",function(e){
+        if(e.keyCode==13){
+            e.preventDefault();
+            $(this).parents("form").submit();
+        }
+    });
+    $("#spell_correction").on("click",function(){
+        var glyphicon =$(this).find(".custom_navbar_icon");
+        if(glyphicon.hasClass("glyphicon-check")){
+            glyphicon.removeClass("glyphicon-check");
+            glyphicon.addClass("glyphicon-unchecked");
+            $("#spell_bit").attr("value","0");
+        }else{
+            glyphicon.removeClass("glyphicon-unchecked");
+            glyphicon.addClass("glyphicon-check");
+            $("#spell_bit").attr("value","1");
+        }
+    });
 
    $( "#search_bar" ).autocomplete({
        source: function(request,response){

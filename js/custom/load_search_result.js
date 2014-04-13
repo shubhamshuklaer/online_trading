@@ -1,6 +1,29 @@
 var get=[];
+var item_response_data;
+var total_num_items;
+var num_item_in_one_page=2;
+var num_pages;
 $("document").ready(function(){
     get_url_variables();
+    if(get["spell_bit"]=="1"){
+        //correct spelling
+        search_term_explode=get["search_bar"].split(":");
+        get["search_bar"]="";
+        for(var i in search_term_explode){
+            //correct the spelling of search_term_explode[i]
+                ////////////////////////
+                ///////////////////////////
+                ////////////////////////
+                /////////////////////////
+                ///////////////////////
+                ///////////////////////
+                ///////////////////////
+                ////
+            ///////////////////////////////////////////////
+            get["search_bar"]+=search_term_explode[i]+" ";
+        }
+        
+    }
     $("#search_bar").attr("value",get["search_bar"]);
     get["search_bar"]=get["search_bar"].replace(/\%/g,"\\%");
     var where_clause={"search_term" : get["search_bar"]};
@@ -57,7 +80,7 @@ $("document").ready(function(){
 });
 
 function load_items(where_clause){
-    document.getElementById("item_list").innerHTML="";
+    
 	$.ajax({
         url: "get_search_result.php",
         dataType: "json",
@@ -66,39 +89,31 @@ function load_items(where_clause){
         success: function(response_data){
             // as we have written datatype as json so jquery automatically converts the result 
             //from json... so responce_data is not json its already parsed
-            var item_list=document.getElementById("item_list");
-            for (var row in response_data){
-                var table_row=$("<tr>");
-                table_row.attr("id",response_data[row]["item_id"]);
-                table_row.addClass("clickableRow");
-                // table_row.attr("href","http://localhost/online_trading/files/template.php");
-                var pic_col=$("<td>");
-                var img_box=$("<img>");
-                img_box.css("width","120px");
-                img_box.css("height","150px");
-                img_box.attr("src",response_data[row]["pic_loc"]);
-                img_box.appendTo(pic_col);
-                var detail_col=$("<td>");
-                detail_col.append("<a href='"+response_data[row]["type"]+".php?item_id="+response_data[row]["item_id"]+"'>"+response_data[row]["item_nm"]+"</a>");
-                detail_col.append("<br>Seller : "+response_data[row]["user_nm"]);
-                detail_col.append("<br> Quantity: "+response_data[row]["quantity"]);
-                detail_col.append("<br> Condition: "+response_data[row]["item_condition"]);
-                detail_col.append("<br> Category: "+response_data[row]["category"]);
-                var type_col=$("<td>");
-                type_col.append("Type :"+response_data[row]["type"]);
-                if(response_data[row]["type"]=="auction"){
-                    type_col.append("<br> Current Bid: "+response_data[row]["cost"]);
-                    var end_date=
-                    type_col.append("<br> End Date :"+response_data[row]["last_date"]);
-                }else{
-                    type_col.append("<br> Cost: "+response_data[row]["cost"]);
-                }
-                    
-                pic_col.appendTo(table_row);
-                detail_col.appendTo(table_row);
-                type_col.appendTo(table_row);
-                table_row.appendTo(item_list);
+            item_response_data=response_data;
+            total_num_items=0;
+            $("#paginator").html("");
+            for(var row in response_data)
+                total_num_items++;
+            if(total_num_items>num_item_in_one_page)
+                display_items_with_pagination(-1,num_item_in_one_page);
+            else
+                display_items_with_pagination(-1,total_num_items);
+
+            num_pages=Math.ceil(total_num_items/num_item_in_one_page);
+            if(num_pages>1){
+                var pagination_options={
+                    bootstrapMajorVersion:3,
+                    currentPage: 1,
+                    onPageClicked: function(e,originalEvent,type,page){
+                        e.preventDefault();
+                        var page_offset=(page-1)*num_item_in_one_page-1;
+                        display_items_with_pagination(page_offset,num_item_in_one_page);
+                    },
+                    totalPages:num_pages
+                };
+                $("#paginator").bootstrapPaginator(pagination_options);
             }
+
         },
         /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
         error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
@@ -328,4 +343,44 @@ function load_promotions(search_term){
             }
         }
     });
+}
+
+    
+function display_items_with_pagination(offset,num_items){//if offset is 1 and num elements is 6 then it will select 2-7
+    document.getElementById("item_list").innerHTML="";
+    var item_list=document.getElementById("item_list");
+    for (var row in item_response_data){
+        if(row>offset&&row<=offset+num_items){
+            var table_row=$("<tr>");
+            table_row.attr("id",item_response_data[row]["item_id"]);
+            table_row.addClass("clickableRow");
+            // table_row.attr("href","http://localhost/online_trading/files/template.php");
+            var pic_col=$("<td>");
+            var img_box=$("<img>");
+            img_box.css("width","120px");
+            img_box.css("height","150px");
+            img_box.attr("src",item_response_data[row]["pic_loc"]);
+            img_box.appendTo(pic_col);
+            var detail_col=$("<td>");
+            detail_col.append("<a href='"+item_response_data[row]["type"]+".php?item_id="+item_response_data[row]["item_id"]+"'>"+item_response_data[row]["item_nm"]+"</a>");
+            detail_col.append("<br>Seller : "+item_response_data[row]["user_nm"]);
+            detail_col.append("<br> Quantity: "+item_response_data[row]["quantity"]);
+            detail_col.append("<br> Condition: "+item_response_data[row]["item_condition"]);
+            detail_col.append("<br> Category: "+item_response_data[row]["category"]);
+            var type_col=$("<td>");
+            type_col.append("Type :"+item_response_data[row]["type"]);
+            if(item_response_data[row]["type"]=="auction"){
+                type_col.append("<br> Current Bid: "+item_response_data[row]["cost"]);
+                var end_date=
+                type_col.append("<br> End Date :"+item_response_data[row]["last_date"]);
+            }else{
+                type_col.append("<br> Cost: "+item_response_data[row]["cost"]);
+            }
+                
+            pic_col.appendTo(table_row);
+            detail_col.appendTo(table_row);
+            type_col.appendTo(table_row);
+            table_row.appendTo(item_list);
+        }
+    }
 }

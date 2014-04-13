@@ -35,7 +35,9 @@
 						It will appear in the content 
 						section of webpage
 		           -->
-		        <div id="paginator"></div>
+		        	<div >
+		        		<ul id="paginator"></ul>
+		        	</div>
 	    		</div>
 	    		<div  class="container-fluid col-sm-3 col-md-2 sidebar">
 	    			<ul class="nav nav-sidebar" id="promotions">

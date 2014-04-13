@@ -21,16 +21,16 @@
 		}
 		foreach ($categories as $row) {
 			if(count($row["sub_category"])>0){
-    			echo "<li><a href='#' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>";
+    			echo "<li><a href='".$row["category"]."' class='dropdown-toggle' data-toggle='dropdown' data-hover='dropdown'>";
     			echo $row["category"]."</a>";
-    			echo "<ul class='dropdown-menu dropdown-menu-right' style='right:-100%; top:0%' role='menu' aria-labelledby='dropdownMenu'>";
+    			echo "<ul class='dropdown-menu dropdown-menu-right' style='right:-85%; top:0%' role='menu' aria-labelledby='dropdownMenu'>";
     			foreach ($row["sub_category"] as $value) {
-    				echo "<li><a tabindex='-1' href='#'>".$value."</a></li>";		
+    				echo "<li><a tabindex='-1' href='".$row["category"].":".$value."'>".$value."</a></li>";		
     			}
     			echo "</ul>";
 
 			}else{
-				echo "<li><a href='#'>".$row["category"]."</a></li>";
+				echo "<li><a href='".$row["category"]."'>".$row["category"]."</a></li>";
 			}
 		}
 	}

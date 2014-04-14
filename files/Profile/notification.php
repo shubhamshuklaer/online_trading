@@ -15,7 +15,12 @@ if(!($connection=mysql_connect("localhost", "root", "")))
  		while($tok!==false)
  		{
  			$fut=strtok(";")
+ 			if($fut!==false)
  			$query=$query."item_nm like '$tok' or item_condition like '$tok' or type like '$tok' or  author_nm like 'tok' or genre like 'tok' or brand like 'tok' or model like 'tok' or ";
+ 		    else
+ 		    {
+ 		    	$query=$query."item_nm like '$tok' or item_condition like '$tok' or type like '$tok' or  author_nm like 'tok' or genre like 'tok' or brand like 'tok' or model like 'tok'"; 		    	
+ 		    }
  		}
  	}
 

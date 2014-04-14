@@ -18,26 +18,18 @@
 <link rel="stylesheet" type="text/css" href="c../../ss/smoothness/jquery-ui.css">
 <?php 
     session_start();
-    if(!isset($_SESSION['user_nm']))
+    if(!isset($_SESSION['authentication']))
     header("Location: http://localhost/online_trading/files/Profile/login.php");
 ?>
 <?php
-  if(isset($_POST['cancel_button']))
-  header("Location: http://localhost/online_trading/files/Profile/wishlist.php");
-  if(!($connection=mysql_connect("localhost", "root", "")))
-  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
- if(!mysql_select_db("online_trading", $connection))
-  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
- else{
-  if(!isset($_SESSION))
-   session_start();
-   $rs=mysql_query("SELECT * from wish_list where id='".$_SESSION['wishlist_product_id']."'");
-   $row=mysql_fetch_assoc($rs);
-   $product_name=$row['item_nm'];
-   $product_category=$row['category'];
-   $product_tags=$row['Tags'];
-   mysql_close($connection);
-}
+  include_once '../class.MySQL.php';
+                if(!isset($_SESSION))
+                  session_start();
+                  $object=new MYSQL();
+              $row=$object->ExecuteSQL("SELECT * from wish_list where id='".$_SESSION['wishlist_product_id']."'");
+   $product_name=$row[0]['item_nm'];
+   $product_category=$row[0]['category'];
+   $product_tags=$row[0]['Tags'];
 ?>
 <?php
 if(isset($_POST['submit_button'])) 
@@ -45,18 +37,12 @@ if(isset($_POST['submit_button']))
    $item_nm=$_POST['productname'];
    $categories_name=$_POST['categories'];
    $Tag=$_SESSION['session_tag'];
-   if(!($connection=mysql_connect("localhost", "root", "")))
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    if(!mysql_select_db("online_trading", $connection))
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    else{
-    $rs=mysql_query("UPDATE wish_list SET item_nm='$item_nm', category='$categories_name', Tags='$Tag' where id='".$_SESSION['wishlist_product_id']."'");
-    if(!$rs)
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    mysql_close($connection);
+   if(!isset($_SESSION))
+                  session_start();
+                  $object=new MYSQL();
+              $row=$object->ExecuteSQL("UPDATE wish_list SET item_nm='$item_nm', category='$categories_name', Tags='$Tag' where id='".$_SESSION['wishlist_product_id']."'");
     header("Location: http://localhost/online_trading/files/Profile/wishlist.php");
   }
-}
 ?>
 <script type="text/javascript">
   var tags_name="";
@@ -96,16 +82,12 @@ if(isset($_POST['submit_button']))
               <div class="btn-group">
              <select name="categories" class="btn btn-default dropdown-toggle">
                <?php 
-                 $con=mysql_connect("localhost", "root", "");
-                 mysql_select_db("online_trading", $con);
-                 $res=mysql_query("SELECT * From categories");
-                 while($row=mysql_fetch_assoc($res)){
-                  if($row["categories_name"]==$product_category)
-                  echo "<option selected='selected'>".$row["categories_name"]."</option>";
-                  else
-                  echo "<option>".$row["categories_name"]."</option>";
+               $i=0;
+                  $row=$object->ExecuteSQL("SELECT * From categories");
+              while($row[$i]){
+                  echo "<option>".$row[$i]["categories_name"]."</option>";
+                  ++$i;
                  }
-                 mysql_close($con);
                ?>
               </select>
             </div>
@@ -135,7 +117,7 @@ if(isset($_POST['submit_button']))
             </div>
 
           <input type="submit" class="btn btn-primary" name="submit_button" value="Save" >
-          <input type="submit" class="btn btn-primary" name="cancel_button" value="Cancel" >
+              <input type="button"  onclick="location.href='wishlist.php' "class="btn btn-primary" name="cancel_button" value="Cancel" >
            </div>
           </fieldset>
         </div>

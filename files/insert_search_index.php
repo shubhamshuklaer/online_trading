@@ -1,22 +1,26 @@
 <?php
-$get_item_nm=array_map('strtolower',preg_split('/[\s]+/', trim(preg_replace("/\b[^\s]{1,3}\b/","","Hello hOw are you"))));
+require_once "class.MySQL.php";
+$get_item_nm=array_map('strtolower',preg_split('/[\s]+/', trim(preg_replace("/\b[^\s]{1,3}\b/","",$passed_item_nm))));
 /*regex explained \b ensures that we are at word boundary [^\s]{1,3} matches 1-3 letters(any) 
 the \b at both end ensures that its a word and not any set of 3 character from in between the word too*/
-$get_item_description=array_map('strtolower',preg_split('/[\s]+/', trim(preg_replace("/\b[^\s]{1,3}\b/","","I a  hello   dg      gdsa   am going but its rained"))));
+$get_item_description=array_map('strtolower',preg_split('/[\s]+/', trim(preg_replace("/\b[^\s]{1,3}\b/","",$passed_item_description))));
 $get_item_type=array();
 $get_item_category;
 $get_item_tags;
-$get_item_id=1;
+$o_item_id_mysql=new MySQL();
+$o_item_id_mysql->Select("items","","item_id DESC","1");
+$result_array=$o_item_id_mysql->arrayedResult;
+$get_item_id=$result_array[0]["item_id"];
 require_once "PorterStemmer2.php";
 require_once "StringBuilder.php";
 $oporter_stemmer=new PorterStemmer2();
 for($i=0;$i<count($get_item_nm);$i++){
 $get_item_nm[$i]=$oporter_stemmer->Stem($get_item_nm[$i]);
-echo $get_item_nm[$i]."<br>";
+//echo $get_item_nm[$i]."<br>";
 }
 for($i=0;$i<count($get_item_description);$i++){
 $get_item_description[$i]=$oporter_stemmer->Stem($get_item_description[$i]);
-echo $get_item_description[$i]."<br>";
+//echo $get_item_description[$i]."<br>";
 }
 $unique_terms=array_unique(array_merge($get_item_nm,$get_item_description));
 $value_count_item_nm=array_count_values($get_item_nm);
@@ -39,7 +43,7 @@ foreach ($unique_terms as $value) {
 	$insert_data_structure[]=$temp;
 }
 
-require_once "class.MySQL.php";
+
 $omysql_insert_index=new MySQL();
 foreach ($insert_data_structure as $row) {
 	$omysql_insert_index->Insert($row,"search_index");

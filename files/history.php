@@ -21,20 +21,13 @@
 
 		<div class="container"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
-				<div class="col-sm-2 col-md-2 sidebar">
-	                <ul class="nav nav-sidebar">
-		                <li class="active"><a href="#">Search</a></li>
-		                <li><a href="#">Profile</a></li>
-		                <li><a href="#">Bulk Order</a></li>
-		                <li><a href="#">Auction</a></li>
-	                </ul>
-                </div>
+
 				<!--Main Content area-->
                     <?php
                         $omysql=new MySQL();
                         session_start();
                         $usernm = $_SESSION['user_nm'];
-                        $auth = 1;
+                        $auth = $_SESSION['authentication'];
                         $where=array("user_nm like"=>$usernm);
                         $from = "orders";
                         $orderBy = "order_id DESC";
@@ -108,7 +101,7 @@
                                                 <img src=".'"'.$pic_loc.'"'." width=".'"100"'."height=".'"100"'.">
                                                 </td>
                                                 <td>
-                                                <h4><a href=".'"item.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
+                                                <h4><a href=".'"sale.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
                                                 ."\n"."<small>Item price: ₹".$res2[0]["cost"]
                                                 ."<br>"."Condition: ".$res2[0]["item_condition"]."
                                                 </small></td>
@@ -184,7 +177,7 @@
                                 <img src=".'"'.$pic_loc.'"'." width=".'"100"'."height=".'"100"'.">
                                 </td>
                                 <td>
-                                <h4><a href=".'"item.php?item_id='.$item_id.'"'.">".$res2[0]["item_nm"]."</a></h4>"
+                                <h4><a href=".'"sale.php?item_id='.$item_id.'"'.">".$res2[0]["item_nm"]."</a></h4>"
                                 ."\n"."<small>Item price: ₹".$res2[0]["cost"]
                                 ."<br>"."Condition: ".$res2[0]["item_condition"]."
                                 </small></td>
@@ -299,7 +292,7 @@
                                                 <img src=".'"'.$pic_loc.'"'." width=".'"100"'."height=".'"100"'.">
                                                 </td>
                                                 <td>
-                                                <h4><a href=".'"item.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
+                                                <h4><a href=".'"sale.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
                                                 ."\n"."<small>Item price: ₹".$res2[0]["cost"]
                                                 ."<br>"."Condition: ".$res2[0]["item_condition"]."
                                                 </small></td>
@@ -350,7 +343,7 @@
                                 <img src=".'"'.$pic_loc.'"'." width=".'"100"'."height=".'"100"'.">
                                 </td>
                                 <td>
-                                <h4><a href=".'"item.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
+                                <h4><a href=".'"sale.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
                                 ."\n"."<small>Item price: ₹".$res2[0]["cost"]
                                 ."<br>"."Condition: ".$res2[0]["item_condition"]."
                                 </small></td>

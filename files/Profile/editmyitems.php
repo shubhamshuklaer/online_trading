@@ -17,57 +17,41 @@
 <link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
 <?php 
+  include_once '../class.MySQL.php';
+if(!isset($_SESSION))
     session_start();
-    if(!isset($_SESSION['user_nm']))
+    if(!isset($_SESSION['authentication']))
     header("Location: http://localhost/online_trading/files/Profile/login.php");
 ?>
 <?php
 
-  if(isset($_POST['cancel_button']))
-  header("Location: http://localhost/online_trading/files/Profile/myitems.php");
-  if(!($connection=mysql_connect("localhost", "root", "")))
-  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
- if(!mysql_select_db("online_trading", $connection))
-  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
- else{
-  if(!isset($_SESSION))
-    session_start();
-    $rs=mysql_query("SELECT * from items where item_id='".$_SESSION['product_id']."'");
-    if($rs){
-    $row=mysql_fetch_assoc($rs);
-    $product_name=$row['item_nm'];
-    $product_category=$row['category'];
-    $product_quantity=$row['quantity'];
-    $product_cost=$row['cost'];
-    $product_condition=$row['item_condition'];
-    $product_description=$row['description'];
-    $product_type=$row['type'];
-  }
-  mysql_close($connection);
-}
+                if(!isset($_SESSION))
+                  session_start();
+                  $object=new MYSQL();
+              $row=$object->ExecuteSQL("SELECT * from items where item_id='".$_SESSION['product_id']."'");
+    $product_name=$row[0]['item_nm'];
+    $product_category=$row[0]['category'];
+    $product_quantity=$row[0]['quantity'];
+    $product_cost=$row[0]['cost'];
+    $product_condition=$row[0]['item_condition'];
+    $product_description=$row[0]['description'];
+    $product_type=$row[0]['type'];
 ?>
 <?php
 if(isset($_POST['submit_button'])) 
   {
-   $item_nm=$_POST['productname'];
+    $item_nm=$_POST['productname'];
    $quantity=$_POST['quantity'];
    $cost=$_POST['cost'];
    $itemcondition=$_POST['condition'];
    $itemdescription=$_POST['itemdescription'];
    $item_type=$_POST['itemtype'];
    $categories_name=$_POST['categories'];
-   if(!($connection=mysql_connect("localhost", "root", "")))
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    if(!mysql_select_db("online_trading", $connection))
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    else{
-    $rs=mysql_query("UPDATE items SET item_nm='$item_nm', category='$categories_name', quantity='$quantity', cost='$cost', item_condition='$itemcondition', type='$item_type', description='$itemdescription' where item_id='".$_SESSION['product_id']."'");
-    if(!$rs)
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    mysql_close($connection);
+   if(!isset($_SESSION))
+            session_start();
+        $row=$object->ExecuteSQL("UPDATE items SET item_nm='$item_nm', category='$categories_name', quantity='$quantity', cost='$cost', item_condition='$itemcondition', type='$item_type', description='$itemdescription' where item_id='".$_SESSION['product_id']."'");
     header("Location: http://localhost/online_trading/files/Profile/myitems.php");
   }
-}
 ?>
 </head>
 <body>
@@ -88,7 +72,7 @@ if(isset($_POST['submit_button']))
            <div class="control-group">
             <label class="control-label" >Product Name:</label>
             <div class="controls">
-              <input id="productname" type="text" name="productname"  class="form-control-lg" value="">
+              <input id="productname" type="text" name="productname"  class="form-control-lg" value="<?php echo $product_name; ?>">
             </div>
           </div>
 
@@ -96,7 +80,7 @@ if(isset($_POST['submit_button']))
             <label class="control-label" >Quantity:</label>
             <div class="controls">
               <input id="quantity" type="text" name="quantity" class="form-control-lg" value="<?php 
-              echo $product_quantity
+              echo $product_quantity;
               ?>">
             </div>
           </div>
@@ -105,7 +89,7 @@ if(isset($_POST['submit_button']))
             <label class="control-label" >Cost:</label>
             <div class="controls">
               <input id="cost" type="text" name="cost" class="form-control-lg" value="<?php 
-              echo $product_cost
+              echo $product_cost;
               ?>">
             </div>
           </div>
@@ -114,7 +98,7 @@ if(isset($_POST['submit_button']))
             <label class="control-label" >Condition:</label>
             <div class="controls">
               <input id="condition" type="text" name="condition" class="form-control-lg" value="<?php 
-              echo $product_condition
+              echo $product_condition;
               ?>">
             </div>
           </div>
@@ -123,7 +107,7 @@ if(isset($_POST['submit_button']))
             <label class="control-label" >Description:</label>
             <div class="controls">
               <input id="itemdescription" type="text" name="itemdescription" class="form-control-lg" value="<?php 
-              echo $product_description
+              echo $product_description;
               ?>">
             </div>
           </div>
@@ -132,7 +116,7 @@ if(isset($_POST['submit_button']))
             <label class="control-label" >Type:</label>
             <div class="controls">
               <input id="itemtype" type="text" name="itemtype" class="form-control-lg" value="<?php 
-              echo $product_type
+              echo $product_type;
               ?>">
             </div>
           </div>
@@ -144,17 +128,13 @@ if(isset($_POST['submit_button']))
              <select name="categories" class="btn btn-default dropdown-toggle">
 
               <?php 
-                $con=mysql_connect("localhost", "root", "");
-                mysql_select_db("online_trading", $con);
-                $res=mysql_query("SELECT * From categories");
-                while($row=mysql_fetch_assoc($res)){
-                  if($row["categories_name"]==$product_category)
-                  echo "<option selected='selected'>".$row["categories_name"]."</option>";
-                  else
-                  echo "<option>".$row["categories_name"]."</option>";
-                }
-                mysql_close($con);
-              ?>
+               $i=0;
+                  $row=$object->ExecuteSQL("SELECT * From categories");
+              while($row[$i]){
+                  echo "<option>".$row[$i]["categories_name"]."</option>";
+                  ++$i;
+                 }
+               ?>
 
               </select>
             </div>
@@ -202,12 +182,15 @@ if(isset($_POST['submit_button']))
         $( "#detailsform" ).validate({
           rules: {
            productname : {
-            required: true,
+            required: true
            },
            quantity : {
-            required: true,
+            required: true
            }
-          }
+          },
+              submitHandler: function(form){
+                (form).submit();
+              }
         });
 </script>
 </body>

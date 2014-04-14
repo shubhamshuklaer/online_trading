@@ -25,8 +25,8 @@
                         <?php
 
                         $omysql=new MySQL();
-                        $usernm = "ayantika";//$_SESSION['user_nm'];
-                        $auth = 1;//$_SESSION['authentication'];
+                        $usernm = $_SESSION['user_nm'];
+                        $auth = $_SESSION['authentication'];
                         $rows = 0;
                         $where=array("user_nm like"=>$usernm);
                         $from = "cart";
@@ -63,7 +63,7 @@
                                         <img src=".'"'.$pic_loc.'"'." width=".'"120"'."height=".'"120"'.">
                                         </td>
                                         <td>
-                                        <h4><a href=".'"item.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
+                                        <h4><a href=".'"sale.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
                                         ."\n"."<small>Item price: ₹".$res2[0]["cost"]
                                         ."<br>"."Condition: ".$res2[0]["item_condition"]."
                                         </small></td>
@@ -156,7 +156,7 @@
                                         <img src=".'"'.$pic_loc.'"'." width=".'"120"'."height=".'"120"'.">
                                         </td>
                                         <td>
-                                        <h4><a href=".'"item.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
+                                        <h4><a href=".'"sale.php?item_id='.$item_id.'"'." >".$res2[0]["item_nm"]."</a></h4>"
                                         ."\n"."<small>Item price: ₹".$res2[0]["cost"]
                                         ."<br>"."Condition: ".$res2[0]["item_condition"]."
                                         </small></td>
@@ -391,7 +391,7 @@
             //alert("in func checkout");
             var a = <?php echo $auth;?>;
             //alert(a);
-            if(a==1)
+            if(a)
             {
                 window.location.href = "def_check.php";
                 //authenticated so go to checkout.php
@@ -399,7 +399,7 @@
             }
             else
             {
-                window.location.href = "cart_login.php";
+                window.location.href = "Profile/cart_login.php";
                 //not authenticated so go login page
             }
         }

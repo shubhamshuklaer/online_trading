@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<?php include 'config.php'; ?> <!-- Added config.php-->
 <title>Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -22,45 +21,35 @@
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <!-- Login Authentication code below-->
 <?php
-  if(!isset($_SESSION))
+  include_once 'class.MySQL.php';
+    // include_once '../../config/config.php';
+if(!isset($_SESSION))
   session_start();
-  if(isset($_SESSION['user_nm']))
-   header("Location: " . constant("HOST11") . "/files/Profile/myaccount.php");
+  //if(isset($_SESSION['user_nm']))
+   //header("Location: " . constant("HOSTNAME") . "/files/Profile/myaccount.php");
   $pageStatus = "REQUESTED";
   if (isset($_POST['txtUserNm'])) {
     $user_nm = $_POST['txtUserNm'];
     $pass = $_POST['txtPass'];
   }
   if(isset($_POST['submitbutton'])){
-    $result="Not Found";
-    if(!($con = mysql_connect(constant("HOSTNAME"), constant("USERNAME"), constant("PASS")))) {
-      header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    }
-    else if(!($select = mysql_select_db(constant("DBNAME"),$con))) {
-      header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    }
-    else {
+    $result="NOTFOUND";
       $pass=sha1($pass);
-      $sql = "SELECT * FROM user WHERE user_nm='".$user_nm."' AND pass='".$pass."'";
-      $rs = mysql_query($sql);
-      while($row = mysql_fetch_assoc($rs)) {
-        $result="FOUND";
+      $object=new MYSQL();
+      $row=$object->ExecuteSQL("SELECT * FROM user WHERE user_nm='".$user_nm."' AND pass='".$pass."'");
+      if($row!="true")
+        {
+          $result="FOUND";
         if(!isset($_SESSION))
           session_start();
+        $_SESSION['authentication']="true";
         $_SESSION['user_nm'] = $user_nm;
-        $_SESSION['name'] = $row['name'];
+        $_SESSION['name'] = $row[0]['name'];
         $asd = $row['name'];
-        $_SESSION['pass'] = $row['pass'];
-        $_SESSION['credit'] = $row['credit'];
-        $_SESSION['address'] = $row['address'];
-        $_SESSION['phone'] = $row['phone'];
-        $_SESSION['email'] = $row['email'];
       }
-    }
-    mysql_close($con);
     if($result == "FOUND"){
-      {setcookie("user_nm","$user_nm",time()+3600*24*30,'/');
-        header("Location: " . constant("HOST11") . "/files/Profile/myaccount.php");}
+      setcookie("user_nm","$user_nm",time()+3600*24*30,'/');
+        header("Location: myaccount.php");
     }
   }
 
@@ -101,6 +90,13 @@
                     <label  class="control-label">Password:</label>
                       <input type="password" name="txtPass" value="" class="form-control">
                   </div>
+                  <?php
+                  if(isset($_POST['submitbutton'])){
+                    if($result == "NOTFOUND"){
+                      echo'<div class="alert alert-danger">The email or password you entered is incorrect!</div>';
+                    }
+                  }
+                  ?>
                   <br>
                   <br>
                   <input type="submit" name="submitbutton" value="Login" class="btn btn-primary">

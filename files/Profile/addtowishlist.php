@@ -22,10 +22,12 @@
 </script>
 <?php 
     session_start();
-    if(!isset($_SESSION['user_nm']))
+    if(!isset($_SESSION['authentication']))
     header("Location: http://localhost/online_trading/files/Profile/login.php");
+	include_once '../class.MySQL.php';
 ?>
 <?php
+$object=new MYSQL();
 if(!isset($_SESSION))
   session_start();
   if(isset($_POST['submit_button'])) 
@@ -35,14 +37,8 @@ if(!isset($_SESSION))
 	 $categories_name=$_POST['categories'];
 	 $Tags=$_SESSION['wishlist_product_id'];
 	 unset($_SESSION['wishlist_product_id']);
-	 if(!($connection=mysql_connect("localhost", "root", "")))
-		header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-	  if(!mysql_select_db("online_trading", $connection))
-		header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-	  else{
-	  $rs=mysql_query("INSERT into wish_list (item_nm,user_nm,category,item_id,Tags,availability) VALUES ('".$item_nm."','".$user_nm."','".$categories_name."',NULL,'".$Tags."','not')");
-	  mysql_close($connection);
-	  header("Location: http://localhost/online_trading/files/Profile/myaccount.php");}
+     $row=$object->ExecuteSQL("INSERT into wish_list (item_nm,user_nm,category,item_id,Tags,availability) VALUES ('".$item_nm."','".$user_nm."','".$categories_name."',NULL,'".$Tags."','not')");
+	  header("Location: http://localhost/online_trading/files/Profile/myaccount.php");
   }
 ?>
 </head>
@@ -75,13 +71,12 @@ if(!isset($_SESSION))
 							<div class="btn-group">
 						 <select name="categories" class="btn btn-default dropdown-toggle">
 							 <?php 
-								 $con=mysql_connect("localhost", "root", "");
-								 mysql_select_db("online_trading", $con);
-								 $res=mysql_query("SELECT * From categories");
-								 while($row=mysql_fetch_assoc($res)){
-								  echo "<option>".$row["categories_name"]."</option>";
+							 $i=0;
+								  $row=$object->ExecuteSQL("SELECT * From categories");
+							while($row[$i]){
+								  echo "<option>".$row[$i]["categories_name"]."</option>";
+								  ++$i;
 								 }
-								 mysql_close($con);
 							 ?>
 						  </select>
 						</div>

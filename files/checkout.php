@@ -112,7 +112,7 @@
                                     <td>
                                     <img src=".'"'.$pic_loc.'"'." width=".'"60"'."height=".'"60"'.">
                                     </td>
-                                    <td><a href=".'"item.php?item_id='.$item_id.'"'.">".$res3[0]["item_nm"]."</td>
+                                    <td><a href=".'"sale.php?item_id='.$item_id.'"'.">".$res3[0]["item_nm"]."</td>
                                     <td>";
                                         $str = strval($item_id)."Delivery_Type";
                                         if(trim($res3[0]["delivery_type"])=='instant')
@@ -190,7 +190,7 @@
                                             <img src=".'"'.$pic_loc.'"'." width=".'"50"'."height=".'"50"'.">
                                             </td>
                                             <td>
-                                            <h4><a href=".'"item.php?item_id='.$item_id.'"'."><small>".$res3[0]["item_nm"]."</small></a></h4>"
+                                            <h4><a href=".'"sale.php?item_id='.$item_id.'"'."><small>".$res3[0]["item_nm"]."</small></a></h4>"
                                                                                     ."\n"."<small>Item price: ₹".$res3[0]["cost"]
                                                 ."<br>"."Condition: ".$res3[0]["item_condition"]."
                                             </small></td>

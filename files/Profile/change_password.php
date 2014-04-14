@@ -22,20 +22,11 @@
 ?>
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <?php
-$con = mysql_connect( "localhost", "root", "" );
-if( !$con )
-{
- die( "Could not connect:"  . mysql_error() );
-}
-else
-{
-  if(!isset($_SESSION))
-  session_start();
- mysql_select_db( "online_trading", $con );
- $result = mysql_query("SELECT * from user where user_nm='".$_SESSION['user_nm']."' ");
- $row = mysql_fetch_array( $result );
-   $a=$row['pass'];
- }
+include_once '../class.MySQL.php';
+  $object=new MYSQL();
+      $row=$object->ExecuteSQL("SELECT * from user where user_nm='".$_SESSION['user_nm']."' ");
+      $a=$row[0]['pass'];
+
  ?> 
 
 
@@ -51,22 +42,10 @@ else
     if($curr_pass==$a)
       {if($pass==$con_pass)
          { 
-
-    
-
-    if(!($connection=mysql_connect("localhost", "root", "")))
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    if(!mysql_select_db("online_trading", $connection))
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    else{
       $pass=sha1($pass);
-    $rs=mysql_query("UPDATE user set pass='$pass' where user_nm='$usernm'");
-    if(!$rs)
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    mysql_close($connection);
+      $row=$object->ExecuteSQL("UPDATE user set pass='$pass' where user_nm='$usernm'");
     header("Location: http://localhost/online_trading/files/Profile/myaccount.php");
   }
-}
 }
 }
  ?>

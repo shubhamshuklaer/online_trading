@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php include_once "../../config/config.php";?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -18,8 +19,8 @@
 <link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
-    if(!isset($_SESSION['user_nm']))
-    header("Location: http://localhost/online_trading/files/Profile/login.php");
+    if(!isset($_SESSION['authentication']))
+      header("Location: login.php");
 ?>
 </head>
 <body>
@@ -55,6 +56,9 @@
               </li>
               <li>
                 <a href="myitems.php">My Items</a>
+              </li>
+              <li>
+                <a href="#">Recommendations</a>
               </li>
               <li>
                 <a href="logout.php">Log out</a>

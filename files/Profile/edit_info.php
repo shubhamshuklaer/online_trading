@@ -22,46 +22,30 @@
     header("Location: http://localhost/online_trading/files/Profile/login.php");
 ?>
 <?php
-$con = mysql_connect( "localhost", "root", "" );
-if( !$con )
-{
- die( "Could not connect:"  . mysql_error() );
-}
-else
-{
-  if(!isset($_SESSION))
-  session_start();
- mysql_select_db( "online_trading", $con );
- $result = mysql_query("SELECT * from user where user_nm='".$_SESSION['user_nm']."'");
- $row = mysql_fetch_array( $result );
-   $a=$row['name'];
-   $b=$row['user_nm'];
-   $c=$row['phone'];
-   $d=$row['email'];
-   $e=$row['address'];
-   mysql_close($con);
-}
+    include_once '../class.MySQL.php';
+  $object=new MYSQL();
+      $row=$object->ExecuteSQL("SELECT * from user where user_nm='".$_SESSION['user_nm']."'");
+      if($row!="true")
+        {
+   $a=$row[0]['name'];
+   $b=$row[0]['user_nm'];
+   $c=$row[0]['phone'];
+   $d=$row[0]['email'];
+   $e=$row[0]['address'];
+ }
 ?>
 <?php
-  if(isset($_POST['submit_button']))
+if(isset($_POST['submit_button']))
   { 
     $name=$_POST['user_name'];
     $phone=$_POST['phone'];
     $email=$_POST['email'];
     $address=$_POST['address'];
     $usernm=$_SESSION['user_nm'];
-    if(!($connection=mysql_connect("localhost", "root", "")))
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    if(!mysql_select_db("online_trading", $connection))
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    else{
-    $rs=mysql_query("UPDATE user set name='$name', phone='$phone', email='$email', address='$address' where user_nm='$usernm'");
-    if(!$rs)
-    header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-    mysql_close($connection);
+   $object=new MYSQL();
+      $row=$object->ExecuteSQL("UPDATE user set name='$name', phone='$phone', email='$email', address='$address' where user_nm='$usernm'");
+    $_SESSION['name']=$name;
     header("Location: http://localhost/online_trading/files/Profile/myaccount.php");
-  }
-
   }
  ?>
 </head>
@@ -178,11 +162,11 @@ else
                   required: true
                 },
                 pass : {
-                  required: true,
+                  required: true
                 },
                 con_pass : {
-                  required: true,
-                },
+                  required: true
+                }
               },
               messages: {
                 phone: {

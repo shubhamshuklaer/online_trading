@@ -23,7 +23,7 @@
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <?php 
     session_start();
-    if(!isset($_SESSION['user_nm']))
+    if(!isset($_SESSION['authentication']))
     header("Location: http://localhost/online_trading/files/Profile/login.php");
 ?>
 <script type="text/javascript">
@@ -51,31 +51,27 @@
                 <th class="total">Action</th>
               </tr>
               <?php 
-                  if(!($connection=mysql_connect("localhost", "root", "")))
-                  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-                 if(!mysql_select_db("online_trading", $connection))
-                  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-                 else{
-                  if(!isset($_SESSION))
-                 session_start();
-                 $rs=mysql_query("SELECT * from wish_list where user_nm='".$_SESSION['user_nm']."'");
-                 if($rs)
-                 {
-                  $count=0;
-                 while($row=mysql_fetch_assoc($rs)){
+                include_once '../class.MySQL.php';
+                if(!isset($_SESSION))
+                  session_start();
+                  $object=new MYSQL();
+              $row=$object->ExecuteSQL("SELECT * from wish_list where user_nm='".$_SESSION['user_nm']."'");
+                 $i=0;
+                 $count=0;
+                 while(isset($row[$i])){
                   ++$count;
                    echo '<script type="text/javascript">
                          item_ids[i]=';
-                         echo $row['id'];
+                         echo $row[$i]['id'];
                          echo';
                          ++i;
                          </script>';
                   echo '<tr id="';echo $count;echo '"">
-                <td    class="name">'.$row['item_nm'].'</td>
-                <td class="model">'.$row['category'].'</td>
-                <td class="quantity">'.$row['availability'].'</td>
+                <td    class="name">'.$row[$i]['item_nm'].'</td>
+                <td class="model">'.$row[$i]['category'].'</td>
+                <td class="quantity">'.$row[$i]['availability'].'</td>
                 <td class="price">';
-                $string=$row['Tags'];
+                $string=$row[$i]['Tags'];
                 $tok=strtok($string, ";");
                 while($tok !== false)
                 {
@@ -87,9 +83,8 @@
                   <a onclick="edit_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-pencil"></span></a>
                   <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-trash"></span></a>
                 </td></tr>';
-                 }}
-                 mysql_close($connection);
-               }
+                  ++$i;
+                 }
               ?>
             </table>
           </div>

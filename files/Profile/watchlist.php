@@ -55,43 +55,37 @@
                 <th class="total">Action</th>
               </tr>
               <?php 
-                  if(!($connection=mysql_connect("localhost", "root", "")))
-                  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-                  if(!mysql_select_db("online_trading", $connection))
-                  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-                  else{
-                  if(!isset($_SESSION))
+                  include_once '../class.MySQL.php';
+                if(!isset($_SESSION))
                   session_start();
-                  $rs=mysql_query("SELECT * from watch_list where user_nm='".$_SESSION['user_nm']."'");
-                  if($rs)
-                  {
-                  $count=0;
-                  while($ids=mysql_fetch_assoc($rs)){
+                  $object=new MYSQL();
+              $ids=$object->ExecuteSQL("SELECT * from watch_list where user_nm='".$_SESSION['user_nm']."'");
+                 $i=0;
+                 $count=0;
+                 while(isset($ids[$i])){
                   ++$count;
                     echo '<script type="text/javascript">
                          item_ids[i]=';
-                         echo $ids['item_id'];
+                         echo $ids[0]['item_id'];
                          echo';
                          ++i;
                          </script>';
-                         $info=mysql_query("SELECT * from items where item_id='".$ids['item_id']."'");
-                         $row=mysql_fetch_assoc($info);
+                         $row=$object->ExecuteSQL("SELECT * from items where item_id='".$ids[0]['item_id']."'");
                   echo '<tr id="';echo $count;echo '"">
-                <td class="image"><a href="#"><img width="50" height="50" src="';echo $row['pic_loc'];echo '" alt="product" title="product"></a></td>
-                <td class="name">'.$row['item_nm'].'</td>
-                <td class="model">'.$row['category'].'</td>
-                <td class="condition">'.$row['item_condition'].'</td>
-                <td class="quantity">'.$row['quantity'].'</td>
-                <td class="cost">'.$row['cost'].'</td>
-                <td class="type">'.$row['type'].'</td>
-                <td class="description">'.$row['description'].'</td>
+                <td class="image"><a href="#"><img width="50" height="50" src="';echo $row[0]['pic_loc'];echo '" alt="product" title="product"></a></td>
+                <td class="name">'.$row[0]['item_nm'].'</td>
+                <td class="model">'.$row[0]['category'].'</td>
+                <td class="condition">'.$row[0]['item_condition'].'</td>
+                <td class="quantity">'.$row[0]['quantity'].'</td>
+                <td class="cost">'.$row[0]['cost'].'</td>
+                <td class="type">'.$row[0]['type'].'</td>
+                <td class="description">'.$row[0]['description'].'</td>
                 <td class="total">
                 <a  href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
                 <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-trash"></span></a>
                 </td></tr>';
-                 }}
-                mysql_close($connection);
-               }
+                ++$i;
+                 }
               ?>
             </table>
           </div>

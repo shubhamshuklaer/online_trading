@@ -17,7 +17,6 @@
 <link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <?php
-  $pagestatus="VALID";
   if(isset($_POST['submit_button']))
   { 
      $user_nm=$_POST['userid'];
@@ -27,20 +26,16 @@
      $phone=$_POST['phone'];
      $email=$_POST['email'];
      $con_pass=$_POST['con_pass'];
-     if(!($connection=mysql_connect("localhost", "root", "")))
-      header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-     if(!mysql_select_db("online_trading", $connection))
-      header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
-     else{
      $pass=sha1($pass);
-     mysql_query("INSERT INTO user (name,user_nm,pass,credit,address,phone,email) VALUES ('".$name."','".$user_nm."','".$pass."','0','".$address."','".$phone."','".$email."')");
-     mysql_close($connection);
-     session_start();
+     include_once '../class.MySQL.php';
+          session_start();
+          $object=new MYSQL();
+      $row=$object->ExecuteSQL("INSERT INTO user (name,user_nm,pass,credit,address,phone,email) VALUES ('".$name."','".$user_nm."','".$pass."','0','".$address."','".$phone."','".$email."')");
+      $_SESSION['authentication']="true";
      $_SESSION['user_nm']=$user_nm;
      $_SESSION['name']=$name;
-     header("Location: http://localhost/online_trading/files/Profile/myaccount.php");
+     header("Location: myaccount.php");
     }
-   } 
  ?>
 </head>
 <body>
@@ -63,12 +58,6 @@
                     if (!empty($_POST['userid'])) { 
                       echo htmlspecialchars($_POST['userid']); 
                     }?>">
-                    <span class="red">
-                    <?php
-                      if($pagestatus=="wrong_userid")
-                        echo "*UserId already taken";
-                    ?>
-                  </span>
                   </div>
                 </div>
                 <div class="control-group">

@@ -1,6 +1,10 @@
 <?php
     require_once "class.MySQL.php";
     session_start();
+    $today = date("Ymd");
+    $order_id;
+    $o_address;
+    
     $username = $_SESSION['user_nm'];
 
     //if(isset($_GET["confirm"])){

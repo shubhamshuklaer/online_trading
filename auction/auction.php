@@ -12,6 +12,7 @@
 	
 </head>
 <body>
+<?php session_start();?>
 	<div class="container-fluid">
 		<div class="row" role="header">
 			<?php include_once "header.php";?> 
@@ -19,14 +20,7 @@
 	
 		<div class="container"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
-				<div class="col-sm-3 col-md-2 sidebar">
-	                <ul class="nav nav-sidebar">
-		                <li class="active"><a href="#">Search</a></li>
-		                <li><a href="#">Profile</a></li>
-		                <li><a href="#">Bulk Order</a></li>
-		                <li><a href="#">Auction</a></li>
-	                </ul>
-                </div>
+				
                </div>
 				<!--Main Content area--> 
 		        <div class="container-fluid col-sm-9 col-md-10">
@@ -39,7 +33,7 @@
 
 						-->
 						<?php
-								session_start();
+								
 								$item_id = $_GET["item_id"];
 								$_SESSION["item_id"] = $item_id;
 								require_once "class.MySQL.php";           
@@ -63,10 +57,10 @@
 					                foreach($result as $row){
 					                	$cur_bid=$row["bid"];
 					                }
-					                else{
+					                
+					            }else{
 					                	$cur_bid=$base_price;
 					                }
-					            }
 							?>
 						<div class="productprice">
 
@@ -106,11 +100,11 @@
 						<br></br>
 						<form action = "save_bid.php" method="get">
 							<?php
-								session_start();
+								// session_start();
 								$item_id = $_GET["item_id"];
 								$_SESSION["item_id"] = $item_id;
 							?>
-							<!--<img border="5" src=<?php $pic ?> alt="Pulpit rock" width="300" height="228">-->
+							<img border="5" src=<?php $pic ?> alt="Pulpit rock" width="300" height="228">
 
 							<div class="control-group">
 				            <label calss="control-label" for="select01">Place bid</label>

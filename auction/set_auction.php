@@ -34,6 +34,7 @@
 <?php  
             require_once "class.MySQL.php";           
             $test = new MySQL(); 
+            $type = "auction";
             if(isset($_POST["base_price_1"]) && isset($_POST['close_date_1']) && isset($_POST['type_1']) && isset($_POST['condition_1']) && isset($_POST['name_1']) && isset($_POST['description_1']) && isset($_POST['mrp_1']) && isset($_POST['model_1']) && isset($_POST['brand_1']) && isset($_POST['quantity_1']))
             {
      
@@ -78,8 +79,9 @@
                                 echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 $sale_type="auction";
                         $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category = "electronics";
-                        $type = $_POST['type_1'];
+                        $category1 = "electronics";
+                       // $type = "auction";
+                        $type_1 = $_POST['type_1'];
                         $name = $_POST['name_1'];
                         $brand = $_POST['brand_1'];
                         $model = $_POST['model_1'];
@@ -89,10 +91,14 @@
                         $description = $_POST['description_1'];
                         $base_price = $_POST['base_price_1'];
                         $close_date = $_POST['close_date_1'];
+                        $category=$category1.":".$type_1;
+
                         $x="description:".$description.";"."category:".$category.";"."type:".$type.";"."brand:".$brand.";"."name:".$name.";"."mrp:".$mrp.";"."base_price:".$base_price.";"."close_date:".$close_date.";"."model:".$model;
             $vars = array('quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'last_date'=>$_POST['close_date_1'],'sale_type'=>$sale_type);
             $test->Insert($vars,"items");
-
+            $passed_item_description=$description;
+                         $passed_item_nm=$name;
+                         include_once "../files/insert_search_index.php";
             // echo $test->lastQuery;
                        echo "Thank u";
 
@@ -150,20 +156,25 @@
                             // echo $test->lastQuery;
                             $sale_type="auction";
                         $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category = "books";
+                        $category1 = "books";
                         $name = $_POST['name_2'];
                         $author = $_POST['author_2'];
                         $mrp=$_POST['mrp_2'];
                         $genre=$_POST['type_2'];
+                        $type_1=$_POST['type_2'];
                         //$quantity=$_POST['quantity'];
                         $condition = $_POST['condition_2'];
                         $description = $_POST['description_2'];
                         $base_price = $_POST['base_price_2'];
                         $close_date = $_POST['close_date_2'];
+                        $category=$category1.":".$type_1;
                          $x="description:".$description.";"."category:".$category.";"."type:".$type.";"."author:".$author.";"."name:".$name.";"."mrp:".$mrp.";"."base_price:".$base_price.";"."close_date:".$close_date;
                         $vars = array('author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category,'last_date'=>$close_date,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                         echo "wow";
+                        $passed_item_description=$description;
+                         $passed_item_nm=$name;
+                         include_once "../files/insert_search_index.php";
                                 }
                             }
                          }
@@ -220,8 +231,8 @@
                             // echo $test->lastQuery;
                              $sale_type="auction";
                         $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category = "appliances";
-                        $type = $_POST['type_4'];
+                        $category1 = "appliances";
+                        $type_1 = $_POST['type_4'];
                         $name = $_POST['name_4'];
                         $brand = $_POST['brand_4'];
                         $mrp=$_POST['mrp_4'];
@@ -231,10 +242,14 @@
                         $description = $_POST['description_4'];
                         $base_price = $_POST['base_price_4'];
                         $close_date = $_POST['close_date_4'];
+                        $category=$category1.":".$type_1;
                          $x="description:".$description.";"."category:".$category.";"."type:".$type.";"."brand:".$brand.";"."name:".$name.";"."mrp:".$mrp.";"."base_price:".$base_price.";"."close_date:".$close_date.";"."model:".$model;
                         $vars = array('brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                         echo "wow";
+                        $passed_item_description=$description;
+                         $passed_item_nm=$name;
+                         include_once "../files/insert_search_index.php";
                                 }
                             }
                          }
@@ -293,8 +308,8 @@
                            
                          $sale_type="auction";
                         $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category = "stationary";
-                        $type = $_POST['type_3'];
+                        $category1 = "stationary";
+                        $type_1 = $_POST['type_3'];
                         $name = $_POST['name_3'];
                         $brand = $_POST['brand_3'];
                         $mrp=$_POST['mrp_3'];
@@ -303,10 +318,15 @@
                         $condition = $_POST['condition_3'];
                         $description = $_POST['description_3'];
                         $base_price = $_POST['base_price_3'];
-                         $x="description:".$description.";"."category:".$category.";"."type:".$type.";"."brand:".$brand.";"."name:".$name.";"."mrp:".$mrp.";"."base_price:".$base_price.";"."close_date:".$close_date.";"."model:".$model;
                         $close_date = $_POST['close_date_3'];
+                        $category=$category1.":".$type_1;
+                         $x="description:".$description.";"."category:".$category.";"."type:".$type.";"."brand:".$brand.";"."name:".$name.";"."mrp:".$mrp.";"."base_price:".$base_price.";"."close_date:".$close_date.";"."model:".$model;
+                        
                         $vars = array('brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
+                        $passed_item_description=$description;
+                         $passed_item_nm=$name;
+                         include_once "../files/insert_search_index.php";
                                 }
                             }
                          }
@@ -361,10 +381,10 @@
                                 echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 
                             // echo $test->lastQuery;
-                           
+                           $type_1= $_POST['type_5'];
                          $sale_type="auction";
                         $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category = "stationary";
+                        $category1 = "stationary";
                         
                         $name = $_POST['name_5'];
                         $brand = $_POST['brand_5'];
@@ -375,9 +395,13 @@
                         $description = $_POST['description_5'];
                         $base_price = $_POST['base_price_5'];
                         $close_date = $_POST['close_date_5'];
+                        $category=$category1.":".$type_1;
                         $x="description:".$description.";"."category:".$category.";"."type:".$type.";"."brand:".$brand.";"."name:".$name.";"."mrp:".$mrp.";"."base_price:".$base_price.";"."close_date:".$close_date.";"."model:".$model;
                         $vars = array('brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'last_date'=>$close_date,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
+                        $passed_item_description=$description;
+                         $passed_item_nm=$name;
+                         include_once "../files/insert_search_index.php";
                                 }
                             }
                          }
@@ -387,6 +411,7 @@
     
                        }
                     }
+
 		               ?>
                        </div>
                        </body>

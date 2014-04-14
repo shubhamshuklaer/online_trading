@@ -31,18 +31,18 @@
                 </li>
 
                 <li>
-                    <a href="profile.php" class="custom_icon_link">
+                    <a href="./Profile/myaccount.php" class="custom_icon_link">
                         <span class="glyphicon glyphicon-user custom_navbar_icon"></span>
                     </a>
                 </li>
                 <li>
-                    <a href="display_cart.php" class="custom_icon_link">
+                    <a href="cart_display.php" class="custom_icon_link">
                         <span id="cart_icon" class="glyphicon glyphicon-shopping-cart custom_navbar_icon"></span>
                     </a>
                 </li>
-                <li><a href="create_auction.php">Auction</a></li>
-                <li><a href="create_sell.php">Sell</a></li>
-                <li><a href="bulk_order.php">Bulk Order</a></li>
+                <li><a href="../auction/temporary_template.php">Auction</a></li>
+                <li><a href="../auction/temporary_template.php">Sell</a></li>
+                <li><a href="template_bulk.php">Bulk Order</a></li>
                 <li>
                     <a href="#" id="notification_link" class="custom_icon_link" data-container="body" data-html="true" data-title="Notifications"  data-toggle="popover" data-placement="bottom">
                         <span class="glyphicon glyphicon-envelope custom_navbar_icon"></span>

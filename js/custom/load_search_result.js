@@ -363,7 +363,7 @@ function display_items_with_pagination(offset,num_items){//if offset is 1 and nu
             img_box.attr("src",item_response_data[row]["pic_loc"]);
             img_box.appendTo(pic_col);
             var detail_col=$("<td>");
-            detail_col.append("<a href='"+item_response_data[row]["type"]+".php?item_id="+item_response_data[row]["item_id"]+"'>"+item_response_data[row]["item_nm"]+"</a>");
+            detail_col.append("<a href='../auction/"+item_response_data[row]["type"]+".php?item_id="+item_response_data[row]["item_id"]+"'>"+item_response_data[row]["item_nm"]+"</a>");
             detail_col.append("<br>Seller : "+item_response_data[row]["user_nm"]);
             detail_col.append("<br> Quantity: "+item_response_data[row]["quantity"]);
             detail_col.append("<br> Condition: "+item_response_data[row]["item_condition"]);

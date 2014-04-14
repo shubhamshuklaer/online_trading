@@ -61,7 +61,7 @@ if(isset($_POST["where_clause"])){
 		if(isset($where["limit"]))
 			$limit_statement=" limit ".$where["limit"]." ";
 		// echo $where_statement;
-		$query="Select * from items where item_id IN (".implode(",",$item_ids).") ".$where_statement." order by FIELD( item_id,".implode(",",$item_ids).") ".$limit_statement;
+		$query="Select * from items where item_id IN (".implode(",",$item_ids).") ".$where_statement." AND quantity>0 order by FIELD( item_id,".implode(",",$item_ids).") ".$limit_statement;
 		/* 
 		as item_ids are taken form database itself and 
 		they are ints so no need for sanitization

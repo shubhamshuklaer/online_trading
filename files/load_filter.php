@@ -49,7 +49,7 @@ if(isset($_POST["search_term"])){
 	
 	if(count($item_ids)>0){
 		
-		$query="Select * from items where item_id IN (".implode(",",$item_ids).") order by FIELD( item_id,".implode(",",$item_ids).") ";
+		$query="Select * from items where item_id IN (".implode(",",$item_ids).")  AND quantity>0 order by FIELD( item_id,".implode(",",$item_ids).") ";
 		/* 
 		as item_ids are taken form database itself and 
 		they are ints so no need for sanitization

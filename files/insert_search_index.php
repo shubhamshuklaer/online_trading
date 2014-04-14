@@ -4,7 +4,8 @@ $get_item_nm=array_map('strtolower',preg_split('/[\s]+/', trim(preg_replace("/\b
 the \b at both end ensures that its a word and not any set of 3 character from in between the word too*/
 $get_item_description=array_map('strtolower',preg_split('/[\s]+/', trim(preg_replace("/\b[^\s]{1,3}\b/","","I a  hello   dg      gdsa   am going but its rained"))));
 $get_item_type=array();
-$get_item_category=array();
+$get_item_category;
+$get_item_tags;
 $get_item_id=1;
 require_once "PorterStemmer2.php";
 require_once "StringBuilder.php";

@@ -126,6 +126,7 @@ function load_items(where_clause){
                     alert(thrownError);        
                 }else{
                     var item_list=document.getElementById("item_list");
+                    item_list.innerHTML="";
                     var table_row=$("<tr>");
                     table_row.text("No search results");
                     table_row.appendTo(item_list);

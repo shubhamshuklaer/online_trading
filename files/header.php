@@ -44,7 +44,7 @@
                 <li><a href="create_sell.php">Sell</a></li>
                 <li><a href="bulk_order.php">Bulk Order</a></li>
                 <li>
-                    <a href="index.php" class="custom_icon_link">
+                    <a href="#" id="notification_link" class="custom_icon_link" data-container="body" data-html="true" data-title="Notifications"  data-toggle="popover" data-placement="bottom">
                         <span class="glyphicon glyphicon-envelope custom_navbar_icon"></span>
                     </a>
                 </li>
@@ -60,6 +60,7 @@
     </div>
 </div>
 <!--Search suggestion.js also contain the code for colour change on hover of custom_navbar_icon-->
+<!--Search_suggestion.js also contains the code for popover notification-->
 
 <style>
 .custom_navbar_icon{

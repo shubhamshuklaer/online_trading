@@ -45,7 +45,7 @@ if(isset($_POST["search_term"])){
 	/////////////////////////
 	//////////////////////////////////////////////////////////
 
-	
+	$omysql_update=new MySQL(); // for updating the promotion_amnt(its cost 1Re per view)
 	if(count($item_ids)>0){
 		// echo $where_statement;
 		$query="Select * from items where item_id IN (".implode(",",$item_ids).") order by promotion_amnt DESC,FIELD( item_id,".implode(",",$item_ids).") limit 3";
@@ -57,6 +57,7 @@ if(isset($_POST["search_term"])){
 		if($omysql->records>0){
 			$result=$omysql->arrayedResult;
 			for($i=0;$i<count($result);$i++){
+				$omysql_update->ExecuteSQL("Update items set promotion_amnt='".($result[$i]["promotion_amnt"]-1)."'where item_id='".$result[$i]["item_id"]."'");
 				$result[$i]["pic_loc"]=constant("HOSTNAME")."/upload/".$result[$i]["pic_loc"];
 			}
 			echo json_encode($result);

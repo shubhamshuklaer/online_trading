@@ -25,6 +25,9 @@ $("document").ready(function(){// short form of doccument load
         }
     });
 
+    $("#notification_link").popover({content:load_notifications()});
+    
+
    $( "#search_bar" ).autocomplete({
        source: function(request,response){
             $.ajax({
@@ -62,3 +65,35 @@ $("document").ready(function(){// short form of doccument load
     
 
 });
+
+
+function load_notifications(){
+    $.ajax({
+        url: "notification.php",
+        dataType: "html",
+        type: "POST",
+        success: function(response_data){
+            // as we have written datatype as json so jquery automatically converts the result 
+            //from json... so responce_data is not json its already parsed
+        
+            return response_data;        
+            // return "hellooo";
+        },
+        /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
+        error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
+        */
+        error: function (request, status, error) {
+            if(request.readyState==4){// 4 means complete
+                if(request.status!=200){
+                    alert(ajaxOptions);
+                    alert(xhr.status);
+                    alert(thrownError);        
+                }else{
+                    return "No Notification";
+                }    
+            }
+        }
+    });
+    // setTimeout(callback(){},1000);
+
+}

@@ -13,13 +13,58 @@
         <!--the collapsable content-->
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
+                <li>
+                    <form class="navbar-form navbar-right" action="search.php" method="get">
+                        <input type="text"  class="form-control" placeholder="Search..." id="search_bar"  name="search_bar">
+                        <input type="text" class="hidden" name="spell_bit" id="spell_bit" value="1">
+                    </form>
+                </li>
+                <li>
+                    <a href="#" class="custom_icon_link" id="spell_correction">
+                    <span class="glyphicon glyphicon-check custom_navbar_icon"></span>
+                    Spell Correction</a>
+                </li>
+                <li>
+                    <a href="index.php" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-home custom_navbar_icon"></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./Profile/myaccount.php" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-user custom_navbar_icon"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cart_display.php" class="custom_icon_link">
+                        <span id="cart_icon" class="glyphicon glyphicon-shopping-cart custom_navbar_icon"></span>
+                    </a>
+                </li>
+                <li><a href="../auction/temporary_template.php">Auction</a></li>
+                <li><a href="../auction/temporary_template.php">Sell</a></li>
+                <li><a href="template_bulk.php">Bulk Order</a></li>
+                <li>
+                    <a href="#" id="notification_link" class="custom_icon_link" data-container="body" data-html="true" data-title="Notifications"  data-toggle="popover" data-placement="bottom">
+                        <span class="glyphicon glyphicon-envelope custom_navbar_icon"></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="help.html" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-question-sign custom_navbar_icon"></span>
+                    </a>
+                </li>
             </ul>
-            <form class="navbar-form navbar-right" action="search.php" method="get">
-                <input type="text"  class="form-control" placeholder="Search..." id="search_bar" name="search_bar" >
-            </form>
+            
         </div>
     </div>
 </div>
+<!--Search suggestion.js also contain the code for colour change on hover of custom_navbar_icon-->
+<!--Search_suggestion.js also contains the code for popover notification-->
+
+<style>
+.custom_navbar_icon{
+    color:#aaa;
+    font-size: 1.2em;
+}
+</style>

@@ -24,7 +24,7 @@
 	                </ul>
                 </div>
 				<!--Main Content area--> 
-		        <div class="container-fluid">
+		        <div class="container-fluid col-sm-9 col-md-9">
 		           <!--
 						Write all
 						your code

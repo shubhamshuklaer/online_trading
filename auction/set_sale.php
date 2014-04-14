@@ -29,7 +29,7 @@
                                 echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
                                 echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
 
-                            if (file_exists("C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]))
+                            if (file_exists("../upload/" . $_FILES["file"]["name"]))
                                 {
                                     echo $_FILES["file"]["name"] . " already exists. ";
                                 }
@@ -42,8 +42,8 @@
                                 $pic_loc= $x[0]["item_id"]+1;
                                 $_FILES["file"]["name"] =$pic_loc.".jpg";
                                 move_uploaded_file($_FILES["file"]["tmp_name"],
-                                "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]);
-                                echo "Stored in: " . "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"];
+                                "../upload/" . $_FILES["file"]["name"]);
+                                echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 
                         $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
                         $category = "electronics";
@@ -57,7 +57,7 @@
                         $description = $_POST['description_1'];
                         $base_price = $_POST['base_price_1'];
                         
-            $vars = array('quantity'=>$quantity,'pic_loc'=>"C:/xampp/htdocs/upload/".$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'type'=>$type,'category'=>$category,'sale_type'=>$sale_type);
+            $vars = array('quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'type'=>$type,'category'=>$category,'sale_type'=>$sale_type);
             $test->Insert($vars,"items");
 
             // echo $test->lastQuery;
@@ -99,7 +99,7 @@
                                 echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
                                 echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
 
-                            if (file_exists("C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]))
+                            if (file_exists("../upload/" . $_FILES["file"]["name"]))
                                 {
                                     echo $_FILES["file"]["name"] . " already exists. ";
                                 }
@@ -110,8 +110,8 @@
                                 $pic_loc=$x[0]["item_id"]+1;
                                 $_FILES["file"]["name"] =$pic_loc.".jpg";
                                 move_uploaded_file($_FILES["file"]["tmp_name"],
-                                "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]);
-                                echo "Stored in: " . "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"];
+                                "../upload/" . $_FILES["file"]["name"]);
+                                echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 
                             // echo $test->lastQuery;
                             
@@ -126,7 +126,7 @@
                         $description = $_POST['description_2'];
                         $base_price = $_POST['base_price_2'];
                         
-                        $vars = array('author_nm'=>$author,'pic_loc'=>"C:/xampp/htdocs/upload/".$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'genre'=>$genre,'category'=>$category, 'sale_type'=>$sale_type);
+                        $vars = array('author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'genre'=>$genre,'category'=>$category, 'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                         echo "wow";
                                 }
@@ -166,7 +166,7 @@
                                 echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
                                 echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
 
-                            if (file_exists("C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]))
+                            if (file_exists("../upload/" . $_FILES["file"]["name"]))
                                 {
                                     echo $_FILES["file"]["name"] . " already exists. ";
                                 }
@@ -178,7 +178,7 @@
                                 $_FILES["file"]["name"] =$pic_loc.".jpg";
                                 move_uploaded_file($_FILES["file"]["tmp_name"],
                                 "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]);
-                                echo "Stored in: " . "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"];
+                                echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 
                             // echo $test->lastQuery;
                            
@@ -194,7 +194,7 @@
                         $description = $_POST['description_4'];
                         $base_price = $_POST['base_price_4'];
                         
-                        $vars = array('brand'=>$brand,'pic_loc'=>"C:/xampp/htdocs/upload/".$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
+                        $vars = array('brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                         echo "wow";
                                 }
@@ -236,7 +236,7 @@
                                 echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
                                 echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
 
-                            if (file_exists("C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]))
+                            if (file_exists("../upload/" . $_FILES["file"]["name"]))
                                 {
                                     echo $_FILES["file"]["name"] . " already exists. ";
                                 }
@@ -247,8 +247,8 @@
                                 $pic_loc=$x[0]["item_id"]+1;
                                 $_FILES["file"]["name"] =$pic_loc.".jpg";
                                 move_uploaded_file($_FILES["file"]["tmp_name"],
-                                "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]);
-                                echo "Stored in: " . "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"];
+                                "../upload/" . $_FILES["file"]["name"]);
+                                echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 
                             // echo $test->lastQuery;
                            
@@ -265,7 +265,7 @@
                         $description = $_POST['description_3'];
                         $base_price = $_POST['base_price_3'];
                         
-                        $vars = array('brand'=>$brand,'pic_loc'=>"C:/xampp/htdocs/upload/".$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
+                        $vars = array('brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                                 }
                             }
@@ -305,7 +305,7 @@
                                 echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
                                 echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
 
-                            if (file_exists("C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]))
+                            if (file_exists("../upload/" . $_FILES["file"]["name"]))
                                 {
                                     echo $_FILES["file"]["name"] . " already exists. ";
                                 }
@@ -316,8 +316,8 @@
                                 $pic_loc=$x[0]["item_id"]+1;
                                 $_FILES["file"]["name"] =$pic_loc.".jpg";
                                 move_uploaded_file($_FILES["file"]["tmp_name"],
-                                "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"]);
-                                echo "Stored in: " . "C:/xampp/htdocs/upload/" . $_FILES["file"]["name"];
+                                "../upload/" . $_FILES["file"]["name"]);
+                                echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 
                             // echo $test->lastQuery;
                            
@@ -334,7 +334,7 @@
                         $description = $_POST['description_5'];
                         $base_price = $_POST['base_price_5'];
                         
-                        $vars = array('brand'=>$brand,'pic_loc'=>"C:/xampp/htdocs/upload/".$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'category'=>$category,'sale_type'=>$sale_type);
+                        $vars = array('brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$description,'category'=>$category,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                                 }
                             }

@@ -8,11 +8,12 @@
 	<link rel="stylesheet" href="../css/bootstrap-new.css"  type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap-magnify.min.css">
 	<script src="../js/jquery.min.js"></script>
 	
 </head>
 <body>
-<?php session_start();?>
+	<?php session_start(); ?>
 	<div class="container-fluid">
 		<div class="row" role="header">
 			<?php include_once "header.php";?> 
@@ -20,8 +21,15 @@
 	
 		<div class="container"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
-				
-               </div>
+				<div class="col-sm-3 col-md-2 sidebar">
+	                <ul class="nav nav-sidebar">
+		                <li class="active"><a href="#">Search</a></li>
+		                <li><a href="#">Profile</a></li>
+		                <li><a href="#">Bulk Order</a></li>
+		                <li><a href="#">Auction</a></li>
+	                </ul>
+                </div>
+               
 				<!--Main Content area--> 
 		        <div class="container-fluid col-sm-9 col-md-10">
 		           <!--
@@ -35,6 +43,8 @@
 						<?php
 								
 								$item_id = $_GET["item_id"];
+								echo $item_id;
+								//$item_id = 24;
 								$_SESSION["item_id"] = $item_id;
 								require_once "class.MySQL.php";           
             					$omysql=new MySQL();
@@ -48,6 +58,8 @@
             							$last_date=$row["last_date"];
             						}
             					}
+            					echo $base_price;
+            					echo $last_date;
             					$nmysql=new MySQL();
             					$limit=1;
 				              	$nwhere = array("item_id like"=>$item_id."%");
@@ -99,12 +111,14 @@
 						</div>
 						<br></br>
 						<form action = "save_bid.php" method="get">
+						<fieldset>
 							<?php
-								// session_start();
-								$item_id = $_GET["item_id"];
+								//session_start();
+								//$item_id = $_GET["item_id"];
+								$_SESSION["cur_bid"] = $cur_bid;
 								$_SESSION["item_id"] = $item_id;
 							?>
-							<img border="5" src=<?php $pic ?> alt="Pulpit rock" width="300" height="228">
+							<img border="5" src=<?php echo "../upload/".$pic ?> alt="Pulpit rock" width="300" height="228">
 
 							<div class="control-group">
 				            <label calss="control-label" for="select01">Place bid</label>
@@ -115,7 +129,7 @@
 				            <div class="form-actions">
                      
 		           			<input type="submit" name="submit" class="btn btn-primary" value="Submit" id="submit">
-		           			<script type="text/javascript">
+		           			<!--<script type="text/javascript">
 		           				var a;
     							    var q = <?php echo json_encode($y); ?>;
     							    if(q > 0 && q < 900){
@@ -125,49 +139,77 @@
     							    	a="hidden";
     							    }	
 		           				document.getElementById('submit').style.visibility=a;
-		           			</script>
+		           			</script>-->
 		           			</div>
-		           			<br></br>
-		           			<ul class="productpagecart">
-
-						    				    
-						    <li>
-						    	<a class="wish" href="#">
-						        	Add to Watchlist
-						        </a>
-						    </li>
-
-							</ul>
-
-		               	</form>
+		           			          			
+		                <div class="form-actions">
 		               	 <div class="col-sm-5">
 	
-		
+	                 <button type="button" class="btn btn-primary btn-lg" onClick="add_watch('<?php echo $item_id;?>')" @brand-success: #5cb85c; >Add To Watch List</button>	
 				<div class="special" style="width:400px; height:250px;" >
 					<div id="counter" style="position:relative; left:60px;">				
 						<div id="shading" >&nbsp;</div>
 					</div>		
 					
-					<script type="text/javascript" src="../js/C3counter.js"></script>
-					<script type="text/javascript">
-						// Default options 
-
-            var p = <?php echo json_encode($y); ?>;
-            if(p>0){
-					   	C3Counter("counter", { startTime :p });
-              setTimeout(check_time(){document.getElementById('submit').style.visibility='hidden';},(p*1000));
-            }
-					</script>
+					
 				</div>
 </div>	  
 				</div>
+				 </div>
+				 </fieldset>
+					</form>
 	</div>
 	<!--All javascript placed at the end so that the page loads faster-->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="../js/C3counter.js"></script>
+					<script type="text/javascript">
+						// Default options 
+
+                     var p = <?php echo json_encode($y); ?>;
+            //if(p>0){
+					   	C3Counter("counter", { startTime :p });
+              //setTimeout(check_time(){document.getElementById('submit').style.visibility='hidden';},(p*1000));
+            //}
+					</script>
+					<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../js/custom/search_suggestions.js"></script>
-	
-</body>
-</html>
+	<script type="text/javascript">
+		function add_watch(item_id)
+	    {
+            // alert("IN ADD_watch FUNC");
+            $.ajax({
+                    url: "detail_addwatch.php",
+                    dataType: "json",
+                    type: "GET",
+                    data: {
+                            item_id : item_id
+                            },
+                    success: function(response_data){
+                    console.log(response_data);
+                        if(response_data=="1")
+                        {
+                           // alert("Added, reloading page");
+                            //window.location.reload();
+                        }
+                        else if(response_data=="0")
+                        {
+                            alert("Could not be added!!!");
+                        }
+                        // as we have written datatype as json so jquery automatically converts the result
+                        //from json... so responce_data is not json its already parsed
+                    },
+                    /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
+                    error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
+                    */
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+	    }
+	</script>

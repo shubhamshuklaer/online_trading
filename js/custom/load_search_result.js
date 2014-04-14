@@ -1,7 +1,7 @@
 var get=[];
 var item_response_data;
 var total_num_items;
-var num_item_in_one_page=2;
+var num_item_in_one_page=3;
 var num_pages;
 $("document").ready(function(){
     get_url_variables();

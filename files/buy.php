@@ -1,10 +1,12 @@
 <?php
-$q=$_POST['q'];
-$d=$_POST['d'];
-$c=$_POST['c'];
-$id=$_POST['x'];
 
+$id=$_POST['id'];
+$q=$_POST['q'];
+$n=$_POST['n'];
+$c=$_POST['c'];
  include_once './class.MySQL.php';
+
+		         
 
 		     // connecting to the database.
 	       $connect=mysql_connect(constant("DB_HOST"),constant("USERNAME"),constant("PASS"))
@@ -12,15 +14,13 @@ $id=$_POST['x'];
 
            $db='online_trading';
            mysql_select_db($db) or die('Could not select the database ('.$db.') ');
+           echo '2';
 
-           $query="UPDATE `vendor's database` SET `Threshold`=$q,`cost`=$c,`discount`=$d WHERE `id`=$id";
-           if(mysql_query($query))
+           $query="INSERT INTO `bulk_order`( `item_id`,`qty` ,`item_name`,`cost`) VALUES ($id,$q,'$n',$c)";
+           $result=mysql_query($query);
            {
            		echo '1';
            }
-
-
-
 
 
 ?>

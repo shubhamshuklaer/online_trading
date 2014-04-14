@@ -44,7 +44,6 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<?php include_once "search_process.php";?>
 
 
 	<div class="container-fluid">

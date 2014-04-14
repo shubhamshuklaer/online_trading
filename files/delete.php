@@ -7,7 +7,7 @@ $id=$_POST['id'];
 		         
 
 		     // connecting to the database.
-	       $connect=mysql_connect('localhost','root','root')
+	       $connect=mysql_connect(constant("DB_HOST"),constant("USERNAME"),constant("PASS"))
 	           or die('Could not connect to the database: '.mysql_error());
 
            $db='online_trading';

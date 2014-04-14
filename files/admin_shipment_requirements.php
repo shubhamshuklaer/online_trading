@@ -1,5 +1,9 @@
  <?php
- $connect=mysql_connect('localhost','root','root')
+ include_once "../config/config.php";
+
+
+
+ $connect=mysql_connect( constant("DB_HOST"),constant("USERNAME"),constant("PASS"))
 		             or die('Could not connect to the database: '.mysql_error());
 
 		            $db='online_trading';

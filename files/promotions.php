@@ -48,7 +48,7 @@ if(isset($_POST["search_term"])){
 	$omysql_update=new MySQL(); // for updating the promotion_amnt(its cost 1Re per view)
 	if(count($item_ids)>0){
 		// echo $where_statement;
-		$query="Select * from items where item_id IN (".implode(",",$item_ids).") order by promotion_amnt DESC,FIELD( item_id,".implode(",",$item_ids).") limit 3";
+		$query="Select * from items where item_id IN (".implode(",",$item_ids).") AND promotion_amnt >0 order by promotion_amnt DESC,FIELD( item_id,".implode(",",$item_ids).") limit 3";
 		/* 
 		as item_ids are taken form database itself and 
 		they are ints so no need for sanitization

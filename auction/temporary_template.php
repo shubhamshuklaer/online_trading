@@ -135,14 +135,15 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	function func(){
-		alert(document.getElementById('sel').value);
-		//alert(document.getElementById("select02").value);
-		//<?php if($_REQUEST['category'] == 'Electronics'){ echo(' selected ');
-	}
+		function func(){
+			alert(document.getElementById('sel').value);
+			//alert(document.getElementById("select02").value);
+			//<?php if($_REQUEST['category'] == 'Electronics'){ echo(' selected ');
+		}
 	</script>
 	<!--All javascript placed at the end so that the page loads faster-->
-    <script src="../js/jquery.js"></script>
+
+    <script type="text/javascript" src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../js/custom/search_suggestions.js"></script>

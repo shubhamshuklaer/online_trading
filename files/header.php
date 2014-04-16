@@ -1,3 +1,4 @@
+<?php session_start();?>
 <div class="navbar navbar-inverse " role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -31,9 +32,15 @@
                 </li>
 
                 <li>
+                    <?php if(isset($_SESSION["user_nm"])){?>
                     <a href="./Profile/myaccount.php" class="custom_icon_link">
                         <span class="glyphicon glyphicon-user custom_navbar_icon"></span>
-                    </a>
+                    <?php echo $_SESSION["user_nm"];?></a>
+                    <?php }else{?>
+                    <a href="./Profile/login.php" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-user custom_navbar_icon"></span>
+                    Login</a>
+                    <?php }?>
                 </li>
                 <li>
                     <a href="cart_display.php" class="custom_icon_link">
@@ -68,3 +75,4 @@
     font-size: 1.2em;
 }
 </style>
+

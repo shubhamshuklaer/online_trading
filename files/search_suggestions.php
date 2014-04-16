@@ -32,7 +32,21 @@ if(isset($_GET["search_text"])&&!empty($_GET["search_text"])){
 		 		$suggestions[]=$temp;
 			}
 	}
-	echo json_encode($suggestions);
+
+	$unique_suggestions=array();
+
+	$count_suggestions=count($suggestions);
+	for($i=0;$i<$count_suggestions;$i++){
+		$j=0;
+		$temp=count($unique_suggestions);
+		while($j<$temp&&$unique_suggestions[$j]["search_text"]!=$suggestions[$i]["search_text"])
+			$j++;
+		if($j==$temp){
+			$unique_suggestions[]=$suggestions[$i];
+		}
+	}
+	
+	echo json_encode($unique_suggestions);
 }
 
 ?>

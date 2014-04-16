@@ -319,6 +319,10 @@ class MySQL {
 			mysqli_close($this->databaseLink);
 		}
 	}
+
+	function escape_string($string){
+		return mysqli_real_escape_string($this->databaseLink,$string);
+	}
 }
 
 ?>

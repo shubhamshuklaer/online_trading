@@ -6,12 +6,7 @@ $("document").ready(function(){// short form of doccument load
         $(this).find(".custom_navbar_icon").css("color","#aaa");
     }); 
 
-    $('#search_bar').on("keydown",function(e){
-        if(e.keyCode==13){
-            e.preventDefault();
-            $(this).parents("form").submit();
-        }
-    });
+    
     $("#spell_correction").on("click",function(){
         var glyphicon =$(this).find(".custom_navbar_icon");
         if(glyphicon.hasClass("glyphicon-check")){
@@ -25,7 +20,7 @@ $("document").ready(function(){// short form of doccument load
         }
     });
 
-    $("#notification_link").popover({content:load_notifications()});
+   // $("#notification_link").popover({content:load_notifications()});
     
 
    $( "#search_bar" ).autocomplete({
@@ -42,12 +37,12 @@ $("document").ready(function(){// short form of doccument load
                 /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
                 error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
                 */
-                error: function (request, status, error) {
+                error: function (request, textStatus, error) {
                     if(request.readyState==4){// 4 means complete
                         if(request.status!=200){
-                            alert(ajaxOptions);
-                            alert(xhr.status);
-                            alert(thrownError);        
+                            alert(textStatus);
+                            alert(request.status);
+                            alert(error);        
                         }else{
                             //no error message
                             //response is empty no suggestions
@@ -90,12 +85,12 @@ function load_notifications(){
         /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
         error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
         */
-        error: function (request, status, error) {
+        error: function (request, textStatus, error) {
             if(request.readyState==4){// 4 means complete
                 if(request.status!=200){
-                    alert(ajaxOptions);
-                    alert(xhr.status);
-                    alert(thrownError);        
+                    alert(textStatus);
+                    alert(request.status);
+                    alert(error);        
                 }else{
                     return "No Notification";
                 }    

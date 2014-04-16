@@ -5,33 +5,16 @@ var num_item_in_one_page=3;
 var num_pages;
 $("document").ready(function(){
     get_url_variables();
-    if(get["spell_bit"]=="1"){
-        //correct spelling
-        // search_term_explode=get["search_bar"].split(":");
-        // get["search_bar"]="";
-        // for(var i in search_term_explode){
-        //     //correct the spelling of search_term_explode[i]
-        //         ////////////////////////
-        //         ///////////////////////////
-        //         ////////////////////////
-        //         /////////////////////////
-        //         ///////////////////////
-        //         ///////////////////////
-        //         ///////////////////////
-        //         ////
-        //     ///////////////////////////////////////////////
-        //     get["search_bar"]+=search_term_explode[i]+" ";
-        // }
-        
-    }
     $("#search_bar").attr("value",get["search_bar"]);
     get["search_bar"]=get["search_bar"].replace(/\%/g,"\\%");
     var where_clause={"search_term" : get["search_bar"]};
-    if(get["search_bar"]!=null){
-        alert(get["search_bar"]+"s");
+    if(get["search_bar"]!=""){
         load_filter(get["search_bar"]);
    	    load_items(JSON.stringify(where_clause));
         load_promotions(get["search_bar"]);
+        update_search_history(get["search_bar"]);
+    }else{
+        document.getElementById("item_list").innerHTML="No Search Result";
     }
     $(document.body).on("change",":radio",function(){
         //:radio is pseudo selector we could have used "input[type='radio']"
@@ -79,6 +62,10 @@ $("document").ready(function(){
         }
         
     });
+
+
+
+    
 });
 
 function load_items(where_clause){
@@ -120,12 +107,12 @@ function load_items(where_clause){
         /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
         error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
         */
-        error: function (request, status, error) {
+        error: function (request, textStatus, error) {
             if(request.readyState==4){// 4 means complete
                 if(request.status!=200){
-                    alert(ajaxOptions);
-                    alert(xhr.status);
-                    alert(thrownError);        
+                    alert(textStatus);
+                    alert(request.status);
+                    alert(error);        
                 }else{
                     var item_list=document.getElementById("item_list");
                     item_list.innerHTML="";
@@ -171,6 +158,7 @@ function load_filter(search_term){
             var type_list=$("<ul>");
             var cost_list=$("<ul>");
             //Default main category
+            if(category_distribution.length>1){
                 var category_element=$("<li>");
                 var main_category=$("<input>");
                 main_category.attr("type","radio");
@@ -180,6 +168,7 @@ function load_filter(search_term){
                 main_category.appendTo(category_element);
                 category_element.append("Default");
                 category_element.appendTo(category_list);
+            }
             /////////////////////////////////
 
             for(var row in category_distribution){
@@ -194,6 +183,7 @@ function load_filter(search_term){
                 if(category_distribution[row]["sub_category"].length>0){
                     var sub_category_list=$("<ul>");
                     ////////////////Default sub category
+                    if(category_distribution[row]["sub_category"].length>1){
                         var sub_category_li=$("<li>");
                         var sub_category_element=$("<input>");
                         sub_category_element.attr("type","radio");
@@ -203,6 +193,7 @@ function load_filter(search_term){
                         sub_category_element.appendTo(sub_category_li);
                         sub_category_li.append("Default");
                         sub_category_li.appendTo(sub_category_list);
+                    }
                     //////////////////////////////////
                     
                     for(var i in category_distribution[row]["sub_category"]){
@@ -221,6 +212,7 @@ function load_filter(search_term){
                 category_element.appendTo(category_list);
             }
             //Default type destribuiton
+            if(type_distribution["auction"]!="undefined"&&type_distribution["sale"]!="undefined"){
                 var type_element_li=$("<li>");
                 var type_element=$("<input>");
                 type_element.attr("type","radio");
@@ -230,7 +222,7 @@ function load_filter(search_term){
                 type_element.appendTo(type_element_li);
                 type_element_li.append("Default");
                 type_element_li.appendTo(type_list);
-
+            }
             ///////////////////////////////////
             for(var type_name in type_distribution){
                 var type_element_li=$("<li>");
@@ -244,27 +236,29 @@ function load_filter(search_term){
                 type_element_li.appendTo(type_list);
             }
                 //default cost
-                var cost_element_li=$("<li>");
-                var cost_element=$("<input>");
-                cost_element.attr("type","radio");
-                cost_element.attr("name","cost");
-                cost_element.addClass("cost");
-                cost_element.attr("value","");
-                cost_element.appendTo(cost_element_li);
-                cost_element_li.append("Default");
-                cost_element_li.appendTo(cost_list);
+                if(cost_distribution.length>1){
+                    var cost_element_li=$("<li>");
+                    var cost_element=$("<input>");
+                    cost_element.attr("type","radio");
+                    cost_element.attr("name","cost");
+                    cost_element.addClass("cost");
+                    cost_element.attr("value","");
+                    cost_element.appendTo(cost_element_li);
+                    cost_element_li.append("Default");
+                    cost_element_li.appendTo(cost_list);
+                }
             ////////////////////////////////////////
 
-            var previous_cost=0;
+
             for(var row in cost_distribution){
                 var cost_element_li=$("<li>");
                 var cost_element=$("<input>");
                 cost_element.attr("type","radio");
                 cost_element.attr("name","cost");
                 cost_element.addClass("cost");
-                cost_element.attr("value",cost_distribution[row]["less_than"]+":"+previous_cost);
+                cost_element.attr("value",cost_distribution[row]["less_than"]+":"+cost_distribution[row]["greater_than_equal_to"]);
                 cost_element.appendTo(cost_element_li);
-                cost_element_li.append(">="+previous_cost+" , < "+cost_distribution[row]["less_than"]+"("+cost_distribution[row]["count"]+")");
+                cost_element_li.append(">="+cost_distribution[row]["greater_than_equal_to"]+" , < "+cost_distribution[row]["less_than"]+"("+cost_distribution[row]["count"]+")");
                 cost_element_li.appendTo(cost_list);
                 previous_cost=cost_distribution[row]["less_than"];
             }
@@ -278,12 +272,12 @@ function load_filter(search_term){
         /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
         error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
         */
-        error: function (request, status, error) {
+        error: function (request, textStatus, error) {
             if(request.readyState==4){// 4 means complete
                 if(request.status!=200){
-                    alert(ajaxOptions);
-                    alert(xhr.status);
-                    alert(thrownError);        
+                    alert(textStatus);
+                    alert(request.status);
+                    alert(error);        
                 }else{
                     var filter_list=document.getElementById("filter_list");
                     var li_element=$("<li>");
@@ -330,12 +324,12 @@ function load_promotions(search_term){
         /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
         error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
         */
-        error: function (request, status, error) {
+        error: function (request, textStatus, error) {
             if(request.readyState==4){// 4 means complete
                 if(request.status!=200){
-                    alert(ajaxOptions);
-                    alert(xhr.status);
-                    alert(thrownError);        
+                    alert(textStatus);
+                    alert(request.status);
+                    alert(error);        
                 }else{
                     var promotion_list=document.getElementById("promotions");
                     var element=$("<li>");
@@ -365,7 +359,7 @@ function display_items_with_pagination(offset,num_items){//if offset is 1 and nu
             img_box.attr("src",item_response_data[row]["pic_loc"]);
             img_box.appendTo(pic_col);
             var detail_col=$("<td>");
-            detail_col.append("<a href='../auction/"+item_response_data[row]["type"]+".php?item_id="+item_response_data[row]["item_id"]+"'>"+item_response_data[row]["item_nm"]+"</a>");
+            detail_col.append("<a href='"+item_response_data[row]["type"]+".php?item_id="+item_response_data[row]["item_id"]+"' value='"+item_response_data[row]["item_id"]+"' onclick='update_click();'>"+item_response_data[row]["item_nm"]+"</a>");
             detail_col.append("<br>Seller : "+item_response_data[row]["user_nm"]);
             detail_col.append("<br> Quantity: "+item_response_data[row]["quantity"]);
             detail_col.append("<br> Condition: "+item_response_data[row]["item_condition"]);
@@ -386,4 +380,55 @@ function display_items_with_pagination(offset,num_items){//if offset is 1 and nu
             table_row.appendTo(item_list);
         }
     }
+}
+
+function update_search_history(search_term){
+    $.ajax({
+        url: "update_search_history.php",
+        type: "POST",
+        data: { search_term : search_term },
+        /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
+        error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
+        */
+        error: function (request, textStatus, error) {
+            if(request.readyState==4){// 4 means complete
+                if(request.status!=200){
+                    alert(textStatus);
+                    alert(xhr.status);
+                    alert(error);        
+                }else{
+                    //no err
+                }    
+            }
+        }
+    });   
+}
+
+function update_click(event_obj){
+    alert("hello");
+    alert(event_obj);
+        // event_obj.preventDefault();
+        alert(event_obj);
+       $.ajax({
+        url: "update_clicks.php",
+        type: "POST",
+        data: {
+            item_id: $(this).attr("item_id"),
+            search_term:get["search_bar"]
+         },
+        //As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
+        //error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
+        
+        error: function (request, textStatus, error) {
+            if(request.readyState==4){// 4 means complete
+                if(request.status!=200){
+                    alert(textStatus);
+                    alert(request.status);
+                    alert(error);        
+                }else{
+                    //no error
+                }    
+            }
+        }
+    });
 }

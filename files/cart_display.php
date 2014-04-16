@@ -11,7 +11,7 @@
     <?php require_once "class.MySQL.php"; ?>
   	<div class="container-fluid" name="c1">
 		<div class="row" role="header">
-			<?php include_once "header.php"; session_start();$_SESSION['user_nm']="ayantika";?>
+			<?php include_once "header.php"; session_start();?>
 		</div>
         <!-- constant("HOSTNAME")."/upload/".picloc-->
 		<div class="container" name="c2"><!-- you can delete this div if you don't want the side bar-->

@@ -1,3 +1,8 @@
 1. notifications.php
 2. something is causing autocomplete to fail in profile module
-3. auction null values of user_nm and quantity
+3. auction null values of user_nm and quantity,type
+4. added to cart cue
+5.auction start date>end date
+6.update click
+
+search

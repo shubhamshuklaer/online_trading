@@ -97,7 +97,7 @@ if(isset($_POST["search_term"])){
 			//calculating category distribution ends
 			$type_distribution=array_count_values($types);
 			//calculating cost distribution
-				$min_cost=0;
+				$min_cost=$costs[0];
 				$max_cost=0;
 				foreach ($costs as $value) {
 					if($max_cost<$value)
@@ -116,17 +116,21 @@ if(isset($_POST["search_term"])){
 				sort($costs);
 				$temp_count=0;
 				// print_r($costs);
+				$temp1=array();
+				$temp1["greater_than_equal_to"]=$min_cost;
 				foreach ($costs as $value) {
 					if($value>=$temp){
-						$temp1=array();
 						$temp1["less_than"]=$temp;
 						$temp1["count"]=$temp_count;
 						$cost_distribution[]=$temp1;
+						while($value>=$temp){
+							if($temp==100)
+								$temp=500;
+							else
+								$temp+=500;
+						}
 						$temp_count=1;
-						if($temp==100)
-							$temp=500;
-						else
-							$temp+=500;
+						$temp1["greater_than_equal_to"]=($temp==500)?100:$temp-500;
 					}else{
 						$temp_count++;
 					}
@@ -134,6 +138,7 @@ if(isset($_POST["search_term"])){
 				$temp1=array();
 				$temp1["less_than"]=$temp;
 				$temp1["count"]=$temp_count;
+				$temp1["greater_than_equal_to"]=($temp==500)?100:$temp-500;
 				$cost_distribution[]=$temp1;
 				// print_r($cost_distribution);
 				//the last cost_distribution will have to be added seperately as for that $value may not become >=$temp

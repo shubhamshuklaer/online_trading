@@ -19,13 +19,7 @@
                 <li>
                     <form class="navbar-form navbar-right" action="search.php" method="get">
                         <input type="text"  class="form-control" placeholder="Search..." id="search_bar"  name="search_bar">
-                        <input type="text" class="hidden" name="spell_bit" id="spell_bit" value="1">
                     </form>
-                </li>
-                <li>
-                    <a href="#" class="custom_icon_link" id="spell_correction">
-                    <span class="glyphicon glyphicon-check custom_navbar_icon"></span>
-                    Spell Correction</a>
                 </li>
                 <li>
                     <a href="index.php" class="custom_icon_link">

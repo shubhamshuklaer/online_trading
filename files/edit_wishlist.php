@@ -8,21 +8,21 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="../../css/jquery.fancybox.css" rel="stylesheet">
-<link href="../../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../../assets/ico/favicon.html">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="c../../ss/smoothness/jquery-ui.css">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="../css/jquery.fancybox.css" rel="stylesheet">
+<link href="../css/cloud-zoom.css" rel="stylesheet">
+<link rel="shortcut icon" href="../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
     if(!isset($_SESSION['authentication']))
-    header("Location: http://localhost/online_trading/files/Profile/login.php");
+    header("Location: login.php");
 ?>
 <?php
-  include_once '../class.MySQL.php';
+  include_once 'class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
                   $object=new MYSQL();
@@ -41,7 +41,7 @@ if(isset($_POST['submit_button']))
                   session_start();
                   $object=new MYSQL();
               $row=$object->ExecuteSQL("UPDATE wish_list SET item_nm='$item_nm', category='$categories_name', Tags='$Tag' where id='".$_SESSION['wishlist_product_id']."'");
-    header("Location: http://localhost/online_trading/files/Profile/wishlist.php");
+    header("Location: wishlist.php");
   }
 ?>
 <script type="text/javascript">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include_once "../../config/config.php";?>
+<?php include_once "../config/config.php";?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -9,14 +9,14 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="../../css/jquery.fancybox.css" rel="stylesheet">
-<link href="../../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../../assets/ico/favicon.html">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="../css/jquery.fancybox.css" rel="stylesheet">
+<link href="../css/cloud-zoom.css" rel="stylesheet">
+<link rel="shortcut icon" href="../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
     if(!isset($_SESSION['authentication']))
@@ -118,7 +118,7 @@ function notification()
              }
      xmlhttp.open("GET","notification.php?id=22",true);
      xmlhttp.send();
-     window.location.href="http://localhost/online_trading/files/Profile/wishlist_confirmation.php";
+     window.location.href="http://localhost/online_trading/files/wishlist_confirmation.php";
 }
 </script>
 </body>

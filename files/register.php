@@ -8,13 +8,13 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="../../css/jquery.fancybox.css" rel="stylesheet">
-<link href="../../css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="../css/jquery.fancybox.css" rel="stylesheet">
+<link href="../css/cloud-zoom.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <?php
   if(isset($_POST['submit_button']))

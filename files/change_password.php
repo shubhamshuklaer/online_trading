@@ -8,21 +8,21 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="../../css/jquery.fancybox.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
     if(!isset($_SESSION['user_nm']))
-    header("Location: http://localhost/online_trading/files/Profile/login.php");
+    header("Location: login.php");
 ?>
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <?php
-include_once '../class.MySQL.php';
+include_once 'class.MySQL.php';
   $object=new MYSQL();
       $row=$object->ExecuteSQL("SELECT * from user where user_nm='".$_SESSION['user_nm']."' ");
       $a=$row[0]['pass'];
@@ -44,7 +44,7 @@ include_once '../class.MySQL.php';
          { 
       $pass=sha1($pass);
       $row=$object->ExecuteSQL("UPDATE user set pass='$pass' where user_nm='$usernm'");
-    header("Location: http://localhost/online_trading/files/Profile/myaccount.php");
+    header("Location: myaccount.php");
   }
 }
 }

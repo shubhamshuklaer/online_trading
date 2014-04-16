@@ -8,10 +8,10 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -58,7 +58,7 @@ if(!isset($_SESSION))
      $omysql->Update($from, $set, $where);
      //////////////////////////////////////////////////////////////////
       setcookie("user_nm","$user_nm",time()+3600*24*30,'/');
-        header("Location: " . constant("HOSTNAME") . "/files/cart_display.php");
+        header("Location: cart_display.php");
     }
   }
 

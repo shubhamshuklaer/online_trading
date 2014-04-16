@@ -8,20 +8,20 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="../../css/jquery.fancybox.css" rel="stylesheet">
-<link href="../../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../../assets/ico/favicon.html">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="../css/jquery.fancybox.css" rel="stylesheet">
+<link href="../css/cloud-zoom.css" rel="stylesheet">
+<link rel="shortcut icon" href="../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
   include_once '../class.MySQL.php';
 if(!isset($_SESSION))
     session_start();
     if(!isset($_SESSION['authentication']))
-    header("Location: http://localhost/online_trading/files/Profile/login.php");
+    header("Location: login.php");
 ?>
 <?php
 
@@ -50,7 +50,7 @@ if(isset($_POST['submit_button']))
    if(!isset($_SESSION))
             session_start();
         $row=$object->ExecuteSQL("UPDATE items SET item_nm='$item_nm', category='$categories_name', quantity='$quantity', cost='$cost', item_condition='$itemcondition', type='$item_type', description='$itemdescription' where item_id='".$_SESSION['product_id']."'");
-    header("Location: http://localhost/online_trading/files/Profile/myitems.php");
+    header("Location: myitems.php");
   }
 ?>
 </head>
@@ -194,4 +194,4 @@ if(isset($_POST['submit_button']))
         });
 </script>
 </body>
-</html>
+</html>w

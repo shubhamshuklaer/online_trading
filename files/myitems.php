@@ -8,25 +8,25 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="../../css/jquery.fancybox.css" rel="stylesheet">
-<link href="../../css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="../css/jquery.fancybox.css" rel="stylesheet">
+<link href="../css/cloud-zoom.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 <!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
+<script type="text/javascript">
 <?php 
     session_start();
     if(!isset($_SESSION['user_nm']))
-    header("Location: http://localhost/online_trading/files/Profile/login.php");
+    header("Location: login.php");
 ?>
-<script type="text/javascript">
  var item_ids = new Array();
  var i=0;
 </script>
@@ -40,7 +40,7 @@
       <div class="row">
         <!-- My Items -->
         <div class="span9">
-          <h1 class="heading1"><span class="maintext">Watchlist</span><span class="subtext">Monitor items you are interested in</span></h1>
+          <h1 class="heading1"><span class="maintext">My Items</span><span class="subtext">View Items posted by you</span></h1>
           <div class="cart-info">
             <table id="mytable" class="table table-striped table-bordered">
               <tr>
@@ -59,29 +59,28 @@
                 if(!isset($_SESSION))
                   session_start();
                   $object=new MYSQL();
-              $ids=$object->ExecuteSQL("SELECT * from watch_list where user_nm='".$_SESSION['user_nm']."'");
+              $row=$object->ExecuteSQL("SELECT * from items where user_nm='".$_SESSION['user_nm']."'");
                  $i=0;
                  $count=0;
-                 while(isset($ids[$i])){
+                 while(isset($row[$i])){
                   ++$count;
                     echo '<script type="text/javascript">
                          item_ids[i]=';
-                         echo $ids[0]['item_id'];
+                         echo $row[$i]['item_id'];
                          echo';
                          ++i;
                          </script>';
-                         $row=$object->ExecuteSQL("SELECT * from items where item_id='".$ids[0]['item_id']."'");
                   echo '<tr id="';echo $count;echo '"">
-                <td class="image"><a href="#"><img width="50" height="50" src="';echo $row[0]['pic_loc'];echo '" alt="product" title="product"></a></td>
-                <td class="name">'.$row[0]['item_nm'].'</td>
-                <td class="model">'.$row[0]['category'].'</td>
-                <td class="condition">'.$row[0]['item_condition'].'</td>
-                <td class="quantity">'.$row[0]['quantity'].'</td>
-                <td class="cost">'.$row[0]['cost'].'</td>
-                <td class="type">'.$row[0]['type'].'</td>
-                <td class="description">'.$row[0]['description'].'</td>
+                <td class="image"><a href="#"><img width="50" height="50" src="';echo $row[$i]['pic_loc'];echo '" alt="product" title="product"></a></td>
+                <td class="name">'.$row[$i]['item_nm'].'</td>
+                <td class="model">'.$row[$i]['category'].'</td>
+                <td class="condition">'.$row[$i]['item_condition'].'</td>
+                <td class="quantity">'.$row[$i]['quantity'].'</td>
+                <td class="cost">'.$row[$i]['cost'].'</td>
+                <td class="type">'.$row[$i]['type'].'</td>
+                <td class="description">'.$row[$i]['description'].'</td>
                 <td class="total">
-                <a  href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                <a onclick="edit_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-trash"></span></a>
                 </td></tr>';
                 ++$i;
@@ -118,15 +117,23 @@
 
 function remove_entry(id)
  {
-  var r=confirm("Are you sure you want to remove this item from your Watchlist ?");
+  var r=confirm("Are you sure you want to delete this item ?");
   if(r==true){  
   var temp=item_ids[id];
   var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open("GET","remove_item_watchlist.php?id="+temp,true);
+  xmlhttp.open("GET","remove_item_entry.php?id="+temp,true);
   xmlhttp.send();
   document.getElementById("mytable").deleteRow(id+1);  
   }
 }
+function edit_entry(id)
+ {
+     var temp=item_ids[id];
+     var xmlhttp=new XMLHttpRequest();
+     xmlhttp.open("GET","add_item_session_variable.php?id="+temp,true);
+     xmlhttp.send();
+     window.location.href="http://localhost/online_trading/files/editmyitems.php";
+  }
 </script>
 </body>
 </html>

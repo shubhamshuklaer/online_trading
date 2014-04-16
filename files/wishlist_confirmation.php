@@ -8,13 +8,13 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="../../css/jquery.fancybox.css" rel="stylesheet">
-<link href="../../css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="../css/jquery.fancybox.css" rel="stylesheet">
+<link href="../css/cloud-zoom.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -50,10 +50,11 @@
                 <th class="total">Action</th>
               </tr>
               <?php 
-                  if(!($connection=mysql_connect("localhost", "root", "")))
-                  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
+                  include_once "../config/config.php";
+                  if(!($connection=mysql_connect(constant("DB_HOST"), constant("USERNAME"),constant("PASS"))))
+                  header("Location: connection_error.php");
                   if(!mysql_select_db("online_trading", $connection))
-                  header("Location: http://localhost/online_trading/files/Profile/connection_error.php");
+                  header("Location: connection_error.php");
                   else{
                   if(!isset($_SESSION))
                   session_start();
@@ -132,7 +133,7 @@ function edit_entry(id)
      var xmlhttp=new XMLHttpRequest();
      xmlhttp.open("GET","add_item_session_variable.php?id="+temp,true);
      xmlhttp.send();
-     window.location.href="http://localhost/online_trading/files/Profile/editmyitems.php";
+     window.location.href="http://localhost/online_trading/files/editmyitems.php";
   }
 </script>
 </body>

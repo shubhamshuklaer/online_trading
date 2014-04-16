@@ -8,14 +8,14 @@
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../../css/style.css" rel="stylesheet">
-<link href="../../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="../../css/jquery.fancybox.css" rel="stylesheet">
-<link href="../../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../../assets/ico/favicon.html">
-<link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.css"  type="text/css"/>
-<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui.css">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="../css/jquery.fancybox.css" rel="stylesheet">
+<link href="../css/cloud-zoom.css" rel="stylesheet">
+<link rel="shortcut icon" href="../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <script type="text/javascript">
   var tags_name="";
   var tag_count=0;
@@ -23,8 +23,8 @@
 <?php 
     session_start();
     if(!isset($_SESSION['authentication']))
-    header("Location: http://localhost/online_trading/files/Profile/login.php");
-	include_once '../class.MySQL.php';
+    header("Location: login.php");
+	include_once 'class.MySQL.php';
 ?>
 <?php
 $object=new MYSQL();
@@ -38,7 +38,7 @@ if(!isset($_SESSION))
 	 $Tags=$_SESSION['wishlist_product_id'];
 	 unset($_SESSION['wishlist_product_id']);
      $row=$object->ExecuteSQL("INSERT into wish_list (item_nm,user_nm,category,item_id,Tags,availability) VALUES ('".$item_nm."','".$user_nm."','".$categories_name."',NULL,'".$Tags."','not')");
-	  header("Location: http://localhost/online_trading/files/Profile/myaccount.php");
+	  header("Location: myaccount.php");
   }
 ?>
 </head>

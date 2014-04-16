@@ -1,6 +1,6 @@
 <?php
 $userid=$_REQUEST["userid"];
-include_once '../class.MySQL.php';
+include_once 'class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
                   $object=new MYSQL();

@@ -1,4 +1,6 @@
 <?php session_start();?>
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <div class="navbar navbar-inverse " role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -33,11 +35,11 @@
 
                 <li>
                     <?php if(isset($_SESSION["user_nm"])){?>
-                    <a href="./Profile/myaccount.php" class="custom_icon_link">
+                    <a href="myaccount.php" class="custom_icon_link">
                         <span class="glyphicon glyphicon-user custom_navbar_icon"></span>
                     <?php echo $_SESSION["user_nm"];?></a>
                     <?php }else{?>
-                    <a href="./Profile/login.php" class="custom_icon_link">
+                    <a href="login.php" class="custom_icon_link">
                         <span class="glyphicon glyphicon-user custom_navbar_icon"></span>
                     Login</a>
                     <?php }?>
@@ -76,3 +78,8 @@
 }
 </style>
 
+
+<script src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/custom/search_suggestions.js"></script>

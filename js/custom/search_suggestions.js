@@ -34,7 +34,7 @@ $("document").ready(function(){// short form of doccument load
                 url: "search_suggestions.php",
                 dataType: "json",
                 type: "GET",
-                data: {search_text : request.term},
+                data: {search_text : request.term.trim()},
                 success: function(response_data){
                     response(response_data);// as we have written datatype as json so jquery automatically converts the result 
                     //from json... so responce_data is not json its already parsed
@@ -42,17 +42,25 @@ $("document").ready(function(){// short form of doccument load
                 /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
                 error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
                 */
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
+                error: function (request, status, error) {
+                    if(request.readyState==4){// 4 means complete
+                        if(request.status!=200){
+                            alert(ajaxOptions);
+                            alert(xhr.status);
+                            alert(thrownError);        
+                        }else{
+                            //no error message
+                            //response is empty no suggestions
+                        }    
+                    }
                 }
             });
        },
        delay: 500,
        minLength: 3,
        select: function(event,ui){
-                    event.preventDefault();
                     $(this).val(ui.item.search_text);                  
+                    event.preventDefault();
                } 
        }).data("ui-autocomplete")._renderItem= function(ul,item){
             var list_element=$("<li>");

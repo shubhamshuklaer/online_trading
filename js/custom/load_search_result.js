@@ -7,30 +7,32 @@ $("document").ready(function(){
     get_url_variables();
     if(get["spell_bit"]=="1"){
         //correct spelling
-        search_term_explode=get["search_bar"].split(":");
-        get["search_bar"]="";
-        for(var i in search_term_explode){
-            //correct the spelling of search_term_explode[i]
-                ////////////////////////
-                ///////////////////////////
-                ////////////////////////
-                /////////////////////////
-                ///////////////////////
-                ///////////////////////
-                ///////////////////////
-                ////
-            ///////////////////////////////////////////////
-            get["search_bar"]+=search_term_explode[i]+" ";
-        }
+        // search_term_explode=get["search_bar"].split(":");
+        // get["search_bar"]="";
+        // for(var i in search_term_explode){
+        //     //correct the spelling of search_term_explode[i]
+        //         ////////////////////////
+        //         ///////////////////////////
+        //         ////////////////////////
+        //         /////////////////////////
+        //         ///////////////////////
+        //         ///////////////////////
+        //         ///////////////////////
+        //         ////
+        //     ///////////////////////////////////////////////
+        //     get["search_bar"]+=search_term_explode[i]+" ";
+        // }
         
     }
     $("#search_bar").attr("value",get["search_bar"]);
     get["search_bar"]=get["search_bar"].replace(/\%/g,"\\%");
     var where_clause={"search_term" : get["search_bar"]};
-    load_filter(get["search_bar"]);
-    // console.log(JSON.stringify(where_clause));
-   	load_items(JSON.stringify(where_clause));
-    load_promotions(get["search_bar"]);
+    if(get["search_bar"]!=null){
+        alert(get["search_bar"]+"s");
+        load_filter(get["search_bar"]);
+   	    load_items(JSON.stringify(where_clause));
+        load_promotions(get["search_bar"]);
+    }
     $(document.body).on("change",":radio",function(){
         //:radio is pseudo selector we could have used "input[type='radio']"
         // SInce the elements are loaded through ajax so the .ready event happens before the elements are loaded
@@ -142,7 +144,7 @@ function get_url_variables(){
     location.search.replace('?', '').split('&').forEach(function (val) {
         // alert("hello");
         split = val.split("=", 2);
-        get[split[0]] = (decodeURIComponent(split[1]).replace(/\+/g," "));
+        get[split[0]] = (decodeURIComponent(split[1]).replace(/\+/g," ")).trim();
     });
 }   
 

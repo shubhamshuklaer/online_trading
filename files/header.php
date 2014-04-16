@@ -47,8 +47,8 @@
                         <span id="cart_icon" class="glyphicon glyphicon-shopping-cart custom_navbar_icon"></span>
                     </a>
                 </li>
-                <li><a href="../auction/temporary_template.php">Auction</a></li>
-                <li><a href="../auction/temporary_template.php">Sell</a></li>
+                <li><a href="temporary_template.php">Auction</a></li>
+                <li><a href="temporary_template.php">Sell</a></li>
                 <li><a href="template_bulk.php">Bulk Order</a></li>
                 <li>
                     <a href="#" id="notification_link" class="custom_icon_link" data-container="body" data-html="true" data-title="Notifications"  data-toggle="popover" data-placement="bottom">

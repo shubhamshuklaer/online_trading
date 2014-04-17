@@ -51,7 +51,6 @@
                 <th class="quantity">Quantity</th>
                 <th class="cost">Cost</th>
                 <th class="type">Type</th>
-                <th class="description">Item Description</th>
                 <th class="total">Action</th>
               </tr>
               <?php 
@@ -78,7 +77,6 @@
                 <td class="quantity">'.$row[$i]['quantity'].'</td>
                 <td class="cost">'.$row[$i]['cost'].'</td>
                 <td class="type">'.$row[$i]['type'].'</td>
-                <td class="description">'.$row[$i]['description'].'</td>
                 <td class="total">
                 <a onclick="edit_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-trash"></span></a>

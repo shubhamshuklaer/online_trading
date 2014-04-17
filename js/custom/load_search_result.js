@@ -212,7 +212,7 @@ function load_filter(search_term){
                 category_element.appendTo(category_list);
             }
             //Default type destribuiton
-            if(type_distribution["auction"]!="undefined"&&type_distribution["sale"]!="undefined"){
+            if(!(typeof type_distribution.auction=="undefined" || typeof type_distribution.sale=="undefined")){
                 var type_element_li=$("<li>");
                 var type_element=$("<input>");
                 type_element.attr("type","radio");

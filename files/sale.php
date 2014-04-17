@@ -162,7 +162,7 @@ $row =$omysql->arrayedResult;
                     console.log(response_data);
                         if(response_data=="1")
                         {
-                           // alert("Added, reloading page");
+                            alert("Added");
                             //window.location.reload();
                         }
                         else if(response_data=="0")

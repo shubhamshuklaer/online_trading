@@ -13,7 +13,7 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -41,9 +41,13 @@
           <!--<h3 class="heading3">Credits : ₹ </h3>-->
           <div class="credits">
               <?php 
-                include_once '../class.MySQL.php';
+                include_once 'class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
+                if(isset($_SESSION['recharge'])) {
+                  echo '<div class="alert alert-success">Your account has been credited with ₹ '.$_SESSION['recharge'].'</div>';
+                  unset($_SESSION['recharge']);
+                }
                 $object=new MYSQL();
                 $row=$object->ExecuteSQL("SELECT * from user where user_nm='".$_SESSION['user_nm']."'");
                 $mycredit=$row[0]['credit'];
@@ -62,7 +66,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript">
   if (typeof(jQuery) == 'undefined')   
-    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
@@ -86,7 +90,7 @@ function edit_entry(id)
   var xmlhttp=new XMLHttpRequest();
   xmlhttp.open("GET","add_item_session_variable.php?id="+temp,true);
   xmlhttp.send();
-  window.location.href="http://localhost/online_trading/files/Profile/editmyitems.php";
+  window.location.href="editmyitems.php";
 }
 
 </script>

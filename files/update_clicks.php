@@ -12,7 +12,7 @@ if(isset($_POST["item_id"])&&isset($_POST["search_term"])){
 	$search_term_array=array_unique($search_term_array);
 	$where_click_update="where item_id = '".$_POST["item_id"]."' and (";
 	foreach ($search_term_array as $value) {
-		$where_click_update.="search_term like '".$omysql_clicks_update->escape_string($value)."' or ";
+		$where_click_update.="search_term like '".$omysql_clicks_update->escape_string($value)."%' or ";
 	}
 
 	$where_click_update=substr($where_click_update,0,-3);

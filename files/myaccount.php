@@ -44,7 +44,7 @@
                 <a href="change_password.php"> Change your password</a>
               </li>
               <li>
-                <a href="#">Cart</a>
+                <a href="cart_display.php">Cart</a>
               </li>
               <li>
                 <a href="wishlist.php">Modify your wish list</a>
@@ -59,7 +59,7 @@
                 <a href="myitems.php">My Items</a>
               </li>
               <li>
-                <a href="#">Recommendations</a>
+                <a href="recommendations.php">Recommendations</a>
               </li>
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="notification()">Notifications <span id="badge" class="badge"></span></a>
@@ -81,10 +81,13 @@
           <div class="myaccountbox">
             <ul>
               <li>
-                <a href="#"> View your Credits</a>
+                <a href="mycredits.php"> View your Credits</a>
               </li>
               <li>
-                <a href="#">Your Transactions</a>
+                <a href="mytransactions.php">Your Transactions</a>
+              </li>
+              <li>
+                <a href="recharge.php">Recharge credits</a>
               </li>
             </ul>
           </div>

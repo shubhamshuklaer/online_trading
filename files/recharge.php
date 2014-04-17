@@ -21,6 +21,19 @@
   if(!isset($_SESSION['user_nm']))
     header("Location: login.php");
 ?>
+<?php
+  $bool_cap = "0";
+  $bool_vouch = "0";
+  function random($legth) {
+    $chrs ="abcdefghijklmnopqrstuvwxyz23456789";
+    $sr = "";
+    $sze = strlen($chrs);
+    for($i=0; $i<$legth; $i++){
+    $sr .= $chrs[rand(0, $sze-1)];
+  }
+  return $sr;
+  }
+?>
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <?php
   if(!isset($_SESSION)){
@@ -29,29 +42,35 @@
   if(isset($_POST['submit_button']))
   {
     include_once 'class.MySQL.php';
+    $in_captcha=$_POST['in_captcha'];
     $in_voucher=$_POST['in_voucher'];
     $object=new MySQL();
-    $cr=$object->ExecuteSQL("SELECT * from user where user_nm='".$_SESSION['user_nm']."'");
-    if(isset($cr[0])) {
-      $credit=$cr[0]['credit'];
-    }
-    $row=$object->ExecuteSQL("SELECT * from vouchers where voucher='".$in_voucher."'");
-    if($row) {
-      $amount=$row[0]['amount'];
-      $available=$row[0]['available'];
-    }
-    $newcredit=$credit + $amount;
-    if($row) {
-      if($available=='1') { 
-      $row=$object->ExecuteSQL("UPDATE vouchers SET available='0' WHERE voucher='".$in_voucher."'");
-      $row=$object->ExecuteSQL("UPDATE user SET credit='".$newcredit."' WHERE user_nm='".$_SESSION['user_nm']."'");
-      header("Location: mycredits.php");
+    if($_SESSION['real']==$in_captcha) {
+      $cr=$object->ExecuteSQL("SELECT * from user where user_nm='".$_SESSION['user_nm']."'");
+      if(isset($cr[0])) {
+        $credit=$cr[0]['credit'];
+      }
+      $row=$object->ExecuteSQL("SELECT * from vouchers where voucher='".$in_voucher."'");
+      if($row) {
+        $amount=$row[0]['amount'];
+        $available=$row[0]['available'];
+      }
+      if($row) {
+        if($available=='1') {
+          $newcredit=$credit + $amount;
+          $row=$object->ExecuteSQL("UPDATE vouchers SET available='0' WHERE voucher='".$in_voucher."'");
+          $row=$object->ExecuteSQL("UPDATE user SET credit='".$newcredit."' WHERE user_nm='".$_SESSION['user_nm']."'");
+          $_SESSION['recharge']=$amount;
+          header("Location: mycredits.php");
+        }
+        else { $bool_vouch='1';}
       }
     }
+    else { $bool_cap='1';}
   }
 ?>
-
 </head>
+
 <body>
 <?php include 'header.php';?>
 <?php include 'sidebar.php'; ?>
@@ -65,12 +84,44 @@
           <h1 class="heading1"><span class="maintext">Recharge your Balance Credits</span><span class="subtext"></span></h1>
           <form id="detailsform" class="form-horizontal" method="POST">
             <h3 class="heading3">Fill the following details : </h3>
+            <?php
+              if($bool_cap) {
+                echo '<div class="alert alert-danger">Captcha entered is incorrect.</div>';
+              }
+              else if($bool_vouch) {
+                echo '<div class="alert alert-danger">Voucher entered do not exist.</div>';
+              }
+            ?>
             <div class="registerbox">
               <fieldset>
                 <div class="control-group">
                   <label class="control-label"> Voucher Key : </label>
                   <div class="controls">
                     <input id="in_voucher" type="text" name="in_voucher" class="form-control-lg" >
+                    <span class="red"></span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Enter the Captcha : </label>
+                  <div class="controls">
+                      <?php
+                      if (!isset($_SESSION))
+                        session_start();
+                      $_SESSION['real'] = random("6");
+                      $sr = "  ".$_SESSION['real'];
+                      $image = imagecreate(100, 20);
+                      $background = imagecolorallocate($image, 0, 0, 0);
+                      $foreground = imagecolorallocate($image, 255, 255, 255);
+                      imagestring($image, 8,2,2,$sr,$foreground);
+                      imagejpeg($image,"captcha.jpg");
+                    ?>
+                    <td class="image"><img width="100" height="20" src='captcha.jpg' alt="Captcha"></td>
+                    <span class="red"></span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <div class="controls">
+                    <input id="in_captcha" type="text" name="in_captcha" class="form-control-lg">
                     <span class="red"></span>
                   </div>
                 </div>
@@ -94,7 +145,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript">
   if (typeof(jQuery) == 'undefined')   
-    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>

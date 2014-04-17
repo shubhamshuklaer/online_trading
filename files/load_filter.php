@@ -63,13 +63,14 @@ if(isset($_POST["search_term"])){
 		$categories=array();
 		if($omysql->records>0){
 			$result=$omysql->arrayedResult;
+			// print_r($result);
 			$final_result=array();
 			foreach ($result as $row) {
 				if($row["type"]=="auction"){
 					if($row["last_date"]>date('Y-m-d H:i:s'))
 						$final_result[]=$row;
 				}else{
-					$final_result[]=$row[$i];
+					$final_result[]=$row;
 				}	
 			}
 			$result=$final_result;

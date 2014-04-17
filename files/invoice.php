@@ -59,21 +59,22 @@
                             </tr>
                             <?php
                             $entries = $j; //number of items in placed order
-                            $sno = 1;
+                            $sno = 0;
                             $from = "items";
                             $grandtot = 0;
                             //fill table
-                            while($sno <= $entries)
+                            while($sno < $entries)
                             {
                                 echo "<tr>";
-                                $id = $items[$sno-1]["item_id"]; //item_id of bought item
-                                $quantity = $items[$sno-1]["qty"]; //qty bought
+                                $id = $items[$sno]["item_id"]; //item_id of bought item
+                                $quantity = $items[$sno]["qty"]; //qty bought
                                 ///search for item details
-                                $where = array("user_nm like"=>$username,"AND item_id like"=>$id);
+                                $where = array("item_id like"=>$id);
                                 $omysql->Select($from, $where);
                                 $res = $omysql->arrayedResult;
                                 $tot = $res[0]["cost"] + (($res[0]["cost"]*$res[0]["tax"])/100);
                                 $grandtot+=$tot;
+                                $sno++;
                                 echo "<td>".$sno."</td>
                                 <td>".$res[0]["item_nm"]."</td>
                                 <td>₹".$res[0]["cost"]."</td>
@@ -81,7 +82,6 @@
                                 <td>".$quantity."</td>
                                 <td>₹".$tot."</td>";
                                 echo "</tr>";
-                                $sno++;
                             }
                             ?>
                             <tr><td></td><td></td><td></td>

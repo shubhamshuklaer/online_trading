@@ -1,7 +1,7 @@
 <?php
 	if(!isset($_SESSION))
     session_start();
-	include_once '../class.MySQL.php';
+	include_once 'class.MySQL.php';
 	$object=new MYSQL();
 	$result=array();
 	$notifications=array();
@@ -97,22 +97,21 @@
  	++$i;
 }
 	$row=$object->ExecuteSQL("SELECT * from watch_list where user_nm='".$_SESSION['user_nm']."'");
-	var_dump($row);
 	$j=0;
 	while(isset($row[$j])){
 		$output=$object->ExecuteSQL("SELECT * from items where item_id='".$row[$j]["item_id"]."'");
 		if($output[0]["cost"]>$row[$j]["previous_cost"])
 			{
 				$notifications[$i]="The cost of ".$output[0]["item_nm"]." has increased";
-				$type[$i]="watchlist";
-				$link[$i]="";
+				$type[$i]=$output[0]["item_id"];
+				$link[$i]="#";
 				++$i;
 			}
 		else if($output[0]["cost"]<$row[$j]["previous_cost"])
 			{
 				$notifications[$i]="The cost of ".$output[0]["item_nm"]." has decreased";
-				$type[$i]="watchlist";
-				$link[$i]="";
+				$type[$i]=$output[0]["item_id"];
+				$link[$i]="#";
 				++$i;
 			}
 			++$j;

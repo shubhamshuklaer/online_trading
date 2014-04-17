@@ -52,7 +52,7 @@ $row =$omysql->arrayedResult;
                                  <div class="row">
                                        <div class="col-md-3" >
                                            <div class="mag">
-                                                <?php $pic = constant("HOSTNAME")."/upload/".$pic_loc; ?>
+                                                <?php $pic = "../upload/".$pic_loc; ?>
                                                 <img data-toggle="magnify" src="<?php echo $pic;?>" alt="" title="" width="300" height="1000" class="img-thumbnail">
 
                                            </div>

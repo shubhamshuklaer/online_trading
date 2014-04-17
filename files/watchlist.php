@@ -51,7 +51,6 @@
                 <th class="quantity">Quantity</th>
                 <th class="cost">Cost</th>
                 <th class="type">Type</th>
-                <th class="description">Item Description</th>
                 <th class="total">Action</th>
               </tr>
               <?php 
@@ -66,22 +65,21 @@
                   ++$count;
                     echo '<script type="text/javascript">
                          item_ids[i]=';
-                         echo $ids[0]['item_id'];
+                         echo $ids[$i]['item_id'];
                          echo';
                          ++i;
                          </script>';
-                         $row=$object->ExecuteSQL("SELECT * from items where item_id='".$ids[0]['item_id']."'");
+                         $row=$object->ExecuteSQL("SELECT * from items where item_id='".$ids[$i]['item_id']."'");
                   echo '<tr id="';echo $count;echo '"">
-                <td class="image"><a href="#"><img width="50" height="50" src="';echo $row[0]['pic_loc'];echo '" alt="product" title="product"></a></td>
+                <td class="image"><a href="#"><img width="50" height="50" src="../upload/';echo $row[0]['pic_loc'];echo '" alt="product" title="product"></a></td>
                 <td class="name">'.$row[0]['item_nm'].'</td>
                 <td class="model">'.$row[0]['category'].'</td>
                 <td class="condition">'.$row[0]['item_condition'].'</td>
                 <td class="quantity">'.$row[0]['quantity'].'</td>
                 <td class="cost">'.$row[0]['cost'].'</td>
                 <td class="type">'.$row[0]['type'].'</td>
-                <td class="description">'.$row[0]['description'].'</td>
                 <td class="total">
-                <a  href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                <a  href="#" onclick="add_cart('.$row[0]["item_id"].')"><span class="glyphicon glyphicon-shopping-cart"></span></a>
                 <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-trash"></span></a>
                 </td></tr>';
                 ++$i;
@@ -101,7 +99,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript">
   if (typeof(jQuery) == 'undefined')   
-    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
@@ -131,6 +129,43 @@ function remove_entry(id)
      row.parentNode.removeChild(row);  
   }
 }
+
+      function add_cart(item_id)
+      {
+            // alert("IN ADD_CART FUNC");
+            $.ajax({
+                    url: "detail_addcart.php",
+                    dataType: "json",
+                    type: "GET",
+                    data: {
+                            item_id : item_id
+                            },
+                    success: function(response_data){
+                    console.log(response_data);
+                        if(response_data=="1")
+                        {
+                           alert("Added");
+                            //window.location.reload();
+                        }
+                        else if(response_data=="0")
+                        {
+                            alert("Could not be added!!!");
+                        }
+                        // as we have written datatype as json so jquery automatically converts the result
+                        //from json... so responce_data is not json its already parsed
+                    },
+                    /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
+                    error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
+                    */
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+      }
+
+
+
 </script>
 </body>
 </html>

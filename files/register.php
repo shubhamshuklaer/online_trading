@@ -13,10 +13,11 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <?php
+  $pass_status="Valid";
   if(isset($_POST['submit_button']))
   { 
      $user_nm=$_POST['userid'];
@@ -26,8 +27,10 @@
      $phone=$_POST['phone'];
      $email=$_POST['email'];
      $con_pass=$_POST['con_pass'];
-     $pass=sha1($pass);
-     include_once '../class.MySQL.php';
+     if($con_pass==$pass)
+     {
+      $pass=sha1($pass);
+     include_once 'class.MySQL.php';
           session_start();
           $object=new MYSQL();
       $row=$object->ExecuteSQL("INSERT INTO user (name,user_nm,pass,credit,address,phone,email) VALUES ('".$name."','".$user_nm."','".$pass."','0','".$address."','".$phone."','".$email."')");
@@ -35,6 +38,11 @@
      $_SESSION['user_nm']=$user_nm;
      $_SESSION['name']=$name;
      header("Location: myaccount.php");
+   }
+   else
+   {
+    $pass_status="Not Valid";
+   }
     }
  ?>
 </head>
@@ -51,6 +59,10 @@
         <!-- Register Account-->
         <div class="span9">
           <h1 class="heading1"><span class="maintext">Register Account</span><span class="subtext">Register Your details with us</span></h1>
+          <?php 
+          if($pass_status=="Not Valid")
+          echo '<div class="alert alert-danger">Your password and confirm password does not match</div>';
+        ?>
           <form id="detailsform" class="form-horizontal" method="POST">
             <h3 class="heading3">Your Personal Details</h3>
             <div class="registerbox">
@@ -142,7 +154,6 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>
@@ -158,7 +169,7 @@
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
 <script src="jquery.form.js"></script>
-        <script>
+<script>
             // just for the demos, avoids form submit
             jQuery.validator.setDefaults({
               debug: true,

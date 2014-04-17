@@ -49,7 +49,7 @@
 		           -->
 
 
-                    <form action = "set_auction.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data">
+                    <form action = "set_auction.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data" onsubmit="return validation(this)">
                     <fieldset>
 
 
@@ -405,6 +405,57 @@
 </html>
 
 
+<script type="text/javascript">
+
+function validation(thisform)
+{
+   with(thisform)
+   {
+      if(validateFileExtension(file, "valid_msg", "png/jpeg/image files are only allowed!",
+      new Array("PNG","GIF","JPEG","jpg")) == false)
+      {
+         return false;
+      }
+      
+   }
+}
+
+function validateFileExtension(component,msg_id,msg,extns)
+{
+   var flag=0;
+   with(component)
+   {
+      var ext=value.substring(value.lastIndexOf('.')+1);
+      for(i=0;i<extns.length;i++)
+      {
+         if(ext==extns[i])
+         {
+            flag=0;
+            break;
+         }
+         else
+         {
+            flag=1;
+         }
+      }
+      if(flag!=0)
+      {
+         document.getElementById(msg_id).innerHTML=msg;
+         component.value="";
+         component.style.backgroundColor="#eab1b1";
+         component.style.border="thin solid #000000";
+         component.focus();
+         return false;
+      }
+      else
+      {
+         return true;
+      }
+   }
+}
+
+
+</script>
 
 
 

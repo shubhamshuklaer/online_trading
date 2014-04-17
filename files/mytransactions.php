@@ -53,7 +53,7 @@
                 <th class="cost">Cost</th>
               </tr>
               <?php 
-                include_once '../class.MySQL.php';
+                include_once 'class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
                 $object=new MYSQL();
@@ -74,7 +74,7 @@
                   ++i;
                   </script>';
                   echo '<tr id="';echo $count;echo '"">
-                  <td class="image"><a href="../../upload/'.$pic.'"><img width="50" height="50" src=../../upload/'.$pic.' alt="product" title="product"></a></td>
+                  <td class="image"><a href="../../upload/'.$pic.'"><img width="50" height="50" src=../upload/'.$pic.' alt="product" title="product"></a></td>
                   <td class="name">'.$itemName.'</td>
                   <td class="transactionId">'.$row[$i]['txn_id'].'</td>
                   <td class="orderId">'.$row[$i]['order_id'].'</td>

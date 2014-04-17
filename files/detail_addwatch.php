@@ -19,7 +19,9 @@
     else
     {
         //item not in the watch_list table
-        $vars=array("user_nm"=>$username,"item_id"=>$id);
+        $select_where=array("item_id ="=>$id);
+        $omysql->Select("items",$select_where);
+        $vars=array("user_nm"=>$username,"item_id"=>$id,"previous_cost"=>$omysql->arrayedResult[0]["cost"]);
         $omysql->Insert($vars,"watch_list");
         $rows2 = $omysql->affected;
         echo json_encode("1");

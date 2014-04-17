@@ -20,8 +20,8 @@
     session_start();
     if(!isset($_SESSION['authentication']))
       header("Location: login.php");
+    include_once'notification.php';
 ?>
-<script type="text/javascript">var count=0;</script>
 </head>
 <body>
   <?php include 'header.php';?>
@@ -44,7 +44,7 @@
                 <a href="change_password.php"> Change your password</a>
               </li>
               <li>
-                <a href="cart_display.php">Cart</a>
+                <a href="#">Cart</a>
               </li>
               <li>
                 <a href="wishlist.php">Modify your wish list</a>
@@ -58,16 +58,31 @@
               <li>
                 <a href="myitems.php">My Items</a>
               </li>
+
               <li>
-                <a href="recommendations.php">Recommendations</a>
+                <a href="bidding.php">Your Bidding Items</a>
+              </li>
+              <li>
+                <a href="#">Recommendations</a>
               </li>
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="notification()">Notifications <span id="badge" class="badge"></span></a>
-                <ul class="dropdown-menu" left=10%>
+                <a class="dropdown-toggle" data-toggle="dropdown"  href="#" >Notifications  <span id="badge" class="badge">
+                  <?php
+                  $count=0;
+                  foreach ($_SESSION['notifications'] as $key => $value) {
+                    if(isset($value))
+                      ++$count;
+                  }
+                  echo $count;
+                  ?></span></a>
+                <ul class="dropdown-menu" >
                   <?php 
                   if(sizeof($_SESSION['notifications'])>0)
                         foreach ($_SESSION['notifications'] as $key => $value) {
-                        echo '<li>'.$value.'</li>'; 
+                        echo '<li><a href="'.$_SESSION['notifications_link'][$key].'" ';
+                        if($_SESSION['notifications_type'][$key]!="wishlist")
+                          echo 'onclick="seen('.$_SESSION['notifications_type'][$key].')" ';
+                          echo '>'.$value.'</a></li>'; 
                         }
                         ?>
                     </ul>
@@ -87,7 +102,7 @@
                 <a href="mytransactions.php">Your Transactions</a>
               </li>
               <li>
-                <a href="recharge.php">Recharge credits</a>
+                <a href="recharge.php">Recharge Credits</a>
               </li>
             </ul>
           </div>
@@ -103,7 +118,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript">
   if (typeof(jQuery) == 'undefined')   
-    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
@@ -120,27 +135,12 @@
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
 <script type="text/javascript">
-     var xmlhttp=new XMLHttpRequest();
-     xmlhttp.onreadystatechange=function()
-             {
-             if (xmlhttp.readyState==4 && xmlhttp.status==200)
-               {
-                var res=JSON.parse(xmlhttp.responseText);
-                  var temp=0;
-                  for(temp=0;temp<res.length;temp++)
-                    if(res[temp]!="")
-                    {
-                      ++count;
-                    }
-               $("#badge").text(count);
-               }
-             }
-     xmlhttp.open("GET","notification.php",true);
-     xmlhttp.send();
-function notification()
+$('.dropdown-menu').css('left','12%');
+function seen(id)
 {
-  if(count>0)
-    window.location.href="wishlist_confirmation.php";
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.open("GET","seen.php?id="+id,true);
+  xmlhttp.send();
 }
 </script>
 </body>

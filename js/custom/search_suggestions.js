@@ -71,32 +71,33 @@ $("document").ready(function(){// short form of doccument load
 
 
 function load_notifications(){
-    $.ajax({
-        url: "notification.php",
-        dataType: "html",
-        type: "POST",
-        success: function(response_data){
-            // as we have written datatype as json so jquery automatically converts the result 
-            //from json... so responce_data is not json its already parsed
+    // return  <?php include_once notifications.php;?>
+    // $.ajax({
+    //     url: "notification.php",
+    //     dataType: "html",
+    //     type: "POST",
+    //     success: function(response_data){
+    //         // as we have written datatype as json so jquery automatically converts the result 
+    //         //from json... so responce_data is not json its already parsed
         
-            return response_data;        
-            // return "hellooo";
-        },
-        /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
-        error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
-        */
-        error: function (request, textStatus, error) {
-            if(request.readyState==4){// 4 means complete
-                if(request.status!=200){
-                    alert(textStatus);
-                    alert(request.status);
-                    alert(error);        
-                }else{
-                    return "No Notification";
-                }    
-            }
-        }
-    });
+    //         return response_data;        
+    //         // return "hellooo";
+    //     },
+    //     As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
+    //     error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
+        
+    //     error: function (request, textStatus, error) {
+    //         if(request.readyState==4){// 4 means complete
+    //             if(request.status!=200){
+    //                 alert(textStatus);
+    //                 alert(request.status);
+    //                 alert(error);        
+    //             }else{
+    //                 return "No Notification";
+    //             }    
+    //         }
+    //     }
+    // });
     // setTimeout(callback(){},1000);
 
 }

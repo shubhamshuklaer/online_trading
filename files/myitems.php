@@ -70,7 +70,7 @@
                          ++i;
                          </script>';
                   echo '<tr id="';echo $count;echo '"">
-                <td class="image"><a href="#"><img width="50" height="50" src="';echo $row[$i]['pic_loc'];echo '" alt="product" title="product"></a></td>
+                <td class="image"><a href="'.$row[$i]["type"].'.php?item_id='.$row[$i]["item_id"].'"><img width="50" height="50" src="../upload/';echo $row[$i]['pic_loc'];echo '" alt="product" title="product"></a></td>
                 <td class="name">'.$row[$i]['item_nm'].'</td>
                 <td class="model">'.$row[$i]['category'].'</td>
                 <td class="condition">'.$row[$i]['item_condition'].'</td>
@@ -98,7 +98,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript">
   if (typeof(jQuery) == 'undefined')   
-    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
@@ -135,7 +135,7 @@ function edit_entry(id)
              {
              if (xmlhttp.readyState==4 && xmlhttp.status==200)
                {
-                 window.location.href="http://localhost/online_trading/files/Profile/editmyitems.php";
+                 window.location.href="editmyitems.php";
                }
              }
      xmlhttp.open("GET","add_item_session_variable.php?id="+temp,true);

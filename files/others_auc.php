@@ -6,24 +6,11 @@
     <title>Template</title>
 	<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
-
-
-
 	<!--some problem in this link-->
 	<link href="../css/bootstrap-combined.min.css" rel="stylesheet" type="text/css">
-
-
-
-
-
-
-
-
     <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap-datetimepicker.min.css">
-	
 </head>
 <body>
-
 	<div class="container-fluid">
 		<div class="row" role="header">
 			<?php include_once "header.php";?> 
@@ -48,104 +35,59 @@
 						It will appear in the content 
 						section of webpage
 		           -->
+                    <form action = "set_auction.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data"  onsubmit="return validation(this)">
+                        <fieldset>
+                        <div class="form-group">
+		                    <label class="col-sm-2 control-label" for="select03" >Name</label>
+		                    <div class="col-sm-5">
+		                        <input type = "text" class="form-control"  id="name" name="name_5" style="height:30px;font-size:14pt;" min="65" > 
+		                    </div>
+		                </div>
+                    
+                        <div class="form-group">
+		                    <label class="col-sm-2 control-label" for="select03">Brand</label>
+		                    <div class="col-sm-5">
+		                        <input type = "text" class="form-control" id="brand" name="brand_5">
+                            </div>
+		                </div>
 
-
-                    <form action = "set_auction.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data">
-                    <fieldset>
-
-
-
-
-                      
-
-                   
-
-
-                     <div class="form-group">
-		             <label class="col-sm-2 control-label" for="select03" >Name</label>
-		            
-		            
-		            <div class="col-sm-5">
-		             <input type = "text" class="form-control"  id="name" name="name_5" style="height:30px;font-size:14pt;" min="65" >
-		             
-		             </div>
-		             </div>
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <div class="form-group">
-		            <label class="col-sm-2 control-label" for="select03">Brand</label>
-		          <div class="col-sm-5">
-		            <input type = "text" class="form-control" id="brand" name="brand_5">
-                   </div>
-		       
-		            </div>
-
-
-
-
-
-
-
-		            
-		            <div class="form-group">
-		            <label class="col-sm-2 control-label" for="select04">Model No</label>
-		           <div class="col-sm-5">
-		            <input type = "text" class="form-control" id="model" name="model_5">
-		            </div>
-		           
-		            </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label" for="select04">Model No</label>
+		                    <div class="col-sm-5">
+		                        <input type = "text" class="form-control" id="model" name="model_5">
+		                    </div> 
+		                </div>
 		          
-		            <div class="form-group">
-		            <label class="col-sm-2 control-label" for="select05">M.R.P.</label>
-		           <div class="col-sm-5">
-		            <input type = "number" class="form-control" id="mrp" name="mrp_5" min="1" min = "0">
-		            </div>
-		      
-		            </div>
-
-
-
-
-
-
-
-
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label" for="select05">M.R.P.</label>
+		                    <div class="col-sm-5">
+		                        <input type = "number" class="form-control" id="mrp" name="mrp_5" min="1" min = "0">
+		                    </div>
+		                </div>
 
 		            <div class="form-group">
-		            <label class="col-sm-2 control-label" for="select03">Quantity</label>
-		         <div class="col-sm-5">
-		            <input type = "number" class="form-control"  id="quantity" name="quantity" min = "0">
-                   </div>
+    		            <label class="col-sm-2 control-label" for="select03">Quantity</label>
+    		            <div class="col-sm-5">
+    		                <input type = "number" class="form-control"  id="quantity" name="quantity_5" min = "0">
+                        </div>
 		            </div>
-
 
 		            <div class="form-group" >
-		            <label class="col-sm-2 control-label" for="select06">Condition</label>
-		            <div class="col-sm-5">
-		            <input type = "text" class="form-control" id="condition" name="condition_5">
-		           </div>
+	       	            <label class="col-sm-2 control-label" for="select06">Condition</label>
+		                <div class="col-sm-5">
+		                    <input type = "text" class="form-control" id="condition" name="condition_5">
+		                </div>
 		            </div>
+
                     <div class="form-group">
-                    <label class="col-sm-2 control-label" for="select07">Description</label>
-                    <div class="col-sm-5">
-                    <textarea rows="4" cols="50" name="description_5" form="usrform" style=" width: 360px; height: 70px;"></textarea>
-		            </div>
+                        <label class="col-sm-2 control-label" for="select07">Description</label>
+                        <div class="col-sm-5">
+                            <textarea rows="4" cols="50" name="description_5" form="usrform" style=" width: 360px; height: 70px;"></textarea>
+		                </div>
 		            </div>
                      
 		             <div class="form-group">
-		            <label class="col-sm-2 control-label" for="select08">Base Price</label>
+		                <label class="col-sm-2 control-label" for="select08">Base Price</label>
 		            <div class="col-sm-5">
 		            <input class="form-control" name="base_price_5" id="base_price" type = "number" min = "0" />
 
@@ -195,7 +137,8 @@
 					</div>
 					</div>
 		            
-		            
+		         <div id="valid_msg">
+                </div>   
 		            
 
 
@@ -391,7 +334,57 @@
 </body>
 </html>
 
+<script type="text/javascript">
 
+function validation(thisform)
+{
+   with(thisform)
+   {
+      if(validateFileExtension(file, "valid_msg", "png/jpeg/image files are only allowed!",
+      new Array("PNG","GIF","JPEG","jpg")) == false)
+      {
+         return false;
+      }
+      
+   }
+}
+
+function validateFileExtension(component,msg_id,msg,extns)
+{
+   var flag=0;
+   with(component)
+   {
+      var ext=value.substring(value.lastIndexOf('.')+1);
+      for(i=0;i<extns.length;i++)
+      {
+         if(ext==extns[i])
+         {
+            flag=0;
+            break;
+         }
+         else
+         {
+            flag=1;
+         }
+      }
+      if(flag!=0)
+      {
+         document.getElementById(msg_id).innerHTML=msg;
+         component.value="";
+         component.style.backgroundColor="#eab1b1";
+         component.style.border="thin solid #000000";
+         component.focus();
+         return false;
+      }
+      else
+      {
+         return true;
+      }
+   }
+}
+
+
+</script>
 
 
 

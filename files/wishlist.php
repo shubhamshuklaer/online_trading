@@ -51,7 +51,7 @@
                 <th class="total">Action</th>
               </tr>
               <?php 
-                include_once '../class.MySQL.php';
+                include_once 'class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
                   $object=new MYSQL();
@@ -100,7 +100,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript">
   if (typeof(jQuery) == 'undefined')   
-    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
@@ -138,12 +138,15 @@
              {
              if (xmlhttp.readyState==4 && xmlhttp.status==200)
                {
-     window.location.href="http://localhost/online_trading/files/Profile/edit_wishlist.php";
+     window.location.href="./edit_wishlist.php";
                }
              }
      xmlhttp.open("GET","add_session_variable.php?id="+temp,true);
      xmlhttp.send();
   }
+
+
+    
 </script>
 </body>
 </html>

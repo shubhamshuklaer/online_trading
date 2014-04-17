@@ -10,7 +10,7 @@ if($omysql_insert_index->records>0){
 	$get_item_description=array_map('strtolower',preg_split('/[\s]+/', trim(preg_replace("/\b[^\s]{1,3}\b/","",$result_array[0]["description"]))));
 	$get_item_type=array();
 	$get_item_category;
-	$get_item_tags;
+	$get_item_tags=array_map("strtolower", explode(",", $result_array[0]["tags"]));
 	$get_item_id=$result_array[0]["item_id"];
 	require_once "PorterStemmer2.php";
 	require_once "StringBuilder.php";
@@ -23,9 +23,13 @@ if($omysql_insert_index->records>0){
 	$get_item_description[$i]=$oporter_stemmer->Stem($get_item_description[$i]);
 	//echo $get_item_description[$i]."<br>";
 	}
-	$unique_terms=array_unique(array_merge($get_item_nm,$get_item_description));
+	for($i=0;$i<count($get_item_tags);$i++){
+		$get_item_tags[$i]=$oporter_stemmer->Stem($get_item_description[$i]);
+	}
+	$unique_terms=array_unique(array_merge(array_merge($get_item_nm,$get_item_description),$get_item_tags));
 	$value_count_item_nm=array_count_values($get_item_nm);
 	$value_count_item_description=array_count_values($get_item_description);
+	$value_count_item_tags=array_count_values($get_item_tags);
 	$insert_data_structure=array();
 	$temp=array();
 	foreach ($unique_terms as $value) {
@@ -41,6 +45,11 @@ if($omysql_insert_index->records>0){
 			$temp["rep_description"]=$value_count_item_description[$value];
 		else
 			$temp["rep_description"]=0;
+		///////////////////////in item tags
+		if(isset($value_count_item_description[$value]))
+			$temp["rep_tags"]=$value_count_item_description[$value];
+		else
+			$temp["rep_tags"]=0;
 		$insert_data_structure[]=$temp;
 	}
 

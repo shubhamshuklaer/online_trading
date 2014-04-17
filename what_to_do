@@ -1,9 +1,14 @@
-1. notifications.php
-2. something is causing autocomplete to fail in profile module
-3. auction null values of user_nm and quantity,type
+1. notifications.php- in header
+2.PROMOTIONS
+4. auction/sale tags
 5.auction start date>end date
 6. relative path in cart module/sell
-7. filter
 8. Sale page details
+10. check $_Session["authentication"]
+12. when no login- we checkout -log in again-items lost
+13. auction bid without login
+14. auction/sale png,jpeg,jpg not uploading
+15. no promotion_amount option in auction/sale
 
-search
+
+////wish-list watch-list changed -addded add to cart

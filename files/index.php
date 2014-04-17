@@ -8,6 +8,20 @@
 	<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 </head>
 <body>
+<?php
+session_start();
+    if(!isset($_SESSION['user_nm']))
+    {
+        $length=10;
+        $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $str = '';
+        $count = strlen($charset);
+        while ($length--) {
+            $str .= $charset[mt_rand(0, $count-1)];
+            }
+        $_SESSION['user_nm'] = $str;
+    }
+?>
 	<div class="container-fluid">
 		<div class="row" role="header">
 			<?php include_once "header.php";?> 

@@ -13,8 +13,8 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../assets/ico/favicon.html">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="shortcut icon" href="../../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
@@ -22,7 +22,7 @@
     header("Location: login.php");
 ?>
 <?php
-    include_once '../class.MySQL.php';
+    include_once 'class.MySQL.php';
   $object=new MYSQL();
       $row=$object->ExecuteSQL("SELECT * from user where user_nm='".$_SESSION['user_nm']."'");
       if($row!="true")
@@ -69,21 +69,21 @@ if(isset($_POST['submit_button']))
                   <label class="control-label" ><span class="red">*</span>Name:</label>
                   <div class="controls">
                     <input id="user_name" type="text" name="user_name" class="form-control-lg" value="<?php 
-                    echo $a; ?>">
+                    echo $a; ?>"><br>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label" ><span class="red">*</span> Email:</label>
                   <div class="controls">
                     <input id="email" type="text" name="email" class="form-control-lg" value="<?php 
-                    echo $d; ?>">
+                    echo $d; ?>"><br>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label" ><span class="red">*</span> Telephone:</label>
                   <div class="controls">
                     <input id="phone" type="text" name="phone" class="form-control-lg" value="<?php 
-                    echo $c; ?>">
+                    echo $c; ?>"><br>
                   </div>
                 </div>
               </fieldset>
@@ -96,7 +96,7 @@ if(isset($_POST['submit_button']))
                   <div class="controls">
                     <input id="address" type="text" name="address" class="form-control-lg" value="<?php 
                     echo $e; 
-                    ?>">
+                    ?>"><br>
                   </div>
                 </div>
               </fieldset>
@@ -116,7 +116,10 @@ if(isset($_POST['submit_button']))
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+</script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>

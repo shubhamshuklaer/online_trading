@@ -2,26 +2,60 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Register</title>
+<title>My Items</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'><link href="css/bootstrap.css" rel="stylesheet">
 <link href="../css/bootstrap-responsive.css" rel="stylesheet">
 <link href="../css/style.css" rel="stylesheet">
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
+<?php 
+    session_start();
+    if(!isset($_SESSION['user_nm']))
+    header("Location: login.php");
+?>
 </head>
+
 <body>
-<div class="jumbotron">
-  <h1>Database Error!</h1>
-  <span>Can not connect to the database</span>
+<?php include 'header.php';?>
+<?php include 'sidebar.php'; ?>
+<div id="maincontainer">
+  <section id="product">
+    <div class="container">
+      <div class="row">
+        <!-- My Credits -->
+        <div class="span9">
+          <h1 class="heading1"><span class="maintext">My Credits</span><span class="subtext">View Credits in your Wallet</span></h1>
+          <!--<h3 class="heading3">Credits : ₹ </h3>-->
+          <div class="credits">
+              <?php 
+                include_once '../class.MySQL.php';
+                if(!isset($_SESSION))
+                  session_start();
+                $object=new MYSQL();
+                $row=$object->ExecuteSQL("SELECT * from user where user_nm='".$_SESSION['user_nm']."'");
+                $mycredit=$row[0]['credit'];
+                echo'<h3 class="heading3">Credits : ₹ '.$mycredit.'</h3>';
+              ?>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </section>
 </div>
+
 
 <!-- javascript
     ================================================== -->
@@ -44,6 +78,17 @@
 <script type="text/javascript"  src="js/jquery.touchSwipe.min.js"></script>
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
-<script src="jquery.form.js"></script>
+<script type="text/javascript">
+
+function edit_entry(id)
+{
+  var temp=item_ids[id];
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.open("GET","add_item_session_variable.php?id="+temp,true);
+  xmlhttp.send();
+  window.location.href="http://localhost/online_trading/files/Profile/editmyitems.php";
+}
+
+</script>
 </body>
 </html>

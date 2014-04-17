@@ -2,7 +2,7 @@
     require_once "class.MySQL.php";
     // your php code
     session_start();
-    if($_SESSION['authentication']==false)
+    if(!isset($_SESSION['authentication']))
     {
         $length=10;
         $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

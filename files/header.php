@@ -11,7 +11,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Online Trading</a>
+            <a href="index.php" class="navbar-brand custom_icon_link">
+                <span class="glyphicon glyphicon-home custom_navbar_icon"></span>
+            Online Trading</a>
         </div>
         <!--the collapsable content-->
         <div class="navbar-collapse collapse">
@@ -20,11 +22,6 @@
                     <form class="navbar-form navbar-right" action="search.php" method="get">
                         <input type="text"  class="form-control" placeholder="Search..." id="search_bar"  name="search_bar">
                     </form>
-                </li>
-                <li>
-                    <a href="index.php" class="custom_icon_link">
-                        <span class="glyphicon glyphicon-home custom_navbar_icon"></span>
-                    </a>
                 </li>
 
                 <li>

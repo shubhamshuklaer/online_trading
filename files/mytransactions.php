@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Wishlist</title>
+<title>My Transactions</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -13,7 +13,7 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -21,70 +21,69 @@
     <![endif]-->
 <!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
+<script type="text/javascript">
 <?php 
     session_start();
-    if(!isset($_SESSION['authentication']))
+    if(!isset($_SESSION['user_nm']))
     header("Location: login.php");
 ?>
-<script type="text/javascript">
  var item_ids = new Array();
  var i=0;
 </script>
 </head>
 <body>
-    <?php include 'header.php';?>
-        <?php include 'sidebar.php'; ?>
+<?php include 'header.php';?>
+<?php include 'sidebar.php'; ?>
 <div id="maincontainer">
   <section id="product">
     <div class="container">
       <div class="row">
-        <!-- Wishlist -->
+        <!-- My Transactions -->
         <div class="span9">
-          <h1 class="heading1"><span class="maintext">Wishlist</span><span class="subtext">View All your Wishlist information</span></h1>
+          <h1 class="heading1"><span class="maintext">My Transactions</span><span class="subtext">View your previous transactions</span></h1>
           <div class="cart-info">
             <table id="mytable" class="table table-striped table-bordered">
               <tr>
-                <th  class="name">Product Name</th>
-                <th class="model">Category</th>
-                <th class="quantity">Availability</th>
-                <th class="price">Tags</th>
-                <th class="total">Action</th>
+                <th class="image">Image</th>
+                <th class="name">Product Name</th>
+                <th class="transactionId">Transaction Id</th>
+                <th class="orderId">Order Id</th>
+                <th class="deliveryTime">Delivery Time</th>
+                <th class="quantity">Quantity</th>
+                <th class="cost">Cost</th>
               </tr>
               <?php 
                 include_once '../class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
-                  $object=new MYSQL();
-              $row=$object->ExecuteSQL("SELECT * from wish_list where user_nm='".$_SESSION['user_nm']."'");
-                 $i=0;
-                 $count=0;
-                 while(isset($row[$i])){
+                $object=new MYSQL();
+                $row=$object->ExecuteSQL("SELECT * FROM orders WHERE user_nm='".$_SESSION['user_nm']."'");
+                $i=0;
+                $count=0;
+                while(isset($row[$i])){
+                  $itemId=$row[$i]['item_id'];
+                  $col=$object->ExecuteSQL("SELECT * FROM items WHERE item_id='".$itemId."'");
+                  $cost=$col[0]['cost'];
+                  $pic=$col[0]['pic_loc'];
+                  $itemName=$col[0]['item_nm'];
                   ++$count;
-                   echo '<script type="text/javascript">
-                         item_ids[i]=';
-                         echo $row[$i]['id'];
-                         echo';
-                         ++i;
-                         </script>';
+                  echo '<script type="text/javascript">
+                  item_ids[i]=';
+                  echo $row[$i]['item_id'];
+                  echo';
+                  ++i;
+                  </script>';
                   echo '<tr id="';echo $count;echo '"">
-                <td    class="name">'.$row[$i]['item_nm'].'</td>
-                <td class="model">'.$row[$i]['category'].'</td>
-                <td class="quantity">'.$row[$i]['availability'].'</td>
-                <td class="price">';
-                $string=$row[$i]['Tags'];
-                $tok=strtok($string, ";");
-                while($tok !== false)
-                {
-                  echo '<span>  </span><label class="label label-primary">'.$tok.'</label><span></span>';
-                  $tok=strtok(";");
-                }
-                echo'</td>
-                <td class="total">
-                  <a onclick="edit_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-pencil"></span></a>
-                  <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                </td></tr>';
+                  <td class="image"><a href="../../upload/'.$pic.'"><img width="50" height="50" src=../../upload/'.$pic.' alt="product" title="product"></a></td>
+                  <td class="name">'.$itemName.'</td>
+                  <td class="transactionId">'.$row[$i]['txn_id'].'</td>
+                  <td class="orderId">'.$row[$i]['order_id'].'</td>
+                  <td class="deliveryTime">'.$row[$i]['delivery_time'].'</td>
+                  <td class="quantity">'.$row[$i]['qty'].'</td>
+                  <td class="cost">'.$cost.'</td>
+                  </tr>';
                   ++$i;
-                 }
+                }
               ?>
             </table>
           </div>
@@ -116,34 +115,4 @@
 <script type="text/javascript"  src="js/jquery.touchSwipe.min.js"></script>
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
-<script type="text/javascript">
-  function remove_entry(id)
- {
-  var r=confirm("Are you sure you want to delete this item ?");
-  if(r==true){
-     var temp=item_ids[id];
-     var xmlhttp=new XMLHttpRequest();
-     xmlhttp.open("GET","remove_entry.php?id="+temp,false);
-     xmlhttp.send();
-     var fade="#";
-     fade=fade.concat(id+1);
-     $(fade).slideToggle(300);
-    }
-  }
-  function edit_entry(id)
- {
-     var temp=item_ids[id];
-     var xmlhttp=new XMLHttpRequest();
-     xmlhttp.onreadystatechange=function()
-             {
-             if (xmlhttp.readyState==4 && xmlhttp.status==200)
-               {
-     window.location.href="http://localhost/online_trading/files/Profile/edit_wishlist.php";
-               }
-             }
-     xmlhttp.open("GET","add_session_variable.php?id="+temp,true);
-     xmlhttp.send();
-  }
-</script>
-</body>
 </html>

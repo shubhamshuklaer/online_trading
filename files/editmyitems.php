@@ -13,11 +13,11 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../assets/ico/favicon.html">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="shortcut icon" href="../../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
-  include_once '../class.MySQL.php';
+  include_once 'class.MySQL.php';
 if(!isset($_SESSION))
     session_start();
     if(!isset($_SESSION['authentication']))
@@ -73,7 +73,7 @@ if(isset($_POST['submit_button']))
             <label class="control-label" >Product Name:</label>
             <div class="controls">
               <input id="productname" type="text" name="productname"  class="form-control-lg" value="<?php echo $product_name; ?>">
-            </div>
+            <br></div>
           </div>
 
           <div class="control-group">
@@ -81,7 +81,7 @@ if(isset($_POST['submit_button']))
             <div class="controls">
               <input id="quantity" type="text" name="quantity" class="form-control-lg" value="<?php 
               echo $product_quantity;
-              ?>">
+              ?>"><br>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ if(isset($_POST['submit_button']))
             <div class="controls">
               <input id="cost" type="text" name="cost" class="form-control-lg" value="<?php 
               echo $product_cost;
-              ?>">
+              ?>"><br>
             </div>
           </div>
 
@@ -99,7 +99,7 @@ if(isset($_POST['submit_button']))
             <div class="controls">
               <input id="condition" type="text" name="condition" class="form-control-lg" value="<?php 
               echo $product_condition;
-              ?>">
+              ?>"><br>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ if(isset($_POST['submit_button']))
             <div class="controls">
               <input id="itemdescription" type="text" name="itemdescription" class="form-control-lg" value="<?php 
               echo $product_description;
-              ?>">
+              ?>"><br>
             </div>
           </div>
 
@@ -117,7 +117,7 @@ if(isset($_POST['submit_button']))
             <div class="controls">
               <input id="itemtype" type="text" name="itemtype" class="form-control-lg" value="<?php 
               echo $product_type;
-              ?>">
+              ?>"><br>
             </div>
           </div>
 
@@ -141,7 +141,7 @@ if(isset($_POST['submit_button']))
            </div>
           </div>
           </fieldset>
-           
+           <br>
           <input type="submit" class="btn btn-primary" name="submit_button" value="Save" >
               <input type="button"  onclick="location.href='myaccount.php' "class="btn btn-primary" name="cancel_button" value="Cancel" >
            </div>
@@ -157,7 +157,10 @@ if(isset($_POST['submit_button']))
 <!-- javascript
    ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+</script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>
@@ -194,4 +197,4 @@ if(isset($_POST['submit_button']))
         });
 </script>
 </body>
-</html>w
+</html>

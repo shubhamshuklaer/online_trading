@@ -13,7 +13,7 @@
                   <a href="change_password.php">Password</a>
                 </li>
                 <li>
-                  <a href="#">Cart</a>
+                  <a href="cart_display.php">Cart</a>
                 </li>
                 <li class="dropdown hover">
             <a class="dropdown-toggle" href="#" data-toggle="">Lists</a>

@@ -10,7 +10,7 @@
 <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
 <link href="../css/bootstrap-responsive.css" rel="stylesheet">
 <link href="../css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -25,6 +25,8 @@
     // include_once '../../config/config.php';
 if(!isset($_SESSION))
   session_start();
+if(isset($_SESSION['authentication']))
+          header("Location: myaccount.php");
   //if(isset($_SESSION['user_nm']))
    //header("Location: " . constant("HOSTNAME") . "/files/Profile/myaccount.php");
   $pageStatus = "REQUESTED";
@@ -114,7 +116,10 @@ if(!isset($_SESSION))
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
+</script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>

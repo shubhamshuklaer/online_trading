@@ -39,7 +39,11 @@
  ?>
 </head>
 <body>
-<script src="js/jquery.js"></script>
+<?php include_once "header.php";?>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
+</script>
 <div id="maincontainer">
   <section id="product">
     <div class="container">

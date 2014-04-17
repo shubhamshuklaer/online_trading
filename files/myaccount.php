@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<?php include_once "../config/config.php";?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -14,17 +13,19 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../assets/ico/favicon.html">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="shortcut icon" href="../../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
     if(!isset($_SESSION['authentication']))
       header("Location: login.php");
 ?>
+<script type="text/javascript">var count=0;</script>
 </head>
 <body>
   <?php include 'header.php';?>
+
 <div id="maincontainer">
   <section id="product">
     <div class="container">
@@ -60,6 +61,17 @@
               <li>
                 <a href="#">Recommendations</a>
               </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="notification()">Notifications <span id="badge" class="badge"></span></a>
+                <ul class="dropdown-menu" left=10%>
+                  <?php 
+                  if(sizeof($_SESSION['notifications'])>0)
+                        foreach ($_SESSION['notifications'] as $key => $value) {
+                        echo '<li>'.$value.'</li>'; 
+                        }
+                        ?>
+                    </ul>
+                  </li>
               <li>
                 <a href="logout.php">Log out</a>
               </li>
@@ -86,7 +98,10 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+</script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>
@@ -102,23 +117,27 @@
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
 <script type="text/javascript">
-function notification()
-{
-  alert("Warnign");
      var xmlhttp=new XMLHttpRequest();
      xmlhttp.onreadystatechange=function()
              {
-              alert(xmlhttp.readyState);
              if (xmlhttp.readyState==4 && xmlhttp.status==200)
                {
-                $res=xmlhttp.responseText;
-                alert($res);
-                prompt("MESSAFE",$res+"");
+                var res=JSON.parse(xmlhttp.responseText);
+                  var temp=0;
+                  for(temp=0;temp<res.length;temp++)
+                    if(res[temp]!="")
+                    {
+                      ++count;
+                    }
+               $("#badge").text(count);
                }
              }
-     xmlhttp.open("GET","notification.php?id=22",true);
+     xmlhttp.open("GET","notification.php",true);
      xmlhttp.send();
-     window.location.href="http://localhost/online_trading/files/wishlist_confirmation.php";
+function notification()
+{
+  if(count>0)
+    window.location.href="wishlist_confirmation.php";
 }
 </script>
 </body>

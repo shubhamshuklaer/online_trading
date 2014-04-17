@@ -13,8 +13,8 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../assets/ico/favicon.html">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="shortcut icon" href="../../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <script type="text/javascript">
   var tags_name="";
@@ -62,7 +62,7 @@ if(!isset($_SESSION))
 						  <input id="productname" type="text" name="productname"  class="form-control-lg" value="<?php 
 						  if (!empty($_POST['productname'])) { 
 							 echo htmlspecialchars($_POST['productname']); 
-						  }?>">
+						  }?>"><br>
 						</div>
 					 </div>
 					 <div class="control-group">
@@ -83,12 +83,12 @@ if(!isset($_SESSION))
 					 </div>
 					</div>
 					 
-
+<br>
 					 <div class="control-group">
 						<label class="control-label" ><span class="red">*</span>Tags:</label>
 						<div id="foo" class="controls">
 						  <input id="tagsname" type="text" name="tagsname"  class="form-control-lg" ><span id="atleast"></span><br>
-						</div>
+						<br></div>
 					 </div>
 				  </fieldset>
 				</div>
@@ -107,7 +107,10 @@ if(!isset($_SESSION))
 <!-- javascript
 	 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+</script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>
@@ -140,9 +143,9 @@ if(!isset($_SESSION))
 					 if(tag_count>0)
 					 {
 						var xmlhttp=new XMLHttpRequest();
-					    xmlhttp.open("GET","add_session_variable.php?id="+tags_name,true);
-					    xmlhttp.send();
-						(form).submit();
+					    xmlhttp.open("GET","add_session_variable.php?id="+tags_name,false);
+					    xmlhttp.send();						
+					    (form).submit();
 					 }
 					 else{
 						var temp=document.getElementById("atleast");
@@ -160,6 +163,8 @@ if(!isset($_SESSION))
 						var temp=document.getElementById("atleast");
 						$(temp).text("");
 					 }
+					 if($("#tagsname").val()=="")
+					 	return false;
 					 ++tag_count;
 					 var itemLabel = document.createElement("label");
 					 itemLabel.setAttribute("class","label label-primary");

@@ -359,7 +359,7 @@ function display_items_with_pagination(offset,num_items){//if offset is 1 and nu
             img_box.attr("src",item_response_data[row]["pic_loc"]);
             img_box.appendTo(pic_col);
             var detail_col=$("<td>");
-            detail_col.append("<a href='"+item_response_data[row]["type"]+".php?item_id="+item_response_data[row]["item_id"]+"' value='"+item_response_data[row]["item_id"]+"' onclick='update_click();'>"+item_response_data[row]["item_nm"]+"</a>");
+            detail_col.append("<a href='"+item_response_data[row]["type"]+".php?item_id="+item_response_data[row]["item_id"]+"' item_id='"+item_response_data[row]["item_id"]+"' onclick='update_click(this);'>"+item_response_data[row]["item_nm"]+"</a>");
             detail_col.append("<br>Seller : "+item_response_data[row]["user_nm"]);
             detail_col.append("<br> Quantity: "+item_response_data[row]["quantity"]);
             detail_col.append("<br> Condition: "+item_response_data[row]["item_condition"]);
@@ -404,18 +404,16 @@ function update_search_history(search_term){
     });   
 }
 
-function update_click(event_obj){
-    alert("hello");
-    alert(event_obj);
-        // event_obj.preventDefault();
-        alert(event_obj);
+function update_click(obj){
+    //obj.preventDefault();
        $.ajax({
         url: "update_clicks.php",
         type: "POST",
         data: {
-            item_id: $(this).attr("item_id"),
-            search_term:get["search_bar"]
+            item_id: $(obj).attr("item_id"),
+            search_term: get["search_bar"]
          },
+         async:false,
         //As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
         //error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
         
@@ -430,5 +428,7 @@ function update_click(event_obj){
                 }    
             }
         }
+
     });
+
 }

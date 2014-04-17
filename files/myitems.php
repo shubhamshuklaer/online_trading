@@ -13,7 +13,7 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -55,7 +55,7 @@
                 <th class="total">Action</th>
               </tr>
               <?php 
-                  include_once '../class.MySQL.php';
+                  include_once 'class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
                   $object=new MYSQL();
@@ -98,7 +98,10 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+</script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>
@@ -121,18 +124,24 @@ function remove_entry(id)
   if(r==true){  
   var temp=item_ids[id];
   var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open("GET","remove_item_entry.php?id="+temp,true);
+  xmlhttp.open("GET","remove_item_entry.php?id="+temp,false);
   xmlhttp.send();
-  document.getElementById("mytable").deleteRow(id+1);  
+     var row=document.getElementById(id+1);
+     row.parentNode.removeChild(row);
   }
 }
 function edit_entry(id)
  {
      var temp=item_ids[id];
-     var xmlhttp=new XMLHttpRequest();
+     var xmlhttp=new XMLHttpRequest();xmlhttp.onreadystatechange=function()
+             {
+             if (xmlhttp.readyState==4 && xmlhttp.status==200)
+               {
+                 window.location.href="http://localhost/online_trading/files/Profile/editmyitems.php";
+               }
+             }
      xmlhttp.open("GET","add_item_session_variable.php?id="+temp,true);
      xmlhttp.send();
-     window.location.href="http://localhost/online_trading/files/editmyitems.php";
   }
 </script>
 </body>

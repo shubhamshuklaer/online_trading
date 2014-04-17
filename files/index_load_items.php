@@ -8,10 +8,18 @@ if(isset($_POST["category"])){
 	$omysql->Select("items",$where);
 	if($omysql->records>0){
 		$result=$omysql->arrayedResult;
+		$final_result=array();
 		for($i=0;$i<count($result);$i++){
-			$result[$i]["pic_loc"]=constant("HOSTNAME")."/upload/".$result[$i]["pic_loc"];
+			$result[$i]["pic_loc"]="../upload/".$result[$i]["pic_loc"];
+			if($result[$i]["type"]=="auction"){
+				if($result[$i]["last_date"]>date('Y-m-d H:i:s'))
+					$final_result[]=$result[$i];
+			}else{
+				$final_result[]=$result[$i];
+			}
 		}
-		echo json_encode($result);
+		if(count($final_result)>0)
+			echo json_encode($final_result);
 	}
 }
 ?>

@@ -9,13 +9,14 @@ if(isset($_POST["where_clause"])){
 	}
 	$where_index=array();
 	$search_term=$where["search_term"];
-	$search_term_array=array_map('strtolower',preg_split('/[\s]+/', trim(preg_replace("/\b[^\s]{1,3}\b/","",$search_term))));
+	$search_term_array=array_map('strtolower',preg_split('/[\s]+/', trim($search_term)));
 	require_once "PorterStemmer2.php";
 	require_once "StringBuilder.php";
 	$oporter_stemmer=new PorterStemmer2();
 	for($i=0;$i<count($search_term_array);$i++)
 		$search_term_array[$i]=$oporter_stemmer->Stem($search_term_array[$i]);
 	$search_term_array=array_unique($search_term_array);
+	// print_r($search_term_array);
 	$search_item_id_ranks=array();
 	foreach ($search_term_array as $value) {
 		$where_index["search_term like"]=$value."%";
@@ -67,12 +68,21 @@ if(isset($_POST["where_clause"])){
 		they are ints so no need for sanitization
 		*/
 		$omysql->ExecuteSQL($query);
+		$final_result=array();
 		if($omysql->records>0){
 			$result=$omysql->arrayedResult;
 			for($i=0;$i<count($result);$i++){
-				$result[$i]["pic_loc"]=constant("HOSTNAME")."/upload/".$result[$i]["pic_loc"];
+
+				$result[$i]["pic_loc"]="../upload/".$result[$i]["pic_loc"];
+				if($result[$i]["type"]=="auction"){
+					if($result[$i]["last_date"]>date('Y-m-d H:i:s'))
+						$final_result[]=$result[$i];
+				}else{
+					$final_result[]=$result[$i];
+				}
 			}
-			echo json_encode($result);
+			if(count($final_result)>0)
+				echo json_encode($final_result);
 
 		}
 	}

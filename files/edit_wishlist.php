@@ -13,8 +13,8 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="../css/cloud-zoom.css" rel="stylesheet">
-<link rel="shortcut icon" href="../assets/ico/favicon.html">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="shortcut icon" href="../../assets/ico/favicon.html">
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
@@ -22,7 +22,7 @@
     header("Location: login.php");
 ?>
 <?php
-  include_once 'class.MySQL.php';
+  include_once '../class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
                   $object=new MYSQL();
@@ -74,6 +74,7 @@ if(isset($_POST['submit_button']))
               <input id="productname" type="text" name="productname"  class="form-control-lg" value="<?php 
               echo $product_name
               ?>">
+              <br>
             </div>
            </div>
            <div class="control-group">
@@ -93,12 +94,12 @@ if(isset($_POST['submit_button']))
             </div>
            </div>
           </div>
-           
+           <br>
 
            <div class="control-group">
             <label class="control-label" >Tags:</label>
             <div id="foo" class="controls">
-              <input id="tagsname" type="text" name="tagsname"  class="form-control-lg" ><span id="atleast"></span><br>
+              <input id="tagsname" type="text" name="tagsname"  class="form-control-lg" ><span id="atleast"></span><br><br>
               <?php 
                   $tok=strtok($product_tags, ";");
                   echo '<script>tags_name="'.$product_tags.'"</script>';
@@ -115,7 +116,7 @@ if(isset($_POST['submit_button']))
                 }
                ?>
             </div>
-
+<br>
           <input type="submit" class="btn btn-primary" name="submit_button" value="Save" >
               <input type="button"  onclick="location.href='wishlist.php' "class="btn btn-primary" name="cancel_button" value="Cancel" >
            </div>
@@ -132,7 +133,10 @@ if(isset($_POST['submit_button']))
 <!-- javascript
    ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+</script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>
@@ -165,10 +169,10 @@ if(isset($_POST['submit_button']))
            if(tag_count>0)
            {
             var xmlhttp=new XMLHttpRequest();
-            xmlhttp.open("GET","add_session_tag.php?id="+tags_name,true);
+            xmlhttp.open("GET","add_session_tag.php?id="+tags_name,false);
              xmlhttp.send();
-            (form).submit();
-           }
+              (form).submit();
+          }
            else{
             var temp=document.getElementById("atleast");
             $(temp).text("*You must add atleast one tag");

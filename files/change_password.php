@@ -13,7 +13,7 @@
 <link href="../css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="../css/jquery.fancybox.css" rel="stylesheet">
 <link href="css/cloud-zoom.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css"  type="text/css"/>
+<link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
@@ -70,21 +70,19 @@ include_once 'class.MySQL.php';
                 <div class="control-group">
                   <label  class="control-label" ><span class="red">*</span> Current Password:</label>
                   <div class="controls">
-                    <input  id="curr_pass" type="password" name="curr_pass" class="form-control-lg" >
-                    <span class="red">
-                    </span>
+                    <input  id="curr_pass" type="password" name="curr_pass" class="form-control-lg" ><br>
                   </div>
                 </div>
                 <div class="control-group">
                   <label  class="control-label" ><span class="red">*</span> New Password:</label>
                   <div class="controls">
-                    <input id="pass" type="password" name="pass" class="form-control-lg">
+                    <input id="pass" type="password" name="pass" class="form-control-lg"><br>
                   </div>
                 </div>
                 <div class="control-group">
                   <label  class="control-label" ><span class="red">*</span> Confirm Password:</label>
                   <div class="controls">
-                    <input  id="con_pass" type="password" name="con_pass" class="form-control-lg" >
+                    <input  id="con_pass" type="password" name="con_pass" class="form-control-lg" ><br>
                     <span class="red">
                     </span>
                   </div>
@@ -107,7 +105,10 @@ include_once 'class.MySQL.php';
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
+<script type="text/javascript">
+  if (typeof(jQuery) == 'undefined')   
+    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+</script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>

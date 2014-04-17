@@ -2,17 +2,6 @@
     require_once "class.MySQL.php";
     // your php code
     session_start();
-    if(!isset($_SESSION['authentication']))
-    {
-        $length=10;
-        $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        $str = '';
-        $count = strlen($charset);
-        while ($length--) {
-            $str .= $charset[mt_rand(0, $count-1)];
-            }
-        $_SESSION['user_nm'] = $str;
-    }
     $username = $_SESSION['user_nm'];
     $id=$_GET["item_id"];
     $omysql = new MySQL();

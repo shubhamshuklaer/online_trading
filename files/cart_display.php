@@ -25,8 +25,12 @@
                         <?php
 
                         $omysql=new MySQL();
+                        if(!isset($_SESSION['authentication']))
+                        {
+                            $_SESSION['authentication'] = 0;
+                        }
                         $usernm = $_SESSION['user_nm'];
-                        $auth = $_SESSION['authentication'];
+                        $auth =  $_SESSION['authentication'];
                         $rows = 0;
                         $where=array("user_nm like"=>$usernm);
                         $from = "cart";
@@ -289,7 +293,7 @@
                         console.log(response_data);
                             if(response_data=="1")
                             {
-                               // alert("Updated");
+                                alert("Updated");
                             }
                             else if(response_data=="0")
                             {
@@ -327,7 +331,7 @@
                     console.log(response_data);
                         if(response_data=="1")
                         {
-                           // alert("Removed, reloading page");
+                            alert("Removed, reloading page");
                             window.location.reload();
                         }
                         else if(response_data=="0")
@@ -362,7 +366,7 @@
                     console.log(response_data);
                         if(response_data=="1")
                         {
-                           // alert("Removing and Adding, reloading page");
+                            alert("Removing, reloading page");
                             window.location.reload();
                         }
                         else if(response_data=="0")
@@ -399,7 +403,7 @@
             }
             else
             {
-                window.location.href = "Profile/cart_login.php";
+                window.location.href = "cart_login.php";
                 //not authenticated so go login page
             }
         }

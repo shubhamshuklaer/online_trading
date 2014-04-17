@@ -4,7 +4,7 @@
     $today = date("Ymd");
     $order_id;
     $o_address;
-    
+
     $username = $_SESSION['user_nm'];
 
     //if(isset($_GET["confirm"])){
@@ -41,13 +41,13 @@
                                 $items[$j]['qty']=$res2[$i]["qty"];
                                 //console.log($items[$i]['qty']);
                                 $j++;
-                            }
-                        }
+                            }//if($res3[0]["quantity"]>=$res2[$i]["qty"])
+                        }//if($omysql->records > 0)
 
-                    }
-                }
+                    }//for($i=0;$i<$rows;$i++)
+                }//if($rows>0)
 
-        //Check credits
+        //Check for enough credits
         $from = "user";
         $where = array("user_nm like"=>$username);
         $omysql->Select($from, $where);
@@ -61,8 +61,8 @@
             $set=array("credit"=>$p_diff);
             $omysql->Update($from, $set, $where);
             $affect=$omysql->affected;
-            if($affect>0){
-                if($rows>0){
+            if($affect>0){//when credits are updated
+                if($rows>0){//if there are items in the cart
                     for($i=0;$i<$j;$i++){
                         $p_id=$items[$i]['item_id'];
                         //console.log($items[$i]['item_id']);
@@ -96,7 +96,7 @@
                         }
                         $p_user_nm=$username;
                         $status="Not Delivered";
-                        //Order id
+                        //Order id generated
                         $today = date("Ymd");
                         $rand = strtoupper(substr(uniqid(sha1(time())),0,4));
                         $order_id = $today . $rand;
@@ -112,14 +112,17 @@
                     }
 
                 //print $selected_radio;
+                 include_once "invoice.php";
                 }
             }
+
         }
         else{
+             include_once "failure.php";
         }
    // }
 
-    include_once "invoice.php";
+
     //$_SESSION['address']=="$&@DEFAULT@&$";
 
  ?>

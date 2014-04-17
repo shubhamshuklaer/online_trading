@@ -1,9 +1,12 @@
 <?php
+	if(!isset($_SESSION))
     session_start();
-	include_once 'class.MySQL.php';
+	include_once '../class.MySQL.php';
 	$object=new MYSQL();
 	$result=array();
 	$notifications=array();
+	$type=array();
+	$link=array();
 	$i=0;
  	$row=$object->ExecuteSQL("SELECT * from wish_list where user_nm='".$_SESSION['user_nm']."'");
  	while(isset($row[$i]))
@@ -80,14 +83,42 @@
  					if($found==true)
  					{
  						$result[$i]=$result[$i].$output[$j]["item_id"].";";
- 						$notifications[$i]='<a href="wishlist_confirmation.php">Items relevant to your wishlist item '.$row[$i]["item_nm"].' are available.</a>';
+ 						
  					}
  				}
  		++$j;
  	}
+ 	if($result[$i]!="")
+ 		{
+ 			$notifications[$i]='Items relevant to your wishlist item '.$row[$i]["item_nm"].' are available.';
+ 			$type[$i]="wishlist";
+			$link[$i]="wishlist_confirmation.php";
+ 		}
  	++$i;
 }
+	$row=$object->ExecuteSQL("SELECT * from watch_list where user_nm='".$_SESSION['user_nm']."'");
+	var_dump($row);
+	$j=0;
+	while(isset($row[$j])){
+		$output=$object->ExecuteSQL("SELECT * from items where item_id='".$row[$j]["item_id"]."'");
+		if($output[0]["cost"]>$row[$j]["previous_cost"])
+			{
+				$notifications[$i]="The cost of ".$output[0]["item_nm"]." has increased";
+				$type[$i]="watchlist";
+				$link[$i]="";
+				++$i;
+			}
+		else if($output[0]["cost"]<$row[$j]["previous_cost"])
+			{
+				$notifications[$i]="The cost of ".$output[0]["item_nm"]." has decreased";
+				$type[$i]="watchlist";
+				$link[$i]="";
+				++$i;
+			}
+			++$j;
+		}
 	$_SESSION['wishlist_found']=$result;
 	$_SESSION['notifications']=$notifications;
- 	echo json_encode($result);
+	$_SESSION['notifications_type']=$type;
+	$_SESSION['notifications_link']=$link;
 ?>

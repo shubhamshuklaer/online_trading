@@ -1,12 +1,14 @@
 <?php
     require_once "class.MySQL.php";
     // your php code
-    $username = "ayantika";
+    session_start();
+    $username = $_SESSION['user_nm'];
     $id=$_GET["item_id"];
     $fromtable = $_GET["fromtable"];
     $totable = $_GET["totable"];
     $omysql = new MySQL();
     //////////////////////Get quantity from fromtable//////////////////
+    $qty = 0;
     $where = array("user_nm like"=>$username,"AND item_id like"=>$id);
     $omysql->Select($fromtable, $where);
     $res = $omysql->arrayedResult;
@@ -17,6 +19,7 @@
     $res1 = $omysql->arrayedResult;
     $ini_rows = $omysql->records;
     ////////////////////////take initial qty if already in totable
+    $ini_qty = 0;
     if($ini_rows==0)
     {
         $ini_qty = 0; //set initial qty

@@ -81,7 +81,7 @@
                                 echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 $sale_type="auction";
                         // remove and for getting username use $_SERVER["user_nm"]
-                        $category1 = "electronics";
+                        $category1 = "Electronics";
                        // $type = "auction";
                         $type_1 = $_POST['type_1'];
                         $name = $_POST['name_1'];
@@ -157,7 +157,7 @@
                             // echo $test->lastQuery;
                             $sale_type="auction";
                         //$_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category1 = "books";
+                        $category1 = "Books";
                         $name = $_POST['name_2'];
                         $author = $_POST['author_2'];
                         $mrp=$_POST['mrp_2'];
@@ -231,7 +231,7 @@
                             // echo $test->lastQuery;
                              $sale_type="auction";
                       //  $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category1 = "appliances";
+                        $category1 = "Appliances";
                         $type_1 = $_POST['type_4'];
                         $name = $_POST['name_4'];
                         $brand = $_POST['brand_4'];
@@ -307,7 +307,7 @@
                            
                          $sale_type="auction";
                         //$_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category1 = "stationary";
+                        $category1 = "Stationary";
                         $type_1 = $_POST['type_3'];
                         $name = $_POST['name_3'];
                         $brand = $_POST['brand_3'];
@@ -381,7 +381,7 @@
                          //  $type_1= $_POST['type_5'];
                          $sale_type="auction";
                        // $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
-                        $category1 = "stationary";
+                        $category1 = "Others";
                         
                         $name = $_POST['name_5'];
                         $brand = $_POST['brand_5'];

@@ -30,14 +30,7 @@
 	
 		<div class="container"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
-				<div class="col-sm-3 col-md-2 sidebar">
-	                <ul class="nav nav-sidebar">
-		                <li class="active"><a href="#">Search</a></li>
-		                <li><a href="#">Profile</a></li>
-		                <li><a href="#">Bulk Order</a></li>
-		                <li><a href="#">Sell</a></li>
-	                </ul>
-                </div>
+			
 				<!--Main Content area--> 
 		        <div class="container-fluid col-sm-9 col-md-10">
 		           <!--

@@ -30,14 +30,7 @@
 	
 		<div class="container"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
-				<div class="col-sm-3 col-md-2 sidebar">
-	                <ul class="nav nav-sidebar">
-		                <li class="active"><a href="#">Search</a></li>
-		                <li><a href="#">Profile</a></li>
-		                <li><a href="#">Bulk Order</a></li>
-		                <li><a href="#">Sell</a></li>
-	                </ul>
-                </div>
+				
 				<!--Main Content area--> 
 		        <div class="container-fluid col-sm-9 col-md-10">
 		           <!--
@@ -61,9 +54,9 @@
 		             <div class="col-sm-5">
 		             <select name="type_1" id="type" class="form-control">
 		             <option></option>
-		             <option value='Mobile'>Mobile and gadgets</option>
-		             <option>Laptops and gadgets</option>
-		             <option>Household-Appliances</option>
+		             <option value='Mobile'>Mobile</option>
+		             <option>Laptop</option>
+		             <option>House</option>
 		             <option>Appliances</option>
 		             <option>Others</option>
 		             </select>

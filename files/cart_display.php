@@ -13,7 +13,6 @@
 		<div class="row" role="header">
 			<?php include_once "header.php"; session_start();?>
 		</div>
-        <!-- constant("HOSTNAME")."/upload/".picloc-->
 		<div class="container" name="c2"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
 
@@ -59,7 +58,7 @@
                                     $grandtot+=$tax;
                                     $qtyStr = strval($i)."qtyCart";
                                     $table = "cart";
-                                    $pic_loc = constant("HOSTNAME")."/upload/".$res2[0]["pic_loc"];
+                                    $pic_loc ="../upload/".$res2[0]["pic_loc"];
                                     if($omysql->records > 0)
                                     {
                                         echo "<tr>
@@ -152,7 +151,7 @@
                                     $tax = (($res2[0]["tax"]/100)*$total);
                                     $qtyStr = strval($i)."qtySaved";
                                     $table = "saved_list";
-                                    $pic_loc = constant("HOSTNAME")."/upload/".$res2[0]["pic_loc"];
+                                    $pic_loc = "../upload/".$res2[0]["pic_loc"];
                                     if($omysql->records > 0)
                                     {
                                         echo "<tr>

@@ -4,7 +4,7 @@ if(isset($_POST["category"])){
 	require_once "class.MySQL.php";
 	require_once "../config/config.php";
 	$omysql=new MySQL();
-	$where=array("category like"=>$_POST["category"]);
+	$where=array("category like"=>$_POST["category"]."%");
 	$omysql->Select("items",$where);
 	if($omysql->records>0){
 		$result=$omysql->arrayedResult;

@@ -104,7 +104,7 @@
                                    // $grandtot+=$total;
                                     $tax = (($res3[0]["tax"]/100)*$total);
                                     //$grandtot+=$tax;
-                                    $pic_loc = constant("HOSTNAME")."/upload/".$res3[0]["pic_loc"];
+                                    $pic_loc = "../upload/".$res3[0]["pic_loc"];
                                     if($omysql->records > 0)
                                     {
 
@@ -154,7 +154,7 @@
                 <?php } ?>
 
 			   </div>
-            <!------------------------------------------Cart summary ----------------------------------------------------------------------------------------->
+            <!------------------------------------------Cart summary --------------------------------------------------------------------------------------- -->
                  <br><br><br>
                 <?php if($rows>0){ ?>
 			   	<div class ="well col-sm-5 col-lg-5">
@@ -182,7 +182,7 @@
                                         $grandtot+=$total;
                                         $tax = (($res3[0]["tax"]/100)*$total);
                                         $grandtot+=$tax;
-                                        $pic_loc = constant("HOSTNAME")."/upload/".$res3[0]["pic_loc"];
+                                        $pic_loc = "../upload/".$res3[0]["pic_loc"];
                                         if($omysql->records > 0)
                                         {
                                             echo "<tr>

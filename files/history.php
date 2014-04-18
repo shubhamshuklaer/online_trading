@@ -95,7 +95,7 @@
                                                 $total = $arr[$k]["qty"]*$res2[0]["cost"];
                                                 $tax = (($res2[0]["tax"]/100)*$total);
                                                 $total+=$tax;
-                                                $pic_loc = constant("HOSTNAME")."/upload/".$res2[0]["pic_loc"];
+                                                $pic_loc = "../upload/".$res2[0]["pic_loc"];
                                                 echo "<tr>
                                                 <td>
                                                 <img src=".'"'.$pic_loc.'"'." width=".'"100"'."height=".'"100"'.">
@@ -171,7 +171,7 @@
                                 $total = $arr[$k]["qty"]*$res2[0]["cost"];
                                 $tax = (($res2[0]["tax"]/100)*$total);
                                 $total+=$tax;
-                                $pic_loc = constant("HOSTNAME")."/upload/".$res2[0]["pic_loc"];
+                                $pic_loc ="../upload/".$res2[0]["pic_loc"];
                                 echo "<tr>
                                 <td>
                                 <img src=".'"'.$pic_loc.'"'." width=".'"100"'."height=".'"100"'.">
@@ -286,7 +286,7 @@
                                                 $total = $arr[$k]["qty"]*$res2[0]["cost"];
                                                 $tax = (($res2[0]["tax"]/100)*$total);
                                                 $total+=$tax;
-                                                $pic_loc = constant("HOSTNAME")."/upload/".$res2[0]["pic_loc"];
+                                                $pic_loc = "../upload/".$res2[0]["pic_loc"];
                                                 echo "<tr>
                                                 <td>
                                                 <img src=".'"'.$pic_loc.'"'." width=".'"100"'."height=".'"100"'.">
@@ -337,7 +337,7 @@
                                 $total = $arr[$k]["qty"]*$res2[0]["cost"];
                                 $tax = (($res2[0]["tax"]/100)*$total);
                                 $total+=$tax;
-                                $pic_loc = constant("HOSTNAME")."/upload/".$res2[0]["pic_loc"];
+                                $pic_loc = "../upload/".$res2[0]["pic_loc"];
                                 echo "<tr>
                                 <td>
                                 <img src=".'"'.$pic_loc.'"'." width=".'"100"'."height=".'"100"'.">

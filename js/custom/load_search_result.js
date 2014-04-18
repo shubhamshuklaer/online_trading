@@ -1,7 +1,7 @@
 var get=[];
 var item_response_data;
 var total_num_items;
-var num_item_in_one_page=3;
+var num_item_in_one_page=5;
 var num_pages;
 $("document").ready(function(){
     get_url_variables();
@@ -41,6 +41,17 @@ $("document").ready(function(){
                 }
             }else{
                 delete where_clause["type ="];   
+            }
+            load_items(JSON.stringify(where_clause));
+        }else if($(this).hasClass("condition")){
+            if($(this).prop("checked")==true){
+                if($(this).attr("value")==""){
+                    delete where_clause["item_condition like"]
+                }else{
+                    where_clause["item_condition like"]=$(this).attr("value");   
+                }
+            }else{
+                delete where_clause["item_condition like"];   
             }
             load_items(JSON.stringify(where_clause));
         }else if($(this).hasClass("cost")){
@@ -148,15 +159,19 @@ function load_filter(search_term){
             var category_distribution=response_data["category_distribution"];
             var type_distribution=response_data["type_distribution"];
             var cost_distribution=response_data["cost_distribution"];
+            var condition_distribution=response_data["condition_distribution"];
             var category=$("<li>");
             var type=$("<li>");
             var cost=$("<li>");
+            var condition=$("<li>");
             category.append("<h3>Categories</h3>");
             type.append("<h3>Type</h3>");
             cost.append("<h3>Cost</h3>");
+            condition.append("<h3>Condition</h3>");
             var category_list=$("<ul>");
             var type_list=$("<ul>");
             var cost_list=$("<ul>");
+            var condition_list=$("<ul>");
             //Default main category
             if(category_distribution.length>1){
                 var category_element=$("<li>");
@@ -262,12 +277,42 @@ function load_filter(search_term){
                 cost_element_li.appendTo(cost_list);
                 previous_cost=cost_distribution[row]["less_than"];
             }
+
+            ////////////default condition distribution
+            if(Object.keys(condition_distribution).length>1){
+                var condition_element_li=$("<li>");
+                var condition_element=$("<input>");
+                condition_element.attr("type","radio");
+                condition_element.attr("name","condition");
+                condition_element.addClass("condition");
+                condition_element.attr("value","");
+                condition_element.appendTo(condition_element_li);
+                condition_element_li.append("Default");
+                condition_element_li.appendTo(condition_list);
+            }
+            ////////////condition distribution//////////////////////////////////
+            for(var condition_name in condition_distribution){
+                var condition_element_li=$("<li>");
+                var condition_element=$("<input>");
+                condition_element.attr("type","radio");
+                condition_element.attr("name","condition");
+                condition_element.addClass("condition");
+                condition_element.attr("value",condition_name);
+                condition_element.appendTo(condition_element_li);
+                condition_element_li.append(condition_name+"("+condition_distribution[condition_name]+")");
+                condition_element_li.appendTo(condition_list);
+            }
+            
+
+            /////////////////////////
             category_list.appendTo(category);
             type_list.appendTo(type);
             cost_list.appendTo(cost);
+            condition_list.appendTo(condition);
             category.appendTo(filter_list);
             type.appendTo(filter_list);
             cost.appendTo(filter_list);
+            condition.appendTo(filter_list);
         },
         /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
         error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )

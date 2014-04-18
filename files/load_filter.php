@@ -61,6 +61,7 @@ if(isset($_POST["search_term"])){
 		$costs=array();
 		$types=array();
 		$categories=array();
+		$conditions=array();
 		if($omysql->records>0){
 			$result=$omysql->arrayedResult;
 			// print_r($result);
@@ -79,6 +80,7 @@ if(isset($_POST["search_term"])){
 					$costs[]=$row["cost"];
 					$categories[]=$row["category"];
 					$types[]=$row["type"];
+					$conditions[]=$row["item_condition"];
 				}
 				//calulating type_distribution
 					$temp_category_distribution=array_count_values($categories);
@@ -98,16 +100,20 @@ if(isset($_POST["search_term"])){
 						if(preg_match("/^[A-Za-z]+:[A-Za-z]+$/", $key)){
 							$temp=explode(":", $key);
 							for($i=0;$i<count($category_distribution);$i++){
-								if($category_distribution[$i]["category"]==$temp[0])
+								if($category_distribution[$i]["category"]==$temp[0]){
 									$temp1=array();
 									$temp1["sub_category_name"]=$temp[1];
 									$temp1["count"]=$value;
 									$category_distribution[$i]["sub_category"][] =$temp1;
+								}
 							}
+
 						}
 					}
 				//calculating category distribution ends
 				$type_distribution=array_count_values($types);
+				///calcutating condition distribution
+				$condition_distribution=array_count_values($conditions);
 				//calculating cost distribution
 					$min_cost=$costs[0];
 					$max_cost=0;
@@ -160,6 +166,7 @@ if(isset($_POST["search_term"])){
 					$filter["category_distribution"]=$category_distribution;
 					$filter["type_distribution"]=$type_distribution;
 					$filter["cost_distribution"]=$cost_distribution;
+					$filter["condition_distribution"]=$condition_distribution;
 					echo json_encode($filter);
 				
 			}

@@ -205,12 +205,12 @@
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Plants and Shrubs" value="Plants and Shrubs"> Plants and Shrubs
+                      <input type="checkbox" name="Plants_and_Shrubs" value="Plants and Shrubs"> Plants and Shrubs
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Romm decorators" value="Romm decorators"> Romm decorators
+                      <input type="checkbox" name="Romm_decorators" value="Romm decorators"> Romm decorators
                     </label>
                    </li>
                    <li>

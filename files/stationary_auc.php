@@ -262,7 +262,7 @@
                    </li>
                    <li> 
                     <label class="checkbox inline">
-                      <input type="checkbox" name="College Supplies" value="College Supplies"> College Supplies
+                      <input type="checkbox" name="College_Supplies" value="College Supplies"> College Supplies
                     </label>
                   </li>
                   <li>

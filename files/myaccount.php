@@ -68,7 +68,7 @@
                 <a href="bidding.php">Your Bidding Items</a>
               </li>
               <li>
-                <a href="#">Recommendations</a>
+                <a href="recommendations.php">Recommendations</a>
               </li>
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown"  href="#" >Notifications  

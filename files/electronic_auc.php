@@ -264,12 +264,12 @@
                    </li>
                    <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Mobile Accessories" value="Mobile Accessories"> Mobile Accessories
+                      <input type="checkbox" name="Mobile_Accessories" value="Mobile Accessories"> Mobile Accessories
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Computer Accessories" value="Computer Accessories"> Computer Accessories
+                      <input type="checkbox" name="Computer_Accessories" value="Computer Accessories"> Computer Accessories
                     </label>
                   </li>
                   <li>
@@ -279,12 +279,12 @@
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Cameras and Accessories" value="Cameras and Accessories"> Cameras and Accessories
+                      <input type="checkbox" name="Cameras_and_Accessories" value="Cameras and Accessories"> Cameras and Accessories
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Audio and Video players" value="Audio and Video players"> Audio and Video players
+                      <input type="checkbox" name="Audio_and_Video_players" value="Audio and Video players"> Audio and Video players
                     </label>
                   </li>
                   </ul>

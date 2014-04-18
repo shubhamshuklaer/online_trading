@@ -264,7 +264,7 @@
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Coffee Makers" value="Coffee Makers"> Coffee Makers
+                      <input type="checkbox" name="Coffee_Makers" value="Coffee Makers"> Coffee Makers
                     </label>
                    </li>
                    <li>

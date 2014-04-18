@@ -25,6 +25,7 @@
 				<!--Main Content area-->
                     <?php
                         $omysql=new MySQL();
+                        $omysql1=new MySQL();
                         session_start();
                         $usernm = $_SESSION['user_nm'];
                         $auth = $_SESSION['authentication'];
@@ -122,13 +123,13 @@
                                                          //echo "within 10 days".$arr[$k]["order_time"];
                                                          echo "<b>Not Delivered Yet<br></b>
                                                         <form>";
-                                                        echo "<input type=".'"'."radio".'"'."value=".'"'."Confirm".'"'." onClick=".'"'."confirm('".$item_id."')".'"'.">Confirm Delivery</input>
+                                                        echo "<input type=".'"'."radio".'"'."value=".'"'."Confirm".'"'." onClick=".'"'."confirm('".$item_id."','".$arr[$k]["order_id"]."')".'"'.">Confirm Delivery</input>
                                                         <br>";
 
                                                         if(trim($arr[$k]["delivery_type"])=='normal' && strtotime(date('Y/m/d',strtotime($arr[$k]["order_time"]))) > strtotime("-2 days"))
                                                         {
                                                             //allow cancellation of order if normal delivery and order < 2 days old
-                                                            echo "<input type=".'"'."radio".'"'."value=".'"'."Cancel".'"'." onClick=".'"'."cancel_delivery('".$item_id."')".'"'.">Cancel Delivery</input>
+                                                            echo "<input type=".'"'."radio".'"'."value=".'"'."Cancel".'"'." onClick=".'"'."cancel_delivery('".$item_id."','".$arr[$k]["order_id"]."')".'"'.">Cancel Delivery</input>
                                                             <br>";
                                                         }
                                                         echo "</form>";
@@ -141,6 +142,27 @@
                                                         $set=array("status"=>"Delivered","delivery_time"=>$tym);
                                                         $omysql->Update("orders", $set, $where);
                                                         //echo "updated: ".$omysql->affected."rows<br>";
+                                                        //////////////////////////////order is confirmed so pay the seller///////////////////////////
+                                                        $qty11 = $arr[$k]["qty"];
+                                                        //get sellers name from items table
+                                                        $from1 = "items";
+                                                        $where1 = array("item_id like"=>$arr[$k]["item_id"]);
+                                                        $omysql1->Select($from1,$where1);
+                                                        $res11 = $omysql1->arrayedResult;
+                                                        $seller = $res11[0]["user_nm"];
+                                                        $price11 = $res11[0]["cost"] + (($res11[0]["cost"]*$res11[0]["tax"])/100);
+                                                        $tot = $price11*$qty11;
+                                                        //get the seller's' credits
+                                                        $from1 = "user";
+                                                        $where1 = array("user_nm like"=>$seller);
+                                                        $omysql1->Select($from1,$where1);
+                                                        $res12 = $omysql1->arrayedResult;
+                                                        $ini_credit = $res12[0]["credit"];
+                                                        //pay the seller
+                                                        $new_credit = $ini_credit+$tot;
+                                                        $set1 = array("credit"=>$new_credit);
+                                                        $omysql1->Update($from1, $set1, $where1);
+                                                        ////////////////////////////////////////////////////////////////////////////////////////////
                                                         echo "<b>Delivered on ".$tym."</b><br>";
                                                     }
                                                 }
@@ -197,12 +219,12 @@
                                         //allow confirmation of delivery if order < 10 days old
                                         echo "<b>Not Delivered Yet</b><br>
                                         <form>";
-                                        echo "<input type=".'"'."radio".'"'."value=".'"'."Confirm".'"'." onClick=".'"'."confirm('".$item_id."')".'"'.">Confirm Delivery</input>
+                                        echo "<input type=".'"'."radio".'"'."value=".'"'."Confirm".'"'." onClick=".'"'."confirm('".$item_id."','".$arr[$k]["order_id"]."')".'"'.">Confirm Delivery</input>
                                         <br>";
                                         if(trim($arr[$k]["delivery_type"])=='normal' && strtotime(date('Y/m/d',strtotime($arr[$k]["order_time"]))) > strtotime("-2 days"))
                                         {
                                             //allow cancellation of order if normal delivery and order < 2 days old
-                                            echo "<input type=".'"'."radio".'"'."value=".'"'."Cancel".'"'." onClick=".'"'."cancel_delivery('".$item_id."')".'"'.">Cancel Delivery</input>
+                                            echo "<input type=".'"'."radio".'"'."value=".'"'."Cancel".'"'." onClick=".'"'."cancel_delivery('".$item_id."','".$arr[$k]["order_id"]."')".'"'.">Cancel Delivery</input>
                                             <br>";
                                         }
                                         echo "</form>";
@@ -214,6 +236,27 @@
                                         $tym = date("Y/m/d");
                                         $set=array("status"=>"Delivered","delivery_time"=>$tym);
                                         $omysql->Update("orders", $set, $where);
+                                        //////////////////////////////order is confirmed so pay the seller///////////////////////////
+                                        $qty11 = $arr[$k]["qty"];
+                                        //get sellers name from items table
+                                        $from1 = "items";
+                                        $where1 = array("item_id like"=>$arr[$k]["item_id"]);
+                                        $omysql1->Select($from1,$where1);
+                                        $res11 = $omysql1->arrayedResult;
+                                        $seller = $res11[0]["user_nm"];
+                                        $price11 = $res11[0]["cost"] + (($res11[0]["cost"]*$res11[0]["tax"])/100);
+                                        $tot = $price11*$qty11;
+                                        //get the seller's' credits
+                                        $from1 = "user";
+                                        $where1 = array("user_nm like"=>$seller);
+                                        $omysql1->Select($from1,$where1);
+                                        $res12 = $omysql1->arrayedResult;
+                                        $ini_credit = $res12[0]["credit"];
+                                        //pay the seller
+                                        $new_credit = $ini_credit+$tot;
+                                        $set1 = array("credit"=>$new_credit);
+                                        $omysql1->Update($from1, $set1, $where1);
+                                        ////////////////////////////////////////////////////////////////////////////////////////////
                                         echo "<b>Delivered on ".$tym."<br></b>";
                                     }
 
@@ -394,14 +437,15 @@
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	    <script type="text/javascript">
 
-       function confirm(item_id){
+       function confirm(item_id,order_id){
             //alert("Inside func confirm");
             $.ajax({
                     url: "confirmajax.php",
                     dataType: "json",
                     type: "GET",
                     data: {
-                            item_id : item_id
+                            item_id : item_id,
+                            order_id : order_id
                             },
                     success: function(response_data){
                     console.log(response_data);
@@ -425,14 +469,15 @@
                     }
                 });
 }
-            function cancel_delivery(item_id){
+            function cancel_delivery(item_id,order_id){
             //alert("Inside func cancel");
             $.ajax({
                     url: "cancelajax.php",
                     dataType: "json",
                     type: "GET",
                     data: {
-                            item_id : item_id
+                            item_id : item_id,
+                            order_id : order_id
                             },
                     success: function(response_data){
                     console.log(response_data);

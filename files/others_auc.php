@@ -187,12 +187,12 @@
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Plants and Shrubs" value="Plants and Shrubs"> Plants and Shrubs
+                      <input type="checkbox" name="Plants_and_Shrubs" value="Plants and Shrubs"> Plants and Shrubs
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Room decorators" value="Room decorators"> Room decorators
+                      <input type="checkbox" name="Room_decorators" value="Room decorators"> Room decorators
                     </label>
                    </li>
                    <li>

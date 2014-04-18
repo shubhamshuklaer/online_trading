@@ -4,10 +4,11 @@
     session_start();
     $username = $_SESSION['user_nm'];
     $id=$_GET["item_id"];
+    $order_id  = $_GET["order_id"];
     //////////////////////////Get credits to be pushed back///////////////////////////
     $from = "orders";
     $omysql = new MySQL();
-    $where = array("user_nm like"=>$username,"AND item_id like"=>$id);
+    $where = array("order_id like"=>$order_id,"AND item_id like"=>$id);
     $omysql->Select($from, $where);
     $res = $omysql->arrayedResult;
     $qty = $res[0]["qty"];   //found quantity
@@ -39,7 +40,7 @@
     $omysql->Update("items", $set, $where);
     /////////////////////////////delete from orders table//////////////////////////////////
     $fromtable = "orders";
-    $where = array("user_nm like"=>$username,"AND item_id like"=>$id);
+    $where = array("order_id like"=>$order_id,"AND item_id like"=>$id);
     $omysql->Delete($fromtable, $where);
     $rows1 = $omysql->affected;
     if($rows>0 && $rows1>0)

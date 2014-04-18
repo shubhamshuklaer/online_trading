@@ -256,12 +256,12 @@
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Bussiness Magazines" value="Bussiness Magazines"> Bussiness Magazines
+                      <input type="checkbox" name="Bussiness_Magazines" value="Bussiness Magazines"> Bussiness Magazines
                     </label>
                    </li>
                    <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" name="Science journals" value="Science journals"> Science journals
+                      <input type="checkbox" name="Science_journals" value="Science journals"> Science journals
                     </label>
                   </li>
                   

@@ -88,7 +88,7 @@
                         if(isset($_POST['Tablets'])){
                             $string5=$string5."tablets,";
                         }
-                        if(isset($_POST['Mobile Accessories'])){
+                        if(isset($_POST['Mobile_Accessories'])){
                             $string5=$string5."mobile accessories,";
                         }
                          if (isset($_POST['Computer Accessories'])){
@@ -97,10 +97,10 @@
                         if(isset($_POST['Speakers'])){
                             $string5=$string5."speakers,";
                         }
-                        if(isset($_POST['cameras and accessories'])){
+                        if(isset($_POST['cameras_and_accessories'])){
                             $string5=$string5."cameras and accessories,";
                         }
-                        if(isset($_POST['Audio and Video players'])){
+                        if(isset($_POST['Audio_and_Video_players'])){
                             $string5=$string5."audio and video players,";
                         }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
@@ -179,10 +179,10 @@
                         if(isset($_POST['Literature'])){
                             $string4=$string4."literature,";
                         }
-                        if(isset($_POST['Bussiness Magazines'])){
+                        if(isset($_POST['Bussiness_Magazines'])){
                             $string4=$string4."business magazines,";
                         }
-                        if(isset($_POST['Science journals'])){
+                        if(isset($_POST['Science_journals'])){
                             $string4=$string4."science journals,";
                         }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."author: ".$author." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price;
@@ -261,7 +261,7 @@
                         if(isset($_POST['Irons'])){
                             $string1=$string1."irons,";
                         }
-                        if(isset($_POST['Coffee Makers'])){
+                        if(isset($_POST['Coffee_Makers'])){
                             $string1=$string1."coffeemakers,";
                         }
                         if(isset($_POST['Others'])){
@@ -348,7 +348,7 @@
                         if(isset($_POST['Drafters'])){
                             $string2=$string2."drafters,";
                         }
-                        if(isset($_POST['College Supplies'])){
+                        if(isset($_POST['College_Supplies'])){
                             $string2=$string2."college supplies,";
                         }
                         if(isset($_POST['Others'])){
@@ -429,10 +429,10 @@
                         if (isset($_POST['Cycles'])){
                             $string3=$string3."cycles,";
                         }
-                        if(isset($_POST['Plants and Shrubs'])){
+                        if(isset($_POST['Plants_and_Shrubs'])){
                             $string3=$string3."plants and shrubs,";
                         }
-                        if(isset($_POST['Room docorators'])){
+                        if(isset($_POST['Room_docorators'])){
                             $string3=$string3."room decorators,";
                         }
                         if(isset($_POST['Others'])){

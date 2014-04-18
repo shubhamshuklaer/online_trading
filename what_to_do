@@ -1,12 +1,12 @@
 
 
 1. notifications.php- in header
-4. auction/sale tags
+4. auction/sale tags8
 14. auction/sale png,jpeg,jpg not uploading
 15. no promotion_amount option in auction/sale
 16. Index wait for image size
 18. check search_suggestion  working in all modules--jquery problem
 19. fixed condition type in auction/sale
-////wish-list watch-list changed -addded add to cart
+////watch-list changed -addded add to cart
 
 //set_sale and set_auction my search_index

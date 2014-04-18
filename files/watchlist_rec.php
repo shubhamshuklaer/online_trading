@@ -1,5 +1,5 @@
 <?php
-include_once "../config/config.php";
+include_once "./config.php";
 
 $username = constant("USERNAME");                                                                   // connection to database 
 $password = constant("PASS");
@@ -11,7 +11,7 @@ $selected = mysql_select_db("online_trading",$dbhandle)
 	or die("Could not select examples");
 $watch_pre = 5;
 
-$result = mysql_query("SELECT tag_values from rec_pre where user_nm =  '".$_SESSION["user_nm"]."'");                  // getting the tag_values string for the corresponding user
+$result = mysql_query("SELECT tag_values from rec_pre where user_nm = 'sathwik'");                  // getting the tag_values string for the corresponding user
 while($row = mysql_fetch_array($result)){
 	$mstr2 = explode(",",$row{'tag_values'});
   	
@@ -29,7 +29,7 @@ echo "<br>";
 
 $mstr3 = array();
 $mstr4 = array();
-$result7 = mysql_query("SELECT item_id from watch_list where user_nm = '".$_SESSION["user_nm"]."'");                       // getting the item_id for all the items in the watchlist 
+$result7 = mysql_query("SELECT item_id from watch_list where user_nm = 'Sathwik'");                       // getting the item_id for all the items in the watchlist 
 while($row = mysql_fetch_array($result7)){                                                            //  of corresponding user 
 	print_r($row);                                                                                    // for every item_id we get its tags from the items table 
 	$results = mysql_query("SELECT tags from items where item_id = '".$row['item_id']."'");           // explode this tags and pushing them into into array mstr4
@@ -64,14 +64,47 @@ for($x =0 ;$x < count($mstr4); $x++)                                            
 	}
 }
 print_r($a);
-$string = "";
-$newArray = array_keys($a);
-for($y = 0; $y < count($newArray); $y++){
-	$string = $string.$newArray[$y]."=".$a[$newArray[$y]].",";                                            // concatenating the string to push back
+arsort($a);
+print_r($a);
+$keys = array_keys($a);
+print_r($keys);
+$result7 = mysql_query("SELECT tags,item_id from items");
+while ($rows = mysql_fetch_array($result7))                                        // extracting the tags and item_id for every item 
+{ 
+	//echo $rows{'tags'}."<br>";
+	$count = 0;
+	$tag_s = explode(",",$rows{'tags'});
+	//print_r($tag_s);
+	//echo "<br>";
+	//echo "<br>";
+	for($x =0 ;$x < count($tag_s); $x++)
+	{
+		for($y=0;$y< 5; $y++)                                        
+		{
+			if((strtolower($tag_s[$x])) == (strtolower($keys[$y])))                  // comparing tag values of ecah item against the tag values having highest 
+			{                                                                       // priority and increasing the count for that item 
+				$count++;
+			}
+
+		}
+	}
+//	echo $count."<br>";
+	$counter[$rows{'item_id'}] = $count;
+
 }
+//print_r($counter);
+arsort($counter); 
+$names = array_keys($counter);
+echo "Item Ids of trending items : ";
 echo "<br>";
-echo $string;
-//print_r($b);
-$string1 = substr($string ,0 ,strlen($string)-1);
-$some = mysql_query("UPDATE rec_pre SET tag_values = '".$string1."' where user_nm = '".$_SESSION["user_nm"]."'")
+$string2 = "";
+for($x = 0;$x < 3;$x++)
+{
+	echo $names[$x];
+	echo "<br>";
+	$string2 = $string2.",";
+}     
+echo $string2;
+//$string3 = substr($string ,0 ,strlen($string)-1);
+//$some = mysql_query("UPDATE rec_pre SET rec_items = '".$string3."' where user_nm = 'Sathwik'");*/
 ?>

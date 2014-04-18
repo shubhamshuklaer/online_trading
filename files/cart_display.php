@@ -26,10 +26,12 @@
                         $omysql=new MySQL();
                         if(!isset($_SESSION['authentication']))
                         {
-                            $_SESSION['authentication'] = 0;
+                            $auth=0;
+                        }else{
+                            $auth =  $_SESSION['authentication'];
                         }
+                        
                         $usernm = $_SESSION['user_nm'];
-                        $auth =  $_SESSION['authentication'];
                         $rows = 0;
                         $where=array("user_nm like"=>$usernm);
                         $from = "cart";

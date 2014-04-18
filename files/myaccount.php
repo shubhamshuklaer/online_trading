@@ -18,9 +18,14 @@
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <?php 
     session_start();
-    if(!isset($_SESSION['authentication']))
+    if(!isset($_SESSION['authentication'])){
+      unset($_SESSION["authentication"]);
       header("Location: login.php");
+    }
     include_once'notification.php';
+    include_once'class.MySQL.php';
+    $object=new MySQL();
+    $row=$object->ExecuteSQL("SELECT `name` from user where user_nm='".$_SESSION['user_nm']."'");
 ?>
 </head>
 <body>
@@ -33,7 +38,7 @@
         
         <!-- My Account-->
         <div class="span9">
-<h1 class="heading1"><span class="maintext">Welcome, <?php echo $_SESSION['name']?></span><span class="subtext">View All your account information</span></h1>        
+<h1 class="heading1"><span class="maintext">Welcome, <?php echo $row[0]['name']?></span><span class="subtext">View All your account information</span></h1>        
               <h3 class="heading3">My Accounts</h3>
           <div class="myaccountbox">
             <ul>
@@ -44,7 +49,7 @@
                 <a href="change_password.php"> Change your password</a>
               </li>
               <li>
-                <a href="#">Cart</a>
+                <a href="cart_display.php">Cart</a>
               </li>
               <li>
                 <a href="wishlist.php">Modify your wish list</a>
@@ -66,26 +71,27 @@
                 <a href="#">Recommendations</a>
               </li>
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown"  href="#" >Notifications  <span id="badge" class="badge">
+                <a class="dropdown-toggle" data-toggle="dropdown"  href="#" >Notifications  
                   <?php
                   $count=0;
                   foreach ($_SESSION['notifications'] as $key => $value) {
                     if(isset($value))
                       ++$count;
                   }
-                  echo $count;
+                  if($count>0)
+                  echo '<span id="badge" class="badge">'.$count.'</span>';
                   ?></span></a>
-                <ul class="dropdown-menu" >
                   <?php 
                   if(sizeof($_SESSION['notifications'])>0)
-                        foreach ($_SESSION['notifications'] as $key => $value) {
-                        echo '<li><a href="'.$_SESSION['notifications_link'][$key].'" ';
-                        if($_SESSION['notifications_type'][$key]!="wishlist")
-                          echo 'onclick="seen('.$_SESSION['notifications_type'][$key].')" ';
-                          echo '>'.$value.'</a></li>'; 
+                        {
+                          echo '<ul class="dropdown-menu" >';
+                          foreach ($_SESSION['notifications'] as $key => $value) {
+                        echo '<li><span class="span3"><a href="'.$_SESSION['notifications_link'][$key].'" ';
+                          echo '>'.$value.'</span></a></li>'; 
                         }
+                    echo '</ul>';
+                      }
                         ?>
-                    </ul>
                   </li>
               <li>
                 <a href="logout.php">Log out</a>
@@ -120,6 +126,7 @@
   if (typeof(jQuery) == 'undefined')   
     document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>
+
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
 <script src="js/application.js"></script>
@@ -136,12 +143,6 @@
 <script defer src="js/custom.js"></script>
 <script type="text/javascript">
 $('.dropdown-menu').css('left','12%');
-function seen(id)
-{
-  var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open("GET","seen.php?id="+id,true);
-  xmlhttp.send();
-}
 </script>
 </body>
 </html>

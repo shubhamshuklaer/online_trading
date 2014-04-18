@@ -1,6 +1,5 @@
 <?php
-session_start();
-include_once "../config/config.php";
+include_once "./config.php";
 
 $username = constant("USERNAME");                                                                   // connection to database 
 $password = constant("PASS");
@@ -13,12 +12,12 @@ $selected = mysql_select_db("online_trading",$dbhandle)
  
 $order_pre = 20;                                                                                    // specified value for order 
 
-$result = mysql_query("SELECT tag_values from rec_pre where user_nm = '".$_SESSION["user_nm"]."'");                  // getting the tag_values string for the corresponding user
+$result = mysql_query("SELECT tag_values from rec_pre where user_nm = 'Sathwik'");                  // getting the tag_values string for the corresponding user
 while($row = mysql_fetch_array($result)){
 	$mstr2 = explode(",",$row{'tag_values'});
   	
 }
-print_r($mstr2);
+//print_r($mstr2);
 foreach($mstr2 as $nstr )
 	{
     	$narr = explode("=",$nstr);
@@ -26,7 +25,7 @@ foreach($mstr2 as $nstr )
 		$ytr[1] = $narr[1];
 		$a[$narr[0]] = $ytr[1];
 	}
-print_r($a);         
+//print_r($a);         
 echo "<br>";
 $b = $a;
 $newArray = array_keys($a); 
@@ -37,9 +36,9 @@ for($x1 = 0; $x1 < count($a); $x1++)
 
 $mstr3 = array();
 $mstr4 = array();
-$result7 = mysql_query("SELECT item_id from orders where user_nm = '".$_SESSION["user_nm"]."'");                       // getting the item_id for all the orders of the user from 
+$result7 = mysql_query("SELECT item_id from orders where user_nm = 'Sathwik'");                       // getting the item_id for all the orders of the user from 
 while($row = mysql_fetch_array($result7)){                                                            // table orders
-	print_r($row);                                                                                    // for every item_id we get its tags from the items table 
+	//print_r($row);                                                                                    // for every item_id we get its tags from the items table 
 	$results = mysql_query("SELECT tags from items where item_id = '".$row['item_id']."'");           // explode this tags and pushing them into into array mstr4
 	while($rows = mysql_fetch_array($results)){
 		$mstr3 = explode(",",$rows['tags']);
@@ -48,7 +47,7 @@ while($row = mysql_fetch_array($result7)){                                      
    			array_push($mstr4,$mstr3[$z]);                                                             
    		}
 	}
-	print_r($mstr3);
+	//print_r($mstr3);
 	echo "<br>";
 }
 print_r($mstr4);
@@ -81,5 +80,5 @@ echo "<br>";
 echo $string;
 //print_r($b);
 $string1 = substr($string ,0 ,strlen($string)-1);
-$some = mysql_query("UPDATE rec_pre SET tag_values = '".$string1."' where user_nm = '".$_SESSION["user_nm"]."'");       // This updates the tag_values column in the rec_pre table
+$some = mysql_query("UPDATE rec_pre SET tag_values = '".$string1."' where user_nm = 'sathwik'");       // This updates the tag_values column in the rec_pre table
 ?>

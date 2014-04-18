@@ -12,10 +12,16 @@
  	while(isset($row[$i]))
  	{
  		$result[$i]="";
- 		$query="SELECT * from items where user_nm='".$_SESSION['user_nm']."' AND ";
+ 		$query="SELECT * from items where ";
  		$item_nm=$row[$i]['item_nm'];
  		$tags=$row[$i]['Tags'];
- 		$query=$query." category='".$row[$i]['category']."' AND ( `item_nm` like '%$item_nm%' or author_nm like '%$item_nm%' or genre like '%$item_nm%' or `brand` like '%$item_nm%' or `model` like '%$item_nm%' or ";
+ 		$query=$query." category like'%".$row[$i]['category']."%' AND ( ";
+ 		$tok=strtok($row[$i]['item_nm']," ");
+ 		while($tok!==false)
+ 		{
+ 			$query=$query."`item_nm` like '%$tok%'  or  `author_nm` like '%$tok%' or `genre` like '%$tok%' or `brand` like '%$tok%' or `model` like '%$tok%' or `description` like '%$tok%' or ";
+ 			$tok=strtok(" ");
+ 		}
  		$tok=strtok("$tags",";");
  		while($tok!==false)
  		{
@@ -104,18 +110,41 @@
 			{
 				$notifications[$i]="The cost of ".$output[0]["item_nm"]." has increased";
 				$type[$i]=$output[0]["item_id"];
-				$link[$i]="#";
+				$link[$i]=$output[0]["type"].".php?item_id=".$type[$i];
 				++$i;
 			}
 		else if($output[0]["cost"]<$row[$j]["previous_cost"])
 			{
 				$notifications[$i]="The cost of ".$output[0]["item_nm"]." has decreased";
 				$type[$i]=$output[0]["item_id"];
-				$link[$i]="#";
+				$link[$i]=$output[0]["type"].".php?item_id=".$type[$i];
 				++$i;
 			}
 			++$j;
 		}
+		$j=0;
+	$row=$object->ExecuteSQL("SELECT * from auction_bidder where user_nm='".$_SESSION['user_nm']."' ORDER by `item_id` DESC, `bid` DESC");
+	while(isset($row[$j])){
+                  $k=$j+1;
+                  while(isset($row[$k]))
+                  {
+                    if($row[$k]['item_id']==$row[$j]['item_id'])
+                      ++$k;
+                    else
+                      break;
+                  }
+		$curr=$object->ExecuteSQL("SELECT * from auction_bidder where item_id='".$row[$j]['item_id']."' ORDER BY `bid` DESC");
+        $curr_bid=$curr[0]['bid'];
+        $krow=$object->ExecuteSQL("SELECT * from items where item_id='".$row[$j]['item_id']."'");
+		if($row[$j]['bid']<$curr_bid)
+		{
+			$notifications[$i]="You are losing the bid for ".$krow[0]['item_nm']."";
+				$link[$i]="auction.php?item_id=".$row[$j]['item_id'];
+				$type[$i]="bid";
+				++$i;
+		}
+		$j=$k;
+	}
 	$_SESSION['wishlist_found']=$result;
 	$_SESSION['notifications']=$notifications;
 	$_SESSION['notifications_type']=$type;

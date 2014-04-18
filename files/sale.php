@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php session_start(); ?>
 <?php
 require_once "class.MySQL.php";
 $omysql=new MySQL();
@@ -7,6 +7,14 @@ $output = '';
 
 //collect
 $item_id=$_GET["item_id"];
+if(isset($_SESSION['authentication'])){
+    $row=$omysql->ExecuteSQL("SELECT * from watch_list where user_nm='".$_SESSION['user_nm']."' and item_id='$item_id'");
+    if($row!="true")
+    {
+        $row=$omysql->ExecuteSQL("SELECT `cost` from items where item_id='$item_id'");
+        $omysql->ExecuteSQL("UPDATE watch_list SET `previous_cost`='".$row[0]["cost"]."' where item_id='$item_id' and user_nm='".$_SESSION['user_nm']."'");
+    }
+}
 $from = "items";
 $where = array("item_id ="=>$item_id);
 $query =$omysql->Select($from, $where);

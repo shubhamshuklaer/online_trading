@@ -56,14 +56,22 @@
                 if(!isset($_SESSION))
                   session_start();
                   $object=new MYSQL();
-              $ids=$object->ExecuteSQL("SELECT * from auction_bidder where user_nm='".$_SESSION['user_nm']."'");
+              $ids=$object->ExecuteSQL("SELECT * from auction_bidder where user_nm='".$_SESSION['user_nm']."' ORDER by `item_id` DESC, `bid` DESC");
                  $i=0;
                  $count=0;
                  while(isset($ids[$i])){
                   ++$count;
+                  $j=$i+1;
+                  while(isset($ids[$j]))
+                  {
+                    if($ids[$j]['item_id']==$ids[$i]['item_id'])
+                      ++$j;
+                    else
+                      break;
+                  }
                     echo '<script type="text/javascript">
                          item_ids[i]=';
-                         echo $ids[$i]['bid_id'];
+                         echo $ids[$i]['item_id'];
                          echo';
                          ++i;
                          </script>';
@@ -72,18 +80,16 @@
                         $curr_bid=$curr[0]['bid'];
                          $row=$object_1->ExecuteSQL("SELECT * from items where item_id='".$ids[$i]['item_id']."'");
                   echo '<tr id="';echo $count;echo '"">
-                <td class="image"><a href="#"><img width="50" height="50" src="../upload/';echo $row[$i]['pic_loc'];echo '" alt="product" title="product"></a></td>
-                <td class="name">'.$row[$i]['item_nm'].'</td>
-                <td class="model">'.$row[$i]['category'].'</td>
+                <td class="image"><a href="#"><img width="50" height="50" src="../upload/';echo $row[0]['pic_loc'];echo '" alt="product" title="product"></a></td>
+                <td class="name">'.$row[0]['item_nm'].'</td>
+                <td class="model">'.$row[0]['category'].'</td>
                 <td class="current">'.$curr_bid.'</td>
                 <td class="current">'.$ids[$i]['bid'] .'</td>
                 <td class="total">
-                <div class="pull-left">
-                <a  href="auction.php?item_id='.$row[$i]['item_id'].'">Change Bid<span class="glyphicon glyphicon-sort"></span></a>
-                </div>
+                <a  href="auction.php?item_id='.$row[0]['item_id'].'">Change Bid<span class="glyphicon glyphicon-sort"></span></a>
                 <a onclick="remove_entry(';echo ($count-1);echo')" href="#">     Delete  <span class="glyphicon glyphicon-trash"></span></a>
                 </td></tr>';
-                ++$i;
+                $i=$j;
                  }
               ?>
             </table>
@@ -117,7 +123,7 @@
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
 <script type="text/javascript">
-
+$("#side_bidding").toggleClass("active");
 function remove_entry(id)
  {
   var r=confirm("Are you sure you want to remove this item from your Watchlist ?");

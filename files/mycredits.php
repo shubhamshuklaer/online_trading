@@ -83,7 +83,7 @@
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
 <script type="text/javascript">
-
+$("#side_credits").toggleClass("active");
 function edit_entry(id)
 {
   var temp=item_ids[id];

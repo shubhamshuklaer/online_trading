@@ -52,7 +52,7 @@ if(isset($_POST['submit_button']))
 <body>
   <?php include 'header.php';?>
         <?php include 'sidebar.php'; ?>
-<!-- <script src="js/jquery.js"></script> -->
+<script src="js/jquery.js"></script>
 <div id="maincontainer">
   <section id="product">
     <div class="container">
@@ -136,6 +136,7 @@ if(isset($_POST['submit_button']))
 <script defer src="js/custom.js"></script>
 <script src="jquery.form.js"></script>
         <script>
+        $("#side_edit").toggleClass("active");
             // just for the demos, avoids form submit
             jQuery.validator.setDefaults({
               debug: true,

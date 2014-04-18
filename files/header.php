@@ -1,4 +1,8 @@
-<?php session_start();?>
+<?php if(!isset($_SESSION))
+        session_start();
+
+        ?>
+
 <link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <div class="navbar navbar-inverse " role="navigation">
@@ -25,7 +29,7 @@
                 </li>
 
                 <li>
-                    <?php if(isset($_SESSION["user_nm"])){?>
+                    <?php if(isset($_SESSION["authentication"])){?>
                     <a href="myaccount.php" class="custom_icon_link">
                         <span class="glyphicon glyphicon-user custom_navbar_icon"></span>
                     <?php echo $_SESSION["user_nm"];?></a>
@@ -35,6 +39,37 @@
                     Login</a>
                     <?php }?>
                 </li>
+
+                <li class="dropdown">
+                <a class="dropdown-toggle" class="custom_icon_link" data-toggle="dropdown"  href="#" >
+                    <span class="glyphicon glyphicon-globe custom_navbar_icon"></span>
+                  <?php
+                  if(isset($_SESSION['authentication'])){
+                  $count=0;
+                  foreach ($_SESSION['notifications'] as $key => $value) {
+                    if(isset($value))
+                      ++$count;
+                  }
+                  if($count>0)
+                  echo '<span id="badge" class="badge">'.$count.'</span>';}
+                  ?></span></a>
+                  <?php
+                  if(isset($_SESSION['authentication'])){ 
+                  if($count>0)
+                        {
+                          echo '<ul class="dropdown-menu" >';
+                          foreach ($_SESSION['notifications'] as $key => $value) {
+                        echo '<li><span class="span3"><a href="'.$_SESSION['notifications_link'][$key].'" ';
+                          echo '>'.$value.'</span></a></li><li class="divider"></li>'; 
+                        }
+                    echo '</ul>';
+                      }}
+                        ?>
+                  </li>
+
+
+
+
                 <li>
                     <a href="cart_display.php" class="custom_icon_link">
                         <span id="cart_icon" class="glyphicon glyphicon-shopping-cart custom_navbar_icon"></span>
@@ -42,11 +77,6 @@
                 </li>
                 <li><a href="temporary_template.php">Auction/Sell</a></li>
                 <li><a href="users_bulk_display.php">Bulk Order</a></li>
-                <li>
-                    <a href="#" id="notification_link" class="custom_icon_link" data-container="body" data-html="true" data-title="Notifications"  data-toggle="popover" data-placement="bottom">
-                        <span class="glyphicon glyphicon-envelope custom_navbar_icon"></span>
-                    </a>
-                </li>
 
                 <li>
                     <a href="help.php" class="custom_icon_link">
@@ -73,3 +103,7 @@
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
 <script type="text/javascript" src="../js/custom/search_suggestions.js"></script>
+<script>
+$('.dropdown-menu').css('left','12%');
+$('.dropdown-menu').css('min-width','300px');
+</script>

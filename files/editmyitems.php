@@ -35,7 +35,6 @@ if(!isset($_SESSION))
     $product_cost=$row[0]['cost'];
     $product_condition=$row[0]['item_condition'];
     $product_description=$row[0]['description'];
-    $product_type=$row[0]['type'];
 ?>
 <?php
 if(isset($_POST['submit_button'])) 
@@ -45,11 +44,10 @@ if(isset($_POST['submit_button']))
    $cost=$_POST['cost'];
    $itemcondition=$_POST['condition'];
    $itemdescription=$_POST['itemdescription'];
-   $item_type=$_POST['itemtype'];
    $categories_name=$_POST['categories'];
    if(!isset($_SESSION))
             session_start();
-        $row=$object->ExecuteSQL("UPDATE items SET item_nm='$item_nm', category='$categories_name', quantity='$quantity', cost='$cost', item_condition='$itemcondition', type='$item_type', description='$itemdescription' where item_id='".$_SESSION['product_id']."'");
+        $row=$object->ExecuteSQL("UPDATE items SET item_nm='$item_nm', category='$categories_name', quantity='$quantity', cost='$cost', item_condition='$itemcondition', description='$itemdescription' where item_id='".$_SESSION['product_id']."'");
     header("Location: myitems.php");
   }
 ?>
@@ -111,16 +109,6 @@ if(isset($_POST['submit_button']))
               ?>"><br>
             </div>
           </div>
-
-          <div class="control-group">
-            <label class="control-label" >Type:</label>
-            <div class="controls">
-              <input id="itemtype" type="text" name="itemtype" class="form-control-lg" value="<?php 
-              echo $product_type;
-              ?>"><br>
-            </div>
-          </div>
-
           <div class="control-group">
             <label class="control-label" ></span>Category:</label>
             <div class="controls">
@@ -177,6 +165,7 @@ if(isset($_POST['submit_button']))
 <script defer src="js/custom.js"></script>
 <script src="js/jquery.form.js"></script>
 <script type="text/javascript">
+$("#side_items").toggleClass("active");
         // just for the demos, avoids form submit
         jQuery.validator.setDefaults({
           debug: true,
@@ -188,8 +177,13 @@ if(isset($_POST['submit_button']))
             required: true
            },
            quantity : {
-            required: true
-           }
+            required: true,
+            number: true
+           },
+            cost : {
+              required: true,
+              number: true
+            },
           },
               submitHandler: function(form){
                 (form).submit();

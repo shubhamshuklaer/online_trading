@@ -116,7 +116,7 @@
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
 <script type="text/javascript">
-
+$("#side_list").toggleClass("active");
 function remove_entry(id)
  {
   var r=confirm("Are you sure you want to remove this item from your Watchlist ?");

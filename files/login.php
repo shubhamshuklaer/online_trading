@@ -25,9 +25,13 @@
     // include_once '../../config/config.php';
 if(!isset($_SESSION))
   session_start();
-// echo $_SESSION["authentication"]==1;
-if(isset($_SESSION['authentication'])&&$_SESSION["authentication"])
-          // header("Location: myaccount.php");
+if(isset($_COOKIE['user_nm']))
+  {
+    $_SESSION['authentication']="true";
+    $_SESSION['user_nm']=$_COOKIE['user_nm'];
+  }
+if(isset($_SESSION['authentication']))
+          header("Location: myaccount.php");
   //if(isset($_SESSION['user_nm']))
    //header("Location: " . constant("HOSTNAME") . "/files/Profile/myaccount.php");
   $pageStatus = "REQUESTED";

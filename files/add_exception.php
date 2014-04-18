@@ -7,7 +7,6 @@ include_once 'class.MySQL.php';
                   echo $_SESSION['user_nm'];
               $row=$object->ExecuteSQL("SELECT * from wish_list where user_nm='".$_SESSION['user_nm']."'");
               $temp=$row[0]['Exceptions'].$item_id.";";
-              echo "UPDATE wish_list SET `Exceptions`='$temp' where user_nm='".$_SESSION['user_nm']."'";
               $row=$object->ExecuteSQL("UPDATE wish_list SET `Exceptions`='$temp' where user_nm='".$_SESSION['user_nm']."'");
               foreach ($_SESSION['wishlist_found'] as $key => $value) {
               	if($value!="")

@@ -17,6 +17,21 @@
 <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
 <link rel="shortcut icon" href="assets/ico/favicon.html">
 <?php
+if(!isset($_SESSION))
+          session_start();
+  $bool_cap = "0";
+  $bool_vouch = "0";
+  function random($legth) {
+    $chrs ="abcdefghijklmnopqrstuvwxyz23456789";
+    $sr = "";
+    $sze = strlen($chrs);
+    for($i=0; $i<$legth; $i++){
+    $sr .= $chrs[rand(0, $sze-1)];
+  }
+  return $sr;
+  }
+?>
+<?php
   $pass_status="Valid";
   if(isset($_POST['submit_button']))
   { 
@@ -29,15 +44,21 @@
      $con_pass=$_POST['con_pass'];
      if($con_pass==$pass)
      {
+      if($_SESSION['real']==$_POST['in_captcha'])
+      {
       $pass=sha1($pass);
      include_once 'class.MySQL.php';
-          session_start();
           $object=new MYSQL();
       $row=$object->ExecuteSQL("INSERT INTO user (name,user_nm,pass,credit,address,phone,email) VALUES ('".$name."','".$user_nm."','".$pass."','0','".$address."','".$phone."','".$email."')");
       $_SESSION['authentication']="true";
      $_SESSION['user_nm']=$user_nm;
      $_SESSION['name']=$name;
      header("Location: myaccount.php");
+   }
+   else
+   {
+    $pass_status="captcha";
+   }
    }
    else
    {
@@ -62,6 +83,8 @@
           <?php 
           if($pass_status=="Not Valid")
           echo '<div class="alert alert-danger">Your password and confirm password does not match</div>';
+        else if($pass_status=="captcha")
+          echo '<div class="alert alert-danger">You entered wrong captcha</div>';
         ?>
           <form id="detailsform" class="form-horizontal" method="POST">
             <h3 class="heading3">Your Personal Details</h3>
@@ -135,9 +158,37 @@
                   <label  class="control-label" ><span class="red">*</span> Confirm Password:</label>
                   <div class="controls">
                     <input id="con_pass" type="password" name="con_pass" class="form-control-lg">
-                    <br>
-                    <br>
-                  <input type="submit" class="btn btn-primary" name="submit_button" value="Continue" >
+                  </div>
+                </div>
+                <div class="control-group">
+                  <div class="controls">
+                      <?php
+                      if (!isset($_SESSION))
+                        session_start();
+                      $_SESSION['real'] = random("6");
+                      $sr = "  ".$_SESSION['real'];
+                      $image = imagecreate(100, 20);
+                      $background = imagecolorallocate($image, 0, 0, 0);
+                      $foreground = imagecolorallocate($image, 255, 255, 255);
+                      imagestring($image, 8,2,2,$sr,$foreground);
+                      imagejpeg($image,"captcha.jpg");
+                    ?>
+                    <td class="image"><img width="100" height="20" src='captcha.jpg' alt="Captcha"></td>
+                    <span class="red"></span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label  class="control-label" ><span class="red">*</span> Enter the captcha:</label>
+                  <div class="controls">
+                    <input id="in_captcha" type="text" name="in_captcha" class="form-control-lg">
+                    <span class="red"></span>
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class="control-group">
+                  <div class="controls">
+                    <input type="submit" class="btn btn-primary" name="submit_button" value="Continue" >
                   <input type="button"  onclick="location.href='myaccount.php' "class="btn btn-primary" name="cancel_button" value="Cancel" >
                   </div>
                 </div>

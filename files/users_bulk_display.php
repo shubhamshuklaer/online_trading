@@ -17,12 +17,54 @@
 $(document).ready(function(){
 	$('input').click(function(){
 		var value=$(this).val();
-		//alert(value);
 		
+		
+	  if(value=='Search')
+	  	{
+	  	  //alert(value);
+	  	  var search_txt = $('#search').val();
+	  	  //alert(search_txt);
+
+	  	  $( "h1" ).each(function(  ) {
+
+ 				var id=$(this).attr('id');
+
+ 				 var str=id.split("");
+				 var x='';
+			     for(var i=1;i<str.length;i++)
+		      	{
+			    	x=x+str[i];
+			    }
+			    //alert(x);
+ 				var name=$(this).text();
+ 				//var x=name.substring(3);
+ 				//alert(id1);
+	    	    //alert(name);
+
+	    	    var temp='#i'+x;
+			    //alert(temp);
+			    search_txt = search_txt.toLowerCase();
+			    name=name.toLowerCase();
+			    if( name.search(search_txt) != -1)
+			    {
+			    	$('#'+id).show();
+			    	$(temp).show();
+			    }
+			    else
+			    {
+			    	$('#'+id).hide();
+			    	$(temp).hide();
+			    	
+			    }
+			});
+
+	  	  
+
+	  	 }
 
 	  if(value=='Buy')
 	  	{
-	  	  alert(value);
+	  	  //alert(value);
 	  	  var id=$(this).attr('id');
 	  	  var str=id.split("");
 			var x='';
@@ -69,7 +111,18 @@ $(document).ready(function(){
 			<?php include_once "header.php";?> 
 		</div>
 
-		
+		<p>Enter name of the item to search:</p>
+				<table>
+				 	<tr>
+				 		<td>
+				<input autocomplete="off"  style="width: 169px; height: 35px" width="80%"class="form-control ui-autocomplete-input" placeholder="enter text here..." id="search" name="search" type="text">
+						</td>
+
+						<td>
+				   <input  class="btn btn-primary" type='button' value='Search' id="searchbtn">
+				   		</td>
+				   	</tr>
+				  </table>
 	
 		<!--  <div class="container">
 				Navigation sidebar
@@ -83,14 +136,18 @@ $(document).ready(function(){
 				 -->
 				 <!--Main Content area-->
 		        <div class="container-fluid"> 
-		        	<!-- <form action="" method="post">
-				<p>Enter name of the item to search:</p>
-				<input autocomplete="off" width="50%"class="form-control ui-autocomplete-input" placeholder="enter text here..." id="search_bar" name="search" type="text">
-				<button type="button" class="btn btn-primary btn-lg" name="searchbtn">Go</button>
-				</form>
-		        	 -->
+		        	
 				
-		           		           		            
+				 
+
+
+				<!-- <div class="input-group">
+     		 <input type="text" style="width: 169px; height: 35px" class="form-control">
+      		<span class="input-group-btn">
+        		<input class="btn btn-primary" style="width: 30px; height: 35px" type="button">
+      		</span>
+    		</div>
+		        	 --> 	           		           		            
 		        	
 		        	<?php
 		        	require_once "class.MySQL.php";
@@ -120,16 +177,17 @@ $(document).ready(function(){
                                    $vendor=$row['username'];
 
                                    ?>
-                                   <div class="container">
-				
+                      <div class="container">
+                      	
 				<div class="col-sm-3 col-md-2 sidebar">
 	                <ul class="nav nav-sidebar">
 		                	                
 	                </ul>
                 </div>
-                                    <h1> <?php print("$item_name"); ?> </h1> 
+                                    <h1 id="<?php echo 'h'.$item_id ?>"> <?php print("$item_name"); ?> </h1> 
                                         
                                  <div class="row">
+                                 	<div class="row" id="<?php echo 'i'.$item_id ?>">
                                        <div class="col-md-3" >
                                            <div class="mag">
                                                                                       
@@ -162,6 +220,7 @@ $(document).ready(function(){
                                         </p>
                                         </blockquote>
                                     </div>
+                                </div>
                                 </div>
                                 							    
 	                       				                       			                       		

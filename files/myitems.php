@@ -77,9 +77,19 @@
                 <td class="quantity">'.$row[$i]['quantity'].'</td>
                 <td class="cost">'.$row[$i]['cost'].'</td>
                 <td class="type">'.$row[$i]['type'].'</td>
-                <td class="total">
-                <a onclick="edit_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-pencil"></span></a>
-                <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-trash"></span></a>
+                <td class="span2">';
+                if($row[$i]['type']=="auction")
+                {
+                  $date='20'.date('y-M-d h:m:s a', time());
+                  $date=strtotime($date);
+                  $temp=strtotime($row[$i]['last_date']);
+                  if($date>$temp)
+                  {
+                  echo '<a  href="#">   Send <span class="glyphicon glyphicon-send"></span></a><br>';    
+                  }
+                }
+                echo '<a onclick="edit_entry(';echo ($count-1);echo')" href="#">  Edit <span class="glyphicon glyphicon-pencil"></span></a><br>
+                <a onclick="remove_entry(';echo ($count-1);echo')" href="#">  Remove <span class="glyphicon glyphicon-trash"></span></a>
                 </td></tr>';
                 ++$i;
                  }
@@ -115,7 +125,7 @@
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
 <script type="text/javascript">
-
+$("#side_items").toggleClass("active");
 function remove_entry(id)
  {
   var r=confirm("Are you sure you want to delete this item ?");

@@ -144,6 +144,7 @@
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript">
+$("#side_recharge").toggleClass("active");
   if (typeof(jQuery) == 'undefined')   
     document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>

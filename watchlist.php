@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Confirm Items</title>
+<title>Watchlist</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -21,12 +21,12 @@
     <![endif]-->
 <!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
-<script type="text/javascript">
 <?php 
     session_start();
     if(!isset($_SESSION['user_nm']))
     header("Location: login.php");
 ?>
+<script type="text/javascript">
  var item_ids = new Array();
  var i=0;
 </script>
@@ -40,7 +40,7 @@
       <div class="row">
         <!-- My Items -->
         <div class="span9">
-          <h1 class="heading1"><span class="maintext">Confirm Items</span><span class="subtext">View Items found as per your wishlist</span></h1>
+          <h1 class="heading1"><span class="maintext">Watchlist</span><span class="subtext">Monitor items you are interested in</span></h1>
           <div class="cart-info">
             <table id="mytable" class="table table-striped table-bordered">
               <tr>
@@ -51,31 +51,27 @@
                 <th class="quantity">Quantity</th>
                 <th class="cost">Cost</th>
                 <th class="type">Type</th>
-                <th class="total">Accept?</th>
+                <th class="total">Action</th>
               </tr>
               <?php 
                   include_once 'class.MySQL.php';
                 if(!isset($_SESSION))
                   session_start();
                   $object=new MYSQL();
+              $ids=$object->ExecuteSQL("SELECT * from watch_list where user_nm='".$_SESSION['user_nm']."'");
+                 $i=0;
                  $count=0;
-                  foreach ($_SESSION['wishlist_found'] as $key => $value) 
-                  {
-                    if($value!="")
-                    {
-                      $tok=strtok($value,";");
-                      while($tok!=false)
-                      {
-                $row=$object->ExecuteSQL("SELECT * from items where item_id='$tok'");
+                 while(isset($ids[$i])){
                   ++$count;
                     echo '<script type="text/javascript">
                          item_ids[i]=';
-                         echo $row[0]['item_id'];
+                         echo $ids[$i]['item_id'];
                          echo';
                          ++i;
                          </script>';
+                         $row=$object->ExecuteSQL("SELECT * from items where item_id='".$ids[$i]['item_id']."'");
                   echo '<tr id="';echo $count;echo '"">
-                <td class="image"><a href="'.$row[0]["type"].'.php?item_id='.$row[0]["item_id"].'"><img width="50" height="50" src="../upload/';echo $row[0]['pic_loc'];echo '" alt="product" title="product"></a></td>
+                <td class="image"><a href="#"><img width="50" height="50" src="../upload/';echo $row[0]['pic_loc'];echo '" alt="product" title="product"></a></td>
                 <td class="name">'.$row[0]['item_nm'].'</td>
                 <td class="model">'.$row[0]['category'].'</td>
                 <td class="condition">'.$row[0]['item_condition'].'</td>
@@ -83,15 +79,11 @@
                 <td class="cost">'.$row[0]['cost'].'</td>
                 <td class="type">'.$row[0]['type'].'</td>
                 <td class="total">
-                <div class="pull-left">
-                <a onclick="edit_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-                </div>
-                <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                <a  href="#" onclick="add_cart('.$row[0]["item_id"].')"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-trash"></span></a>
                 </td></tr>';
-                $tok=strtok(";");
-              }
-            }
-          }
+                ++$i;
+                 }
               ?>
             </table>
           </div>
@@ -107,7 +99,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript">
   if (typeof(jQuery) == 'undefined')   
-    document.write("<script type='text/javascript' src='./js/jquery.js'/>");
+    document.write("<script type='text/javascript' src='../js/jquery.js'/>");
 </script>
 <script src="js/bootstrap.js"></script>
 <script src="js/respond.min.js"></script>
@@ -127,29 +119,53 @@
 
 function remove_entry(id)
  {
-  var r=confirm("Is this not the item you wanted ?");
+  var r=confirm("Are you sure you want to remove this item from your Watchlist ?");
   if(r==true){  
   var temp=item_ids[id];
   var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open("GET","add_exception.php?id="+temp,false);
+  xmlhttp.open("GET","remove_item_watchlist.php?id="+temp,false);
   xmlhttp.send();
-   var row=document.getElementById(id+1);
-   row.parentNode.removeChild(row);
+     var row=document.getElementById(id+1);
+     row.parentNode.removeChild(row);  
   }
 }
-// function edit_entry(id)
-//  {
-//      var temp=item_ids[id];
-//      var xmlhttp=new XMLHttpRequest();xmlhttp.onreadystatechange=function()
-//              {
-//              if (xmlhttp.readyState==4 && xmlhttp.status==200)
-//                {
-//                  window.location.href="http://localhost/online_trading/files/Profile/editmyitems.php";
-//                }
-//              }
-//      xmlhttp.open("GET","add_exception.php?id="+temp,true);
-//      xmlhttp.send();
-//   }
+
+      function add_cart(item_id)
+      {
+            // alert("IN ADD_CART FUNC");
+            $.ajax({
+                    url: "detail_addcart.php",
+                    dataType: "json",
+                    type: "GET",
+                    data: {
+                            item_id : item_id
+                            },
+                    success: function(response_data){
+                    console.log(response_data);
+                        if(response_data=="1")
+                        {
+                           alert("Added");
+                            //window.location.reload();
+                        }
+                        else if(response_data=="0")
+                        {
+                            alert("Could not be added!!!");
+                        }
+                        // as we have written datatype as json so jquery automatically converts the result
+                        //from json... so responce_data is not json its already parsed
+                    },
+                    /*As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object.
+                    error:  Function( jqXHR jqXHR, String textStatus, String errorThrown )
+                    */
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+      }
+
+
+
 </script>
 </body>
 </html>

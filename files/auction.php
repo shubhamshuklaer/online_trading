@@ -25,12 +25,25 @@
 								$_SESSION["item_id"] = $item_id;
 								require_once "class.MySQL.php";           
             					$omysql=new MySQL();
+
+            					if(isset($_SESSION['authentication']))
+            					{
+            						$row=$omysql->ExecuteSQL("SELECT * from watch_list where user_nm='".$_SESSION['user_nm']."' and item_id='$item_id'");
+            						if($row!="true")
+            							{
+            							    $row=$omysql->ExecuteSQL("SELECT `cost` from items where item_id='$item_id'");
+            							    $omysql->ExecuteSQL("UPDATE watch_list SET `previous_cost`='".$row[0]["cost"]."' where item_id='$item_id' and user_nm='".$_SESSION['user_nm']."'");
+            							}
+            					}
+
+
+            					
             					$where =array("item_id like"=>$item_id."%");
             					$omysql->Select("items",$where);
             					if($omysql->records>0){
             						$result = $omysql->arrayedResult;
             						foreach($result as $row){
-            							$pic = $row["pic_loc"];
+            							$pic_loc = $row["pic_loc"];
             							$base_price=$row["base_price"];
             							$last_date=$row["last_date"];
             							$name=$row["item_nm"];
@@ -119,8 +132,16 @@
 		<div class="container"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
 				<div class="col-sm-3 col-md-2 sidebar">
-	               <img border="5" src=<?php echo "../upload/".$pic ?> alt="Pulpit rock" width="250" height="200" align="right">  
+				<div class="mag">
+                                                <?php $pic = "../upload/".$pic_loc; ?>
+                                                <img data-toggle="magnify" src="<?php echo $pic;?>" alt="" title="" width="300" height="1000" class="img-thumbnail">
+
+                                           </div>
+	             <!-- <img border="5" data-toggle="magnify" src=<?php// echo "../upload/".$pic ?> alt="Pulpit rock" width="250"  align="right" onmouseover="this.width=450;this.height=330;" onmouseout="this.width=100;this.height=100">  -->
                 </div>
+				<!-- <div class="col-sm-3 col-md-2 sidebar">
+	               <img border="5" src=<?php //echo "../upload/".$pic ?> alt="Pulpit rock" width="250" height="auto" align="right">  
+                </div> -->
 				<!--Main Content area--> 
 		        <div class="container-fluid col-sm-9 col-md-10">
 		           <!--

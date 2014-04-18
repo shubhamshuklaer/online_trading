@@ -1,6 +1,6 @@
 <?php
 
-include_once "../config/config.php";
+include_once "./config.php";
 
 $username = constant("USERNAME");                                                              // database connection 
 $password = constant("PASS");
@@ -124,4 +124,5 @@ for($x = 0;$x < 3;$x++)
 	echo $names[$x];
 	echo "<br>";
 }
+
 ?>

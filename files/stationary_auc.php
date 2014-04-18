@@ -63,7 +63,7 @@
 		             </div>
                      </div>
                       
-
+                   
                    
 
 
@@ -169,7 +169,7 @@
 		            <label class="col-sm-2 control-label" for="select10">Start Date(yyyy-mm-dd)</label>
 		          <div class="col-sm-5">
 		              <div id="datetimepicker2" class="input-append date">
-                     <input data-format="dd/MM/yyyy hh:mm:ss" type="text" name="start_date_3">
+                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="start_date">
                      <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                      </i>
@@ -183,7 +183,7 @@
 		            <label class="col-sm-2 control-label" for="select10">Close Date(yyyy-mm-dd)</label>
 		          <div class="col-sm-5">
 		              <div id="datetimepicker1" class="input-append date">
-                     <input data-format="dd/MM/yyyy hh:mm:ss" type="text" name="close_date_3">
+                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="close_date">
                      <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                      </i>
@@ -242,6 +242,37 @@
 		             
 
 		             </div>
+                 <div class="container-fluid col-sm-3 col-md-2">
+                  <ul style="list-style-type: none;">
+                    <li>
+                   <label class="checkbox inline">
+                      <input type="checkbox" id="Pens" value="Pens"> Pens
+                
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Calculator" value="Calculator"> Calculator
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Drafters" value="Drafters"> Drafters
+                    </label>
+                   </li>
+                   <li> 
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="College Supplies" value="College Supplies"> College Supplies
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Others" value="S.Others"> Others
+                    </label>
+                  </li>
+                  </ul>
+                 </div>
+
 		        
 	    		</div>
 

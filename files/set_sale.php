@@ -6,19 +6,8 @@
     <title>Template</title>
     <link rel="stylesheet" href="../css/bootstrap.css"  type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/smoothness/jquery-ui.css">
-
-
-
     <!--some problem in this link-->
     <link href="../css/bootstrap-combined.min.css" rel="stylesheet" type="text/css">
-
-
-
-
-
-
-
-
     <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap-datetimepicker.min.css">
     
 </head>
@@ -89,7 +78,7 @@
                         $description = $_POST['description_1'];
                         $base_price = $_POST['base_price_1'];
                         $category=$category1.":".$type_1;
-                        $x="description: ".$description." "."category: ".$category." "."type: ".$type." "."brand: ".$brand." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."model: ".$model;
+                        $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
             $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
             $test->Insert($vars,"items");
 
@@ -158,7 +147,7 @@
                         $description = $_POST['description_2'];
                         $base_price = $_POST['base_price_2'];
                         $category=$category1.":".$type_1;
-                        $x="description: ".$description." "."category: ".$category." "."type: ".$type." "."author: ".$author." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price;
+                        $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."author: ".$author." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price;
                         $vars = array('user_nm'=>$usrnm,'type'=>$type, 'quantity'=>$quantity ,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category, 'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
@@ -215,7 +204,7 @@
                 
                             // echo $test->lastQuery;
                            
-                        // $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
+                        $_SESSION["user_nm"]="shubahm";// remove and for getting username use $_SERVER["user_nm"]
                         $category1 = "Appliances";
                         $type_1 = $_POST['type_4'];
                         $name = $_POST['name_4'];
@@ -227,7 +216,7 @@
                         $description = $_POST['description_4'];
                         $base_price = $_POST['base_price_4'];
                         $category=$category1.":".$type_1;
-                        $x="description: ".$description." "."category: ".$category." "."type:".$type." "."brand: ".$brand." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."model: ".$model;
+                        $x="description: ".$description." ;"."category: ".$category." ;"."type:".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
                         $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
@@ -298,7 +287,7 @@
                         $condition = $_POST['condition_3'];
                         $description = $_POST['description_3'];
                         $base_price = $_POST['base_price_3'];
-                        $x="description: ".$description." "."category: ".$category." "."type: ".$type." "."brand: ".$brand." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."model: ".$model;
+                        $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
                         $category=$category1.":".$type_1;
                         $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
@@ -369,7 +358,7 @@
                         $description = $_POST['description_5'];
                         $base_price = $_POST['base_price_5'];
                         $category=$category1.":".$type_1;
-                        $x="description: ".$description."  "."category: ".$category."  "."type: ".$type."  "."brand: ".$brand." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."model: ".$model;
+                        $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
                         $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                                 }
@@ -391,3 +380,4 @@
                        </html>
 
                        <?php include_once "insert_search_index.php";?>
+                       <?php header("Location: myitems.php");?>

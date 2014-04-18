@@ -182,7 +182,33 @@
 		             
 
 		             </div>
-		        
+		        		<div class="container-fluid col-sm-3 col-md-2">
+                  <ul style="list-style-type: none;">
+                    <li>
+                   <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1"> Literature
+                
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox2" value="option1"> Textbooks
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox3" value="option1"> Bussiness Magazines
+                    </label>
+                   </li>
+                   <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Science journals
+                    </label>
+                  </li>
+                  
+                  
+                  </ul>
+                 </div>
 	    		</div>
 
 

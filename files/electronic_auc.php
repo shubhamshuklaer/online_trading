@@ -169,7 +169,7 @@
 		            <label class="col-sm-2 control-label" for="select10">Start Date(yyyy-mm-dd)</label>
 		          <div class="col-sm-5">
 		              <div id="datetimepicker2" class="input-append date">
-                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="start_date_1" id="start_date">
+                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="start_date" id="start_date">
                      <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                      </i>
@@ -183,7 +183,7 @@
 		            <label class="col-sm-2 control-label" for="select10">Close Date(yyyy-mm-dd)</label>
 		          <div class="col-sm-5">
 		              <div id="datetimepicker1" class="input-append date">
-                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="close_date_1" id="close_date">
+                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="close_date" id="close_date">
                      <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                      </i>
@@ -244,7 +244,51 @@
 		             
 
 		             </div>
-		        
+		             <div class="container-fluid col-sm-3 col-md-2">
+                  <ul style="list-style-type: none;">
+                    <li>
+                   <label class="checkbox inline">
+                      <input type="checkbox" id="Mobiles" value="Mobiles"> Mobiles
+                
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Computers" value="Computers"> Computers
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Tablets" value="Tablets"> Tablets
+                    </label>
+                   </li>
+                   <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Mobile Accessories" value="Mobile Accessories"> Mobile Accessories
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Computer Accessories" value="Computer Accessories"> Computer Accessories
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Speakers" value="Speakers"> Speakers
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Cameras and Accessories" value="Cameras and Accessories"> Cameras and Accessories
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Audio and Video players" value="Audio and Video players"> Audio and Video players
+                    </label>
+                  </li>
+                  </ul>
+                 </div>
 	    		</div>
 
 

@@ -87,6 +87,13 @@ $row =$omysql->arrayedResult;
                                                     echo "<li> Sale type: $sale_type </li>";
                                                     }
 
+                                                     $str_explode=explode(";",$description);
+                                                    $string1 = $str_explode[0]; // hello
+                                                    $string2 = $str_explode[1]; // test
+                                                    if($string1 != null){
+                                                     echo "<li>$string1 </li>";
+                                                    }
+
                                                 ?>
                                             </ul>
                                         </blockquote>

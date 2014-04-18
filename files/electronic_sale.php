@@ -201,7 +201,51 @@
 		             
 
 		             </div>
-		        
+		              <div class="container-fluid col-sm-3 col-md-2">
+                  <ul style="list-style-type: none;">
+                    <li>
+                   <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1"> Mobiles
+                
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox2" value="option1"> Computers
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox3" value="option1"> Tablets
+                    </label>
+                   </li>
+                   <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Mobile Accessories
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Computer Accessories
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Speakers
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Cameras and Accessories
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Audio and Video players
+                    </label>
+                  </li>
+                  </ul>
+                 </div>
 	    		</div>
 
 

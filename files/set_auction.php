@@ -37,31 +37,10 @@
             $type = "auction";
            // session_start();
             $usrnm=$_SESSION["user_nm"];
-            if(isset($_POST["base_price_1"]) && isset($_POST['close_date_1']) && isset($_POST['type_1']) && isset($_POST['condition_1']) && isset($_POST['name_1']) && isset($_POST['description_1']) && isset($_POST['mrp_1']) && isset($_POST['model_1']) && isset($_POST['brand_1']) && isset($_POST['quantity_1']))
+            if(isset($_POST["base_price_1"]) && isset($_POST['close_date']) && isset($_POST['type_1']) && isset($_POST['condition_1']) && isset($_POST['name_1']) && isset($_POST['description_1']) && isset($_POST['mrp_1']) && isset($_POST['model_1']) && isset($_POST['brand_1']) && isset($_POST['quantity_1']))
             {
      
-                $date1 = $_POST['start_date_1'];
-                $date2 = $_POST['close_date_1'];
-                $datetime1 = new DateTime($date1);
-                $datetime2 = new DateTime($date2);
-                date_default_timezone_set('Asia/Calcutta');
-              //  $date = date('y-M-d h:m:s a', time());
-               // $date3 = '20'.$date;
-                //$datetime3 = new DateTime($date3);
-                $f=$datetime2->diff($datetime1);
-                $fy = $f->y;
-                $fm = $f->m;
-                $fd = $f->d;
-                $fh = $f->h;
-                $fi = $f->i;
-                $fs = $f->s;
-                $g=($fy*31536000)+($fm*2592000)+($fd*86400)+($fh*3600)+($fi*60)+$fs;
-                if(!($datetime2->format('U') > $datetime1->format('U') && $g>=7200)){
-                    echo "Time difference is not valid so please go back and set correct values";
-                }
-                else{
-                    echo "hii";
-                }
+           
            //echo "mittal1";
                 $allowedExts = array("gif", "jpeg", "jpg", "png");
                     $temp = explode(".", $_FILES["file"]["name"]);
@@ -79,7 +58,7 @@
                                 echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
                             }
                         else
-                            {
+                            {     
                                 echo "Upload: " . $_FILES["file"]["name"] . "<br>";
                                 echo "Type: " . $_FILES["file"]["type"] . "<br>";
                                 echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
@@ -113,17 +92,17 @@
                         $condition = $_POST['condition_1'];
                         $description = $_POST['description_1'];
                         $base_price = $_POST['base_price_1'];
-                        $close_date = $_POST['close_date_1'];
-                        $start_date = $_POST['start_date_1'];
+                        $close_date = $_POST['close_date'];
+                        $start_date = $_POST['start_date'];
                         $category=$category1.":".$type_1;
 
-                        $x="description: ".$description." "."category: ".$category." "."type: ".$type." "."brand: ".$brand." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."start_date: ".$start_date." "."close_date: ".$close_date." "."model: ".$model;
-            $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'last_date'=>$_POST['close_date_1'],'start_date'=>$start_date,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
+            $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'last_date'=>$_POST['close_date'],'start_date'=>$start_date,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
             $test->Insert($vars,"items");
             
             // echo $test->lastQuery;
                        echo "Thank u";
-
+                        
 
                                 }
                             }
@@ -135,7 +114,7 @@
 
             }
 
-                       else if(isset($_POST["type_2"]) && isset($_POST['name_2']) && isset($_POST['author_2']) && isset($_POST['condition_2']) && isset($_POST['mrp_2']) && isset($_POST['description_2']) && isset($_POST['base_price_2'])  && isset($_POST['close_date_2']))
+                       else if(isset($_POST["type_2"]) && isset($_POST['name_2']) && isset($_POST['author_2']) && isset($_POST['condition_2']) && isset($_POST['mrp_2']) && isset($_POST['description_2']) && isset($_POST['base_price_2'])  && isset($_POST['close_date']))
                        {
                         // echo "mittal1";
                         //session_start();
@@ -188,10 +167,10 @@
                         $condition = $_POST['condition_2'];
                         $description = $_POST['description_2'];
                         $base_price = $_POST['base_price_2'];
-                        $close_date = $_POST['close_date_2'];
-                        $start_date = $_POST['start_date_2'];
+                        $close_date = $_POST['close_date'];
+                        $start_date = $_POST['start_date'];
                         $category=$category1.":".$type_1;
-                         $x="description: ".$description." "."category: ".$category." "."type: ".$type." "."author: ".$author." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."start_date: ".$start_date." "."close_date: ".$close_date;
+                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."author: ".$author." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date;
                         $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
@@ -207,7 +186,7 @@
 
 
 
-                       else if(isset($_POST["type_4"]) && isset($_POST['name_4']) && isset($_POST['brand_4']) && isset($_POST['condition_4']) && isset($_POST['mrp_4']) && isset($_POST['description_4']) && isset($_POST['base_price_4'])  && isset($_POST['close_date_4']) && isset($_POST['model_4']) && isset($_POST['start_date_4']))
+                       else if(isset($_POST["type_4"]) && isset($_POST['name_4']) && isset($_POST['brand_4']) && isset($_POST['condition_4']) && isset($_POST['mrp_4']) && isset($_POST['description_4']) && isset($_POST['base_price_4'])  && isset($_POST['close_date']) && isset($_POST['model_4']) && isset($_POST['start_date']))
                        {
                         // echo "mittal1";
                         echo "appliances";
@@ -262,10 +241,31 @@
                         $condition = $_POST['condition_4'];
                         $description = $_POST['description_4'];
                         $base_price = $_POST['base_price_4'];
-                        $close_date = $_POST['close_date_4'];
-                        $start_date = $_POST['start_date_4'];
+                        $close_date = $_POST['close_date'];
+                        $start_date = $_POST['start_date'];
                         $category=$category1.":".$type_1;
-                         $x="description: ".$description." "."category: ".$category." "."type: ".$type." "."brand: ".$brand." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."start_date: ".$start_date." "."close_date: ".$close_date." "."model: ".$model;
+                        $cookers=$_POST['Cookers'].",";
+                        $irons = $_POST['Irons'].",";
+                        $Coffee_Makers = $_POST['Coffee Makers'].",";
+                        $others = $_POST['Others'].",";
+                        echo "hello";
+                        echo $cookers;
+                        echo "<br>";
+                        echo $irons;
+                        if(!$others){
+                            echo "defined";
+                        }
+                        /*if(!$cookers){
+                            $tag1 = "cookers,";
+                        }
+                        else{
+                            $tag1="";
+                        }
+                        echo $tag1;*/
+                       // $tag=$cookers.$irons.$Coffee_Makers.$others;//   'tags'=>$tag,'
+                       // echo $tags;
+                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
+                        
                         $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
@@ -283,7 +283,7 @@
 
 
 
-                        else if(isset($_POST["type_3"]) && isset($_POST['name_3']) && isset($_POST['brand_3']) && isset($_POST['condition_3']) && isset($_POST['mrp_3']) && isset($_POST['description_3']) && isset($_POST['base_price_3'])  && isset($_POST['close_date_3']) && isset($_POST['model_3']) && isset($_POST['start_date_3']))
+                        else if(isset($_POST["type_3"]) && isset($_POST['name_3']) && isset($_POST['brand_3']) && isset($_POST['condition_3']) && isset($_POST['mrp_3']) && isset($_POST['description_3']) && isset($_POST['base_price_3'])  && isset($_POST['close_date']) && isset($_POST['model_3']) && isset($_POST['start_date']))
                         {
                             // echo "mittal1";
                          echo "stationary";
@@ -338,10 +338,10 @@
                         $condition = $_POST['condition_3'];
                         $description = $_POST['description_3'];
                         $base_price = $_POST['base_price_3'];
-                        $close_date = $_POST['close_date_3'];
-                        $start_date = $_POST['start_date_3'];
+                        $close_date = $_POST['close_date'];
+                        $start_date = $_POST['start_date'];
                         $category=$category1.":".$type_1;
-                         $x="description: ".$description." "."category: ".$category." "."type: ".$type." "."brand: ".$brand." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."start_date: ".$start_date." "."close_date: ".$close_date." "."model: ".$model;
+                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
                         
                         $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
@@ -357,7 +357,7 @@
 
 
 
-                    else if(isset($_POST['name_5']) && isset($_POST['brand_5']) && isset($_POST['condition_5']) && isset($_POST['mrp_5']) && isset($_POST['description_5']) && isset($_POST['base_price_5'])  && isset($_POST['close_date_5']) && isset($_POST['model_5']) && isset($_POST['start_date_5']))
+                    else if(isset($_POST['name_5']) && isset($_POST['brand_5']) && isset($_POST['condition_5']) && isset($_POST['mrp_5']) && isset($_POST['description_5']) && isset($_POST['base_price_5'])  && isset($_POST['close_date']) && isset($_POST['model_5']) && isset($_POST['start_date']))
                         {
 
                          echo "others";
@@ -379,10 +379,10 @@
                             }
                         else
                             {
-                                echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-                                echo "Type: " . $_FILES["file"]["type"] . "<br>";
-                                echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-                                echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
+                               // echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+                               // echo "Type: " . $_FILES["file"]["type"] . "<br>";
+                               // echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+                               // echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
 
                             if (file_exists("../upload/" . $_FILES["file"]["name"]))
                                 {
@@ -396,7 +396,7 @@
                                 $_FILES["file"]["name"] =$pic_loc.".jpg";
                                 move_uploaded_file($_FILES["file"]["tmp_name"],
                                 "../upload/" . $_FILES["file"]["name"]);
-                                echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
+                               // echo "Stored in: " . "../upload/" . $_FILES["file"]["name"];
                 
                             // echo $test->lastQuery;
                          //  $type_1= $_POST['type_5'];
@@ -412,25 +412,25 @@
                         $condition = $_POST['condition_5'];
                         $description = $_POST['description_5'];
                         $base_price = $_POST['base_price_5'];
-                        $close_date = $_POST['close_date_5'];
-                        $start_date = $_POST['start_date_5'];
+                        $close_date = $_POST['close_date'];
+                        $start_date = $_POST['start_date'];
                         $category=$category1;
-                        $x="description: ".$description." "."category: ".$category." "."type: ".$type." "."brand: ".$brand." "."name: ".$name." "."mrp: ".$mrp." "."base_price: ".$base_price." "."start_date: ".$start_date." "."close_date: ".$close_date." "."model: ".$model;
-                        $vars = array('user_nm'=>$usrnm,'type'=>$type,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
+                        $vars = array('user_nm'=>$usrnm,'type'=>$type,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$_POST['close_date'],'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                                 }
                             }
                          }
                     else
                     {
-                    echo "Invalid file3";
+                   // echo "Invalid file3";
     
                        }
                     }
+                    include_once "insert_search_index.php";
+ header("Location: myitems.php");
 
 		               ?>
                        </div>
                        </body>
                        </html>
-
-                       <?php include_once "insert_search_index.php";?>

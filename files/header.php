@@ -49,7 +49,7 @@
                 </li>
 
                 <li>
-                    <a href="help.html" class="custom_icon_link">
+                    <a href="help.php" class="custom_icon_link">
                         <span class="glyphicon glyphicon-question-sign custom_navbar_icon"></span>
                     </a>
                 </li>

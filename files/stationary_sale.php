@@ -42,7 +42,7 @@
 		           -->
 
 
-                    <form action = "set_sale.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data"  onsubmit="return validation(this)">
+                    <form action = "set_auction.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data"  onsubmit="return validation(this)">
                     <fieldset>
 
 
@@ -217,7 +217,37 @@
 		             
 
 		             </div>
-		        
+		        		
+                 <div class="container-fluid col-sm-3 col-md-2">
+                  <ul style="list-style-type: none;">
+                    <li>
+                   <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1"> Pens
+                
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox2" value="option1"> Calculator
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox3" value="option1"> Drafters
+                    </label>
+                   </li>
+                   <li> 
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox4" value="option1"> College Supplies
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Others
+                    </label>
+                  </li>
+                  </ul>
+                 </div>
 	    		</div>
 
 

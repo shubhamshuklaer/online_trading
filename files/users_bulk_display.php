@@ -58,8 +58,8 @@ $(document).ready(function(){
 
 <?php 
     session_start();
-    if(!isset($_SESSION['authentication_bulk']))
-      header("Location: bulk_vendor_login.php");
+    if(!isset($_SESSION['authentication']))
+      header("Location: login.php");
 ?>
 
 </head>

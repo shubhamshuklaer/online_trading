@@ -1,6 +1,7 @@
 <?php
 session_start();
-    if (!isset($_SESSION['user_nm'])) {
-        header("Location: ./Profile/login.php");
+// echo $_SESSION["authentication"]=="false";
+    if (!isset($_SESSION['authentication'])||!$_SESSION["authentication"]) {
+        header("Location: login.php");
     }
 ?>

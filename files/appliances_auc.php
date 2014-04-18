@@ -167,7 +167,7 @@
 		            <label class="col-sm-2 control-label" for="select10">Start Date(yyyy-mm-dd)</label>
 		          <div class="col-sm-5">
 		              <div id="datetimepicker2" class="input-append date">
-                     <input data-format="dd/MM/yyyy hh:mm:ss" type="text" name="start_date_4">
+                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="start_date">
                      <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                      </i>
@@ -181,7 +181,7 @@
 		            <label class="col-sm-2 control-label" for="select10">Close Date(yyyy-mm-dd)</label>
 		          <div class="col-sm-5">
 		              <div id="datetimepicker1" class="input-append date">
-                     <input data-format="dd/MM/yyyy hh:mm:ss" type="text" name="close_date_4">
+                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="close_date">
                      <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                      </i>
@@ -235,13 +235,42 @@
 		           </div>
 
                       
-		              </fieldset>
-                      </form>
+		           
 		              
 		             
 
 		             </div>
-		        
+        <!-- <form action = "set_auction.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data" onsubmit="return validation(this)"> -->
+		              <div class="container-fluid col-sm-3 col-md-2">
+                  <ul style="list-style-type: none;">
+                    <li>
+                   <label class="checkbox inline">
+                      <input type="checkbox" name="Cookers" value="Cookers"> Cookers
+                
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="Irons" value="Irons"> Irons
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="Coffee Makers" value="Coffee Makers"> Coffee Makers
+                    </label>
+                   </li>
+                   <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="Others" value="A.Others"> Others
+                    </label>
+                  </li>
+                  
+                  
+                  </ul>
+                 </div>
+               </form>
+               </fieldset>
+
 	    		</div>
 
 

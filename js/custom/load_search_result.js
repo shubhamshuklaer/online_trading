@@ -26,11 +26,10 @@ $("document").ready(function(){
                 if($(this).attr("value")==""){
                     delete where_clause["category like"];//will delete if it exist..??
                 }else{
-                    $("input[name='"+$(this).attr("value")+"']").each(function(){
+                    $("input:radio[class='category']").each(function(){
                         this.checked=false;
                     });
-                    
-                    alert("hello");
+                    $(this).prop("checked",true);
                     where_clause["category like"]=$(this).attr("value");
                 }
             }else{//redundent code we don't need the else part as we are using radio button so he cannot uncheck
@@ -203,17 +202,17 @@ function load_filter(search_term){
                 if(category_distribution[row]["sub_category"].length>0){
                     var sub_category_list=$("<ul>");
                     ////////////////Default sub category
-                    if(category_distribution[row]["sub_category"].length>1){
-                        var sub_category_li=$("<li>");
-                        var sub_category_element=$("<input>");
-                        sub_category_element.attr("type","radio");
-                        sub_category_element.attr("value",category_distribution[row]["category"]+"%");
-                        sub_category_element.attr("name",category_distribution[row]["category"]);
-                        sub_category_element.addClass("category");
-                        sub_category_element.appendTo(sub_category_li);
-                        sub_category_li.append("Default");
-                        sub_category_li.appendTo(sub_category_list);
-                    }
+                    // if(category_distribution[row]["sub_category"].length>1){
+                    //     var sub_category_li=$("<li>");
+                    //     var sub_category_element=$("<input>");
+                    //     sub_category_element.attr("type","radio");
+                    //     sub_category_element.attr("value",category_distribution[row]["category"]+"%");
+                    //     sub_category_element.attr("name",category_distribution[row]["category"]);
+                    //     sub_category_element.addClass("category");
+                    //     sub_category_element.appendTo(sub_category_li);
+                    //     sub_category_li.append("Default");
+                    //     sub_category_li.appendTo(sub_category_list);
+                    // }
                     //////////////////////////////////
                     
                     for(var i in category_distribution[row]["sub_category"]){
@@ -363,7 +362,18 @@ function load_promotions(search_term){
                 pic_box.attr("src",response_data[row]["pic_loc"]);
                 pic_box.appendTo(element_div);
                 element_div.append("<br><a href='"+response_data[row]["type"]+".php?item_id="+response_data[row]["item_id"]+"'>"+response_data[row]["item_nm"]+"<a>");
-                element_div.append("<br> Cost: "+response_data[row]["cost"]);
+              ///////////////
+
+            if(response_data[row]["type"]=="auction"){
+                element_div.append("<br> Current Bid: "+response_data[row]["base_price"]);
+                var end_date=
+                element_div.append("<br> End Date :"+response_data[row]["last_date"]);
+            }else{
+                element_div.append("<br> Cost: "+item_response_data[row]["cost"]);
+            }
+
+            //////////////////////
+                // element_div.append("<br> Cost: "+response_data[row]["cost"]);
                 element_div.append("<br> Type: "+response_data[row]["type"]);
                 element_div.addClass("img-thumbnail");
                 element_div.appendTo(promotion_element);
@@ -417,7 +427,7 @@ function display_items_with_pagination(offset,num_items){//if offset is 1 and nu
             var type_col=$("<td>");
             type_col.append("Type :"+item_response_data[row]["type"]);
             if(item_response_data[row]["type"]=="auction"){
-                type_col.append("<br> Current Bid: "+item_response_data[row]["cost"]);
+                type_col.append("<br> Current Bid: "+item_response_data[row]["base_price"]);
                 var end_date=
                 type_col.append("<br> End Date :"+item_response_data[row]["last_date"]);
             }else{

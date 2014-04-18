@@ -98,7 +98,7 @@
 		            <label class="col-sm-2 control-label" for="select10">Start Date(yyyy-mm-dd)</label>
 		          <div class="col-sm-5">
 		              <div id="datetimepicker2" class="input-append date">
-                     <input data-format="dd/MM/yyyy hh:mm:ss" type="text" name="start_date_5">
+                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="start_date">
                      <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                      </i>
@@ -113,7 +113,7 @@
 		          <div class="col-sm-5">
 
 		              <div id="datetimepicker1" class="input-append date">
-                     <input data-format="dd/MM/yyyy hh:mm:ss" type="text" name="close_date_5">
+                     <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="close_date">
                      <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                      </i>
@@ -177,7 +177,31 @@
 		             
 
 		             </div>
-		        
+		               <div class="container-fluid col-sm-3 col-md-2">
+                  <ul style="list-style-type: none;">
+                    <li>
+                   <label class="checkbox inline">
+                      <input type="checkbox" id="Cycles" value="Cycles"> Cycles
+                
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Plants and Shrubs" value="Plants and Shrubs"> Plants and Shrubs
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Room decorators" value="Room decorators"> Room decorators
+                    </label>
+                   </li>
+                   <li>
+                    <label class="checkbox inline">
+                      <input type="checkbox" id="Others" value="O.Others"> Others
+                    </label>
+                  </li>
+                  </ul>
+                 </div>
 	    		</div>
 
 

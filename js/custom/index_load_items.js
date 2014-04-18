@@ -38,7 +38,15 @@ function load_items(load_category){
                 item_pic.css("height","auto");
             	item_pic.appendTo(item_div);
             	item_div.append("<a href='"+response_data[row]["type"]+".php?item_id="+response_data[row]["item_id"]+"'>"+response_data[row]["item_nm"]+"</a>");
-            	item_div.append("<br> Cost: "+response_data[row]["cost"]);
+            	if(response_data[row]["type"]=="auction"){
+                    item_div.append("<br> Current Bid: "+response_data[row]["base_price"]);
+                    var end_date=
+                    item_div.append("<br> End Date :"+response_data[row]["last_date"]);
+                }else{
+                    item_div.append("<br> Cost: "+response_data[row]["cost"]);
+                }
+                // item_div.append("<br> Cost: "+response_data[row]["cost"]);
+                item_div.append("<br> Type: "+response_data[row]["type"]);
             	item_div.css("border", "1px solid #888");
             	item_div.css("border-radius","5px");
             	item_div.css("padding","5px");

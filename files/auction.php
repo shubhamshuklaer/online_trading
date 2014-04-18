@@ -13,37 +13,14 @@
 	
 </head>
 <body>
-	<?php session_start(); ?>
 	<div class="container-fluid">
 		<div class="row" role="header">
 			<?php include_once "header.php";?> 
 		</div>
-	
-		<div class="container"><!-- you can delete this div if you don't want the side bar-->
-				<!--Navigation sidebar-->
-				<div class="col-sm-3 col-md-2 sidebar">
-	                <ul class="nav nav-sidebar">
-		                <li class="active"><a href="#">Search</a></li>
-		                <li><a href="#">Profile</a></li>
-		                <li><a href="#">Bulk Order</a></li>
-		                <li><a href="#">Auction</a></li>
-	                </ul>
-                </div>
-               
-				<!--Main Content area--> 
-		        <div class="container-fluid col-sm-9 col-md-10">
-		           <!--
-						Write all
-						your code
-						here...
-						It will appear in the content 
-						section of webpage
-
-						-->
-						<?php
+	<?php
 								
 								$item_id = $_GET["item_id"];
-								echo $item_id;
+								//echo $item_id;
 								//$item_id = 24;
 								$_SESSION["item_id"] = $item_id;
 								require_once "class.MySQL.php";           
@@ -56,10 +33,19 @@
             							$pic = $row["pic_loc"];
             							$base_price=$row["base_price"];
             							$last_date=$row["last_date"];
+            							$name=$row["item_nm"];
+            							$model=$row["model"];
+            							$mrp=$row["cost"];
+            							$condition=$row["item_condition"];
+            							$start_date=$row["start_date"];
+            							$description=$row['description'];
             						}
+            						$split_des=explode(";",$description);
+            						$split_des1=explode(":",$split_des[0]);
+            						$des=$split_des1[1];
             					}
-            					echo $base_price;
-            					echo $last_date;
+            					//echo $base_price;
+            					//echo $last_date;
             					$nmysql=new MySQL();
             					$limit=1;
 				              	$nwhere = array("item_id like"=>$item_id."%");
@@ -74,6 +60,7 @@
 					                	$cur_bid=$base_price;
 					                }
 							?>
+							</div>
 						<div class="productprice">
 
 						    <div class="productpagecurrentbid">
@@ -84,11 +71,25 @@
 								date_default_timezone_set('Asia/Calcutta');
 								$date = date('y-M-d h:m:s a', time());
 								$date1 = '20'.$date;
-								echo "\n";
+								//echo "\n";
+								$datetime3 = new DateTime($start_date);
 								$datetime2 = new DateTime($date1);
 								$datetime1 = new DateTime($last_date);
-								$datreto = $datetime1->getTimestamp();
-								$datefrom= $datetime2->getTimestamp();
+							if($datetime3->format('U') > $datetime2->format('U')){
+								$f=$datetime3->diff($datetime2);
+								$fy = $f->y;
+								$fm = $f->m;
+								$fd = $f->d;
+								$fh = $f->h;
+								$fi = $f->i;
+								$fs = $f->s;
+								$g=($fy*31536000)+($fm*2592000)+($fd*86400)+($fh*3600)+($fi*60)+$fs;
+							}
+							else{
+								$g = 0;
+							}
+							//echo $g;
+							if($datetime1->format('U') > $datetime2->format('U')){
 								$x=$datetime1->diff($datetime2);
 								$yy = $x->y;
 								$mm = $x->m;
@@ -97,73 +98,157 @@
 								$ii = $x->i;
 								$ss = $x->s;
 								$y=($yy*31536000)+($mm*2592000)+($dd*86400)+($hh*3600)+($ii*60)+$ss;
+							}
+							elseif($g != 0) {
+								$y = 0;
+							}
+							else{
+								$y = 0;
+							}
 //$y=$x->format('%y years %m months %a days %h hours %i minutes %S seconds');
 //echo $y;
 
 
 						    ?>
-						    </div>
-						   <!-- <br></br> -->
-						      <div class="productpagecurrentbid">
-						      Current Bid : <?php echo $cur_bid ?>
-						    </div>
-
-						</div>
-						<br></br>
-						<form action = "save_bid.php" method="get">
-						<fieldset>
-							<?php
+						    <?php
 								//session_start();
 								//$item_id = $_GET["item_id"];
 								$_SESSION["cur_bid"] = $cur_bid;
 								$_SESSION["item_id"] = $item_id;
 							?>
-							<img border="5" src=<?php echo "../upload/".$pic ?> alt="Pulpit rock" width="300" height="228">
+		<div class="container"><!-- you can delete this div if you don't want the side bar-->
+				<!--Navigation sidebar-->
+				<div class="col-sm-3 col-md-2 sidebar">
+	               <img border="5" src=<?php echo "../upload/".$pic ?> alt="Pulpit rock" width="250" height="200" align="right">  
+                </div>
+				<!--Main Content area--> 
+		        <div class="container-fluid col-sm-9 col-md-10">
+		           <!--
+						Write all
+						your code
+						here...
+						It will appear in the content 
+						section of webpage
+		           -->
+                    <div>
+						
+						    </div>
 
-							<div class="control-group">
-				            <label calss="control-label" for="select01">Place bid</label>
-				            <div class= "formSmallTextbox">
-				            <input type = "text" class="formTextbox" name="bid" id="bid" >
-				            
+                    <form action = "save_bid.php" method="get" class="form-horizontal" id="usrform" enctype="multipart/form-data">
+                    <fieldset>
+                    	
+
+
+                  
+                    <div class="form-group">
+		                 <label class="col-sm-2 control-label" for="select03" >Current Bid :</label>
+		            
+		            
+		            <div class="col-sm-5">
+		             <label class="col-sm-2 control-label" for="select03" ><?php echo $cur_bid ?></label>
+		             </div>
+		             </div>
+                      
+                        <div class="form-group">
+		                         <label class="col-sm-2 control-label" for="select03" >Name:</label>
+		            
+		            
+		            <div class="col-sm-5">
+		             <label class="col-sm-2 control-label" for="select03" ><?php echo $name ?></label>
+		             
+		             </div>
+		             </div>
+                   
+
+                      <div class="form-group">
+		                 <label class="col-sm-2 control-label" for="select03" >Condition:</label>
+		            
+		            
+		            <div class="col-sm-5">
+		             <label class="col-sm-2 control-label" for="select03"><?php echo $condition ?></label>
+		             
+		             </div>
+		             </div>
+		             <div class="form-group">
+		              <label class="col-sm-2 control-label" for="select03" >Mrp:</label>
+		            
+		            
+		            <div class="col-sm-5">
+		             <label class="col-sm-2 control-label" for="select03" ><?php echo $mrp ?></label>
+		             
+		             </div>
+		             </div>
+         				
+         			<div class="form-group">
+		                         <label class="col-sm-2 control-label" for="select03" >Description:</label>
+		            
+		            
+		            <div class="col-sm-5">
+		             <label class="col-sm-2 control-label" for="select03" ><?php echo $des ?></label>
+		             
+		             </div>
+		             </div>
+
+
+
+
+                  <div class="form-group">
+				            <label class="col-sm-2 control-label" for="select01">Place bid</label>
+				             <div class="col-sm-5">
+		                    <input type = "text" class="form-control"  id="bid" name="bid" style="height:30px;font-size:14pt;width:140px;" > 
 				            </div>
+				            </div>
+				             
+     
+
+
 				            <div class="form-actions">
-                     
-		           			<input type="submit" name="submit" class="btn btn-primary" value="Submit" id="submit">
-		           			<!--<script type="text/javascript">
-		           				var a;
-    							    var q = <?php echo json_encode($y); ?>;
-    							    if(q > 0 && q < 900){
-    							    	a="visible";
-    							    }
-    							    else{
-    							    	a="hidden";
-    							    }	
-		           				document.getElementById('submit').style.visibility=a;
-		           			</script>-->
+                            <div class="col-sm-1">
+		           			<input type="submit" name="submit" class="btn btn-primary" value="Submit" id="submit" style="height:30px;width:60px;" disabled="true">
+    						</div>
 		           			</div>
 		           			          			
 		                <div class="form-actions">
-		               	 <div class="col-sm-5">
+		           <div class="col-sm-5">
 	
 	                 <button type="button" class="btn btn-primary btn-lg" onClick="add_watch('<?php echo $item_id;?>')" @brand-success: #5cb85c; >Add To Watch List</button>	
-				<div class="special" style="width:400px; height:250px;" >
-					<div id="counter" style="position:relative; left:60px;">				
-						<div id="shading" >&nbsp;</div>
-					</div>		
+						<div class="special" style="width:400px; height:250px ;" >
+								<div id="counter" style="position:relative; left:60px ;">				
+										<div id="shading" >&nbsp;</div>
+								</div>		
 					
-					
-				</div>
-</div>	  
-				</div>
-				 </div>
-				 </fieldset>
-					</form>
-	</div>
+						</div>
+					</div>	  
+						</div>
+						
+				 			</div>
+
+
+		              </fieldset>
+                      </form>
+		              
+		             
+
+		             </div>
+		        
+	    		</div>
+
+
+		</div>
+
+	
+	
+
+	<!--<script>
+	function myFunction(){
+    alert('hii');
+    alert(document.getElementById('name').value);
+     }
+     
+	</script>-->
+
 	<!--All javascript placed at the end so that the page loads faster-->
-	</div>
-</body>
-</html>
-<script type="text/javascript" src="../js/C3counter.js"></script>
+	<script type="text/javascript" src="../js/C3counter.js"></script>
 					<script type="text/javascript">
 						// Default options 
 
@@ -173,11 +258,20 @@
               //setTimeout(check_time(){document.getElementById('submit').style.visibility='hidden';},(p*1000));
             //}
 					</script>
-					<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+					<script type="text/javascript" src="../js/jquery.min.js"></script>
     <script src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../js/custom/search_suggestions.js"></script>
+	<script>
+	var y = <?php echo json_encode($y); ?>;
+	setTimeout(function(){document.getElementById('submit').disabled =true;},(y*1000));
+	</script>
+
+	<script>
+	var h = <?php echo json_encode($g); ?>;
+	setTimeout(function(){document.getElementById('submit').disabled =false;},(h*1000));
+	</script>
 	<script type="text/javascript">
 		function add_watch(item_id)
 	    {
@@ -213,3 +307,6 @@
                 });
 	    }
 	</script>
+
+</body>
+</html>

@@ -17,14 +17,8 @@ $qty=$_POST['q'];
   $curr_datetime=date("Y-m-d H:i:s");//take current datetime from the server 
   /***********Take name and cost of the item and name of the vendor from the vendor's table**********************************************************************************************************/
   $where=array("id ="=>$item_id);
-  if($objmysql->Select("vendor's database",$where,""))
-  {
-    echo 'hai';
-  }
-  else
-  {
-    echo 'no hai';
-  }
+  $objmysql->Select("vendor's database",$where,"");
+  
   $result=$objmysql->arrayedResult;
   $vendor_name="";
   if($objmysql->records>0)
@@ -44,7 +38,6 @@ $qty=$_POST['q'];
   $whre=array("user_nm ="=>$_SESSION["user_nm"]);
 
   $objmysql->Select("user",$whre);
-  echo $objmysql->lastQuery;
   $r=$objmysql->arrayedResult;
     $check_user=0;
   if($objmysql->records>0)
@@ -68,9 +61,9 @@ $qty=$_POST['q'];
  
     /***********************************place the order in bulk_order*****************************************************************/
    $query1="INSERT INTO `bulk_order` (`user_nm`,`qty`,`item_id`,`txn_id`,`order_id`,`order_time`,`cost`,`shipping_address`,`mobile_no`,`item_name`,`email_id`,`vendor_name`) VALUES('$user_nm_bulk',$qty,$item_id,$txn_id,$order_id,'$curr_datetime',$total_cost,'$shipping_address',$mobile_no,'$item_name','$email_id','$vendor_name')";
-    echo $query1;
+    // echo $query1;
   $objmysql->ExecuteSQL($query1);
-  echo $objmysql->lastError;
+  // echo $objmysql->lastError;
   
 
   

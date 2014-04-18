@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+if(!isset($_SESSION['authentication_bulk']))
+      header("Location:bulk_vendor_login.php");
+
+$username=$_SESSION["user_nm_bulk"];
+/*echo $username;*/
+
 $q=$_POST['q'];
 $c=$_POST['c'];
 $d=$_POST['d'];
@@ -18,8 +25,8 @@ $n=$_POST['n'];
            mysql_select_db($db) or die('Could not select the database ('.$db.') ');
 
 
-           $query="INSERT INTO `vendor's database`  (`id`,`name`,`Threshold`,`cost`,`discount`) VALUES ($id,'$n',$q,$c,$d)";
-           
+           $query="INSERT INTO `vendor's database`  (`id`,`name`,`Threshold`,`cost`,`discount`,`username`) VALUES ($id,'$n',$q,$c,$d,'$username')";
+           /*echo $query;*/
            if(mysql_query($query))
            {
            		echo '1';

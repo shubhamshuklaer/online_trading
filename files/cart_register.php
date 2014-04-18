@@ -27,7 +27,7 @@
      $email=$_POST['email'];
      $con_pass=$_POST['con_pass'];
      $pass=sha1($pass);
-     include_once '../class.MySQL.php';
+     include_once 'class.MySQL.php';
           session_start();
           $object=new MYSQL();
       $row=$object->ExecuteSQL("INSERT INTO user (name,user_nm,pass,credit,address,phone,email) VALUES ('".$name."','".$user_nm."','".$pass."','0','".$address."','".$phone."','".$email."')");
@@ -46,7 +46,7 @@
  ?>
 </head>
 <body>
-<script src="js/jquery.js"></script>
+<?php include_once "header.php";?>
 <div id="maincontainer">
   <section id="product">
     <div class="container">

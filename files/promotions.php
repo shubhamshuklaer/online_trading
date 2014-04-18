@@ -15,7 +15,7 @@ if(isset($_POST["search_term"])){
 	$search_item_id_ranks=array();
 	foreach ($search_term_array as $value) {
 		$where_index["search_term like"]=$value."%";
-		$cols="item_id,(5*clicks+2*rep_name + 2*rep_category + rep_description) as rank";
+		$cols="item_id,(5*clicks+2*rep_tags+2*rep_name + 2*rep_category + rep_description) as rank";
 		$order_by="rank DESC";
 		$omysql->Select("search_index",$where_index,$order_by,"",$cols);	
 		$search_items=$omysql->arrayedResult;

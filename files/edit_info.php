@@ -52,7 +52,7 @@ if(isset($_POST['submit_button']))
 <body>
   <?php include 'header.php';?>
         <?php include 'sidebar.php'; ?>
-<script src="js/jquery.js"></script>
+<!-- <script src="js/jquery.js"></script> -->
 <div id="maincontainer">
   <section id="product">
     <div class="container">

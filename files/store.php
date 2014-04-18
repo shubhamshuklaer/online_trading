@@ -49,11 +49,7 @@ $(document).ready(function(){
 					}
 				}
 			});
-			
-
-			
-			
-
+		
 		}
 
 
@@ -116,26 +112,15 @@ $(document).ready(function(){
 					if(result)
 					{
 						$('#response').html("<p style='color:blue'>Inserted</p>")
+						location.reload();
 					}
 				}
 				
 			});
 
-			location.reload();
+			
 
-			//$(insert).hide();
-			/*var tbl = document.getElementById('table1');
-			var lastRow = tbl.rows.length;
-			alert(lastRow);
-// if there's no header row in the table, then iteration = lastRow + 1
-			var iteration = lastRow;
-			var row = tbl.insertRow(lastRow);
-			var cell1 = row.insertCell(0);
-			var buttonnode= document.createElement('input');
-			buttonnode.setAttribute('type','button');
-			buttontonnode.setAttribute('value','delete');
-			buttontonnode.setAttribute('id',$del);
-			cell1.appendChild(buttonnode);*/
+
 
 
 		 }

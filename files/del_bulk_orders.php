@@ -21,7 +21,7 @@
 		    	$quantity=$info['qty'];
 		    	$cost=$info['cost'];
 		    	$order_time=$info['order_time'];
-		    	$user_name=$info['user_nm'];
+		    	$user_name=$info['user_nm_bulk'];
 		    	$email=$info['email_id'];
 		    	$phone=$info['mobile_no'];
 		    	$address=$info['shipping_address'];
@@ -31,7 +31,7 @@
 		    	$order_id=$info['order_id'];
 
 
-		    	$query2="INSERT INTO `old_bulk_orders`(`user_nm`, `qty`, `item_id`, `txn_id`, `order_id`, `order_time`, `delivery_time`, `status`, `cost`, `shipping_address`, `mobile_no`, `item_name`, `email_id`)
+		    	$query2="INSERT INTO `old_bulk_orders`(`user_nm_bulk`, `qty`, `item_id`, `txn_id`, `order_id`, `order_time`, `delivery_time`, `status`, `cost`, `shipping_address`, `mobile_no`, `item_name`, `email_id`)
 		    								   VALUES ('$user_name',$quantity,$item_id,$transaction_id,'$order_id','$order_time','$delivery_time','$status',$cost,'$address',$phone,'$item_name','$email')";
 		    	if(mysql_query($query2))
 		    	{

@@ -44,7 +44,7 @@ $(document).ready(function(){
 					//alert(result);
 					if(result)
 					{
-						$('#response').html("<p style='color:green'>Updated</p>")
+						//$('#response').html("<p style='color:green'>Updated</p>")
 					}
 				}
 			});
@@ -73,7 +73,7 @@ $(document).ready(function(){
 					//alert(result);
 					if(result)
 					{
-						$('#response').html("<p style='color:green'>Deleted</p>")
+						//$('#response').html("<p style='color:green'>Deleted</p>")
 					}
 				}
 			});
@@ -93,7 +93,7 @@ $(document).ready(function(){
 			{
 				x=x+str[i];
 			}
-			//alert(x);
+			alert(x);
 			var n_id='#'+'n'+x;
 			var q_id='#'+'q'+x;
 			var c_id='#'+'c'+x;
@@ -108,10 +108,10 @@ $(document).ready(function(){
 				method:'POST',
 				data:'q='+q+'&c='+c+'&d='+d+'&x='+x+'&n='+n,
 				success:function(result){
-					//alert(result);
+					alert(result);
 					if(result)
 					{
-						$('#response').html("<p style='color:blue'>Inserted</p>")
+						//$('#response').html("<p style='color:blue'>Inserted</p>")
 						 location.reload();
 					}
 				}
@@ -124,6 +124,13 @@ $(document).ready(function(){
 
 	});
 }); 
+<?php
+ session_start();
+    if(!isset($_SESSION['authentication_bulk']))
+      header("Location:bulk_vendor_login.php");
+
+?>
+
 </script>
 </head>
 <body>
@@ -140,11 +147,9 @@ $(document).ready(function(){
 		                <li class="active"><a href="new_orders.php">New Orders</a></li>
 		                <li class="active"><a href="approved_orders.php">Approved Orders</a></li>
 		                <li class="active"><a href="set_threshold.php">Set Threshold</a></li>
-		                <li class="active"><a href="store.php">Items Store</a></li>
-		                <li class="active"><a href="#">Help</a></li>
-		                
-		                
-		                
+		                <li class="active"><a href="vendors.php">Items Store</a></li>
+		                <li class="active"><a href="bulk_logout.php">Log Out</a></li>
+		                <li class="active"><a href="#">Help</a></li>		                
 	                </ul>
                 </div>
 				<!--Main Content area--> 
@@ -165,10 +170,10 @@ $(document).ready(function(){
 		        	require_once "class.MySQL.php";
 		        	   
                       $obmysql=new MySQL();
-                      
-                       $obmysql->Select("vendor's database","","id ASC");
+                       $where = array("username=" => $_SESSION['user_nm_bulk'] );
+                       $obmysql->Select("vendor's database",$where,"id ASC");
                        $rows=$obmysql->arrayedResult;
-                       $item_id;
+                       $item_id=0;
 
                       if($obmysql->records>0)
                       {
@@ -194,25 +199,25 @@ $(document).ready(function(){
 	                       			
 	                       			<div class="input-group">
 
- 									 <input type="text" id="<?php echo 'n'.$item_id; ?>" value="<?php echo $item_name ?>"disabled="true"class="form-control" >
+ 									 <input type="text" id="<?php echo 'n'.$item_id; ?>" value="<?php echo $item_name; ?>"disabled="true"class="form-control" >
  									  
 								    </div>
 
 							    </td>
 	                       		<td align="center">
 	                       			<div class="input-group">				
- 									  <input type="text" id="<?php echo 'q'.$item_id; ?>" value="<?php echo $qty ?> "class="form-control" >
+ 									  <input type="text" id="<?php echo 'q'.$item_id; ?>" value="<?php echo $qty; ?> "class="form-control" >
 								    </div>
 							    </td>
 	                       		<td align="center">
 	                       			<div class="input-group">				
- 									 <input type="number" id="<?php echo 'c'.$item_id; ?>" value="<?php echo $cost ?>" class="form-control" >
+ 									 <input type="number" id="<?php echo 'c'.$item_id; ?>" value="<?php echo $cost ;?>" class="form-control" >
 								    </div>
 							    </td>
 	                       		<td align="center">
 	                       			<div class="input-group">				
- 									  <input  type="number" id="<?php echo 'd'.$item_id; ?>"value="<?php echo $discount ?> "class="form-control" >
-							     	</div>
+ 									 <input type="number" id="<?php echo 'd'.$item_id; ?>" value="<?php echo $discount ;?>" class="form-control" >
+								    </div>
 							    </td>
 	                       		<td  ><input  class="btn btn-primary"style="display: inline"  align="center" type='button' value='edit' id="<?php echo 'e'.$item_id; ?>">               
 	                                <input   class="btn btn-primary" style="display: inline"align="center"type='button' value='delete' id="<?php echo 'z'.$item_id; ?>">
@@ -280,6 +285,6 @@ $(document).ready(function(){
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../js/custom/search_suggestions.js"></script>
-<div id='response'><p >status</p></div>
+<!-- <div id='response'><p >status</p></div> -->
 </body>
 </html>

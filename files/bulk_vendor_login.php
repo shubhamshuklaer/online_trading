@@ -19,37 +19,37 @@
     <![endif]-->
 <!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
-<!-- Login Authentication code below-->
+<!-- Login authentication_bulk code below-->
 <?php
   include_once 'class.MySQL.php';
     // include_once '../../config/config.php';
 if(!isset($_SESSION))
   session_start();
-  //if(isset($_SESSION['user_nm']))
+  //if(isset($_SESSION['user_nm_bulk']))
    //header("Location: " . constant("HOSTNAME") . "/files/Profile/myaccount.php");
   $pageStatus = "REQUESTED";
   if (isset($_POST['txtUserNm'])) {
-    $user_nm = $_POST['txtUserNm'];
+    $user_nm_bulk = $_POST['txtUserNm'];
     $pass = $_POST['txtPass'];
   }
   if(isset($_POST['submitbutton'])){
     $result="NOTFOUND";
-      $pass=sha1($pass);
+      /*$pass=sha1($pass);*/
       $object=new MYSQL();
-      $row=$object->ExecuteSQL("SELECT * FROM user WHERE user_nm='".$user_nm."' AND pass='".$pass."'");
+      $row=$object->ExecuteSQL("SELECT * FROM `vendor's details` WHERE username='".$user_nm_bulk."' AND password='".$pass."'");
       if($row!="true")
         {
           $result="FOUND";
         if(!isset($_SESSION))
           session_start();
-        $_SESSION['authentication']="true";
-        $_SESSION['user_nm'] = $user_nm;
+        $_SESSION['authentication_bulk']="true";
+        $_SESSION['user_nm_bulk'] = $user_nm_bulk;
         $_SESSION['name'] = $row[0]['name'];
         $asd = $row['name'];
       }
     if($result == "FOUND"){
-      setcookie("user_nm","$user_nm",time()+3600*24*30,'/');
-        header("Location: myaccount.php");
+      setcookie("user_nm_bulk","$user_nm_bulk",time()+3600*24*30,'/');
+        header("Location: vendors.php");
     }
   }
 

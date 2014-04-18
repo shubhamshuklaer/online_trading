@@ -1,8 +1,9 @@
+
+
 1. notifications.php- in header
 2.PROMOTIONS
 4. auction/sale tags
 5.auction start date>end date
-6. relative path in cart module/sell
 8. Sale page details
 10. check $_Session["authentication"]
 12. when no login- we checkout -log in again-items lost
@@ -11,5 +12,7 @@
 15. no promotion_amount option in auction/sale
 16. Index wait for image size
 17. Filter when you click on a category its sub-category should move to default... and if you click on main default all should move to default..!!
-
+18. check search_suggestion  working in all modules--jquery problem
+19. fixed condition type in auction/sale
 ////wish-list watch-list changed -addded add to cart
+

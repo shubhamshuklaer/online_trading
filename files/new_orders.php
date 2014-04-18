@@ -59,7 +59,8 @@ $(document).ready(function(){
 		                <li class="active"><a href="new_orders.php">New Orders</a></li>
 		                <li class="active"><a href="approved_orders.php">Approved Orders</a></li>
 		                <li class="active"><a href="set_threshold.php">Set Threshold</a></li>
-		                <li class="active"><a href="store.php">Items Store</a></li>
+		                <li class="active"><a href="vendors.php">Items Store</a></li>
+		                <li class="active"><a href="bulk_logout.php">Log Out</a></li>
 		                <li class="active"><a href="#">Help</a></li>
 	                     </ul>
                 </div>
@@ -121,7 +122,7 @@ $(document).ready(function(){
 																			   $qty=$result2["qty"];
 																			   $cost=$result2["cost"];
 																			   $order_time=$result2["order_time"];
-																			   $user_name=$result2["user_nm"];
+																			   $user_name=$result2["user_nm_bulk"];
 																			   $email=$result2["email_id"];
 																			   $phone=$result2["mobile_no"];
 																			   $address=$result2["shipping_address"];

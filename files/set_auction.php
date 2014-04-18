@@ -40,7 +40,28 @@
             if(isset($_POST["base_price_1"]) && isset($_POST['close_date_1']) && isset($_POST['type_1']) && isset($_POST['condition_1']) && isset($_POST['name_1']) && isset($_POST['description_1']) && isset($_POST['mrp_1']) && isset($_POST['model_1']) && isset($_POST['brand_1']) && isset($_POST['quantity_1']))
             {
      
-           
+                $date1 = $_POST['start_date_1'];
+                $date2 = $_POST['close_date_1'];
+                $datetime1 = new DateTime($date1);
+                $datetime2 = new DateTime($date2);
+                date_default_timezone_set('Asia/Calcutta');
+              //  $date = date('y-M-d h:m:s a', time());
+               // $date3 = '20'.$date;
+                //$datetime3 = new DateTime($date3);
+                $f=$datetime2->diff($datetime1);
+                $fy = $f->y;
+                $fm = $f->m;
+                $fd = $f->d;
+                $fh = $f->h;
+                $fi = $f->i;
+                $fs = $f->s;
+                $g=($fy*31536000)+($fm*2592000)+($fd*86400)+($fh*3600)+($fi*60)+$fs;
+                if(!($datetime2->format('U') > $datetime1->format('U') && $g>=7200)){
+                    echo "Time difference is not valid so please go back and set correct values";
+                }
+                else{
+                    echo "hii";
+                }
            //echo "mittal1";
                 $allowedExts = array("gif", "jpeg", "jpg", "png");
                     $temp = explode(".", $_FILES["file"]["name"]);

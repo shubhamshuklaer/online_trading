@@ -30,7 +30,7 @@
 		           -->
 
 
-                    <form action = "set_auction.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data"  onsubmit="return validation(this)">
+                    <form action = "set_sale.php" method="post" class="form-horizontal" id="usrform" enctype="multipart/form-data"  onsubmit="return validation(this)">
                     <fieldset>
 
 
@@ -364,7 +364,7 @@ function validation(thisform)
    with(thisform)
    {
       if(validateFileExtension(file, "valid_msg", "png/jpeg/image files are only allowed!",
-      new Array("PNG","GIF","JPEG","jpg")) == false)
+      new Array("PNG","GIF","JPEG","jpg","png","gif","jpeg")) == false)
       {
          return false;
       }

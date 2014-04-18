@@ -34,7 +34,8 @@
 		                <li class="active"><a href="new_orders.php">New Orders</a></li>
 		                <li class="active"><a href="approved_orders.php">Approved Orders</a></li>
 		                <li class="active"><a href="set_threshold.php">Set Threshold</a></li>
-		                <li class="active"><a href="store.php">Items Store</a></li>
+		                <li class="active"><a href="vendors.php">Items Store</a></li>
+		                <li class="active"><a href="bulk_logout.php">Log Out</a></li>
 		                <li class="active"><a href="#">Help</a></li>
 	     
 

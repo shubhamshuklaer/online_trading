@@ -26,6 +26,11 @@ $("document").ready(function(){
                 if($(this).attr("value")==""){
                     delete where_clause["category like"];//will delete if it exist..??
                 }else{
+                    $("input[name='"+$(this).attr("value")+"']").each(function(){
+                        this.checked=false;
+                    });
+                    
+                    alert("hello");
                     where_clause["category like"]=$(this).attr("value");
                 }
             }else{//redundent code we don't need the else part as we are using radio button so he cannot uncheck

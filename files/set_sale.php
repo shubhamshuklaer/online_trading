@@ -373,6 +373,7 @@
     
                        }
                     }
+                    header("Location: myitems.php")
                        ?>
 
                        </div>

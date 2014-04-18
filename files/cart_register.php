@@ -38,6 +38,13 @@
      $where=array("user_nm like"=>$username);
      $set=array("user_nm"=>$name);
      $omysql->Update($from, $set, $where);
+      //////////////////////updating saved_list/////////////////////////
+     $omysql=new MySql();
+     $from="saved_list";
+     $where=array("user_nm like"=>$username);
+     $set=array("user_nm"=>$name);
+     $omysql->Update($from, $set, $where);
+     /////////////////////////////////////////////////////////////////////////////////////////
       $_SESSION['authentication']="true";
      $_SESSION['user_nm']=$user_nm;
      $_SESSION['name']=$name;

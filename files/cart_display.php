@@ -11,7 +11,7 @@
     <?php require_once "class.MySQL.php"; ?>
   	<div class="container-fluid" name="c1">
 		<div class="row" role="header">
-			<?php include_once "header.php"; session_start();?>
+			<?php include_once "header.php"; //session_start();?>
 		</div>
 		<div class="container" name="c2"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
@@ -45,6 +45,7 @@
                             $tax = 0;
                             $grandtot = 0;
                             $from = "items";
+                            $totqty = 0;
                             if($rows>0){
                                 while($i<$rows)
                                 {
@@ -52,6 +53,7 @@
                                     $where = array("item_id like"=>$item_id);
                                     $omysql->Select($from, $where);
                                     $res2 = $omysql->arrayedResult;
+                                    $totqty+=$res1[$i]["qty"];
                                     $total = $res1[$i]["qty"]*$res2[0]["cost"];
                                     $grandtot+=$total;
                                     $tax = (($res2[0]["tax"]/100)*$total);
@@ -222,7 +224,7 @@
 	    		<div class="col-sm-2 col-lg-2.5 sidebar">
 				    <div class="well">
 	               <?php
-	               echo "<b>"."Cart Summary "."</b> (".$rows."&nbsp;";
+	               echo "<b>"."Cart Summary "."</b> (".$totqty."&nbsp;";
                     if($rows==1)
                     {
                         echo "Item)";
@@ -267,7 +269,14 @@
             }
             else
             {
-                return 1;
+                if(val%1==0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
             }
 
         }

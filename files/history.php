@@ -35,7 +35,7 @@
                         $rows = $omysql->records;
                         $res1 = $omysql->arrayedResult;
                         ?>
-		        <div class="container-fluid col-sm-10 col-md-10">
+		        <div class="container-fluid col-sm-12 col-md-12">
 		            <ul class="nav nav-tabs" id="mytabs">
                     <li class="active">
                     <a href="#tab_a" id="rec_order">RECENT ORDERS <small>(Last 2 Months)</small></a></li>

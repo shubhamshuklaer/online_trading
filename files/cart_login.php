@@ -90,6 +90,46 @@ if(!isset($_SESSION))
         $omysql->Delete($from, $where);
      }
      //////////////////////////////////////////////////////////////////
+     ///////////////////////////update saved_item list////////////////////////
+     $omysql=new MySql();
+     $from="saved_list";
+     $where=array("user_nm like"=>$username);
+     $omysql->Select($from, $where);
+     $newres = $omysql->arrayedResult;
+     $rows = $omysql->records;
+     if($rows)
+     {
+        $i = 0;
+        while($i<$rows)
+        {
+            $newqty = $newres[$i]["qty"];
+            $id = $newres[$i]["item_id"];
+            $where=array("user_nm like"=>$user_nm,"AND item_id="=>$id);
+            $omysql->Select($from, $where);
+            $r = $omysql->records;
+            $oldres = $omysql->arrayedResult;
+            if($r)
+            {
+                //item already in saved_list so update
+                $oldqty = $oldres[0]["qty"];
+                $q = $oldqty + $newqty;
+                $where=array("user_nm like"=>$user_nm,"AND item_id="=>$id);
+                $set=array("qty"=>$q);
+                $omysql->Update($from, $set, $where);
+            }
+            else
+            {
+                //this item is not in saved_list of registered user so insert
+                $vars=array("user_nm"=>$user_nm,"item_id"=>$id,"qty"=>$newqty);
+                $omysql->Insert($vars,"saved_list");
+            }
+            $i++;
+        }
+        //delete unregd user's saved_list
+        $where = array("user_nm like"=>$username);
+        $omysql->Delete($from, $where);
+     }
+     ////////////////////////////////////////////////////////////////////////////////////
       setcookie("user_nm","$user_nm",time()+3600*24*30,'/');
         header("Location: cart_display.php");
     }

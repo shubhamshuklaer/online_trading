@@ -222,28 +222,28 @@
                   <ul style="list-style-type: none;">
                     <li>
                    <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox1" value="option1"> Pens
+                      <input type="checkbox" name="Pens" value="Pens"> Pens
                 
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox2" value="option1"> Calculator
+                      <input type="checkbox" name="Calculator" value="Calculator"> Calculator
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox3" value="option1"> Drafters
+                      <input type="checkbox" name="Drafters" value="Drafters"> Drafters
                     </label>
                    </li>
                    <li> 
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox4" value="option1"> College Supplies
+                      <input type="checkbox" name="College Supplies" value="College Supplies"> College Supplies
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Others
+                      <input type="checkbox" name="Others" value="S.Others"> Others
                     </label>
                   </li>
                   </ul>

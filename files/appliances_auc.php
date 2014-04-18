@@ -114,7 +114,7 @@
 		            <div class="form-group">
 		            <label class="col-sm-2 control-label" for="select05">M.R.P.</label>
 		           <div class="col-sm-5">
-		            <input type = "number" class="form-control" id="mrp" name="mrp_4">
+		            <input type = "number" class="form-control" id="mrp" name="mrp_4" min="1">
 		            </div>
 		      
 		            </div>
@@ -130,7 +130,7 @@
 		            <div class="form-group">
 		            <label class="col-sm-2 control-label" for="select03">Quantity</label>
 		         <div class="col-sm-5">
-		            <input type = "number" class="form-control"  id="quantity" name="quantity_4">
+		            <input type = "number" class="form-control"  id="quantity" name="quantity_4" min="1">
                    </div>
 		            </div>
 
@@ -151,7 +151,7 @@
 		             <div class="form-group">
 		            <label class="col-sm-2 control-label" for="select08">Base Price</label>
 		            <div class="col-sm-5">
-		            <input class="form-control" name="base_price_4" id="base_price" type = "number" />
+		            <input class="form-control" name="base_price_4" id="base_price" type = "number" min="1" />
 
 
 		            </div>
@@ -190,7 +190,15 @@
                      </div>
                      </div>
 
-                    
+                    <div class="form-group">
+                <label class="col-sm-2 control-label" for="select08">Promotions</label>
+                <div class="col-sm-5">
+                <input class="form-control" name="promotions" id="promotions" type = "number" />
+
+
+                </div>
+                </div>
+
 
 
 

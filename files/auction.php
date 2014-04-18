@@ -82,7 +82,7 @@
 								$date = $splitTimeStamp[0];
 								$time = $splitTimeStamp[1];
 								date_default_timezone_set('Asia/Calcutta');
-								$date = date('y-M-d h:m:s a', time());
+								$date = date('y-M-d h:i:s a', time());
 								$date1 = '20'.$date;
 								//echo "\n";
 								$datetime3 = new DateTime($start_date);
@@ -278,12 +278,17 @@
 					   	C3Counter("counter", { startTime :p });
               //setTimeout(check_time(){document.getElementById('submit').style.visibility='hidden';},(p*1000));
             //}
-					</script>
-					<script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script src="../js/jquery.js"></script>
+				 
+        </script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script src="../js/bootstrap-magnify.min.js"></script>
 	<script type="text/javascript" src="../js/custom/search_suggestions.js"></script>
+
+
+    
+	
+	
 	<script>
 	var y = <?php echo json_encode($y); ?>;
 	setTimeout(function(){document.getElementById('submit').disabled =true;},(y*1000));

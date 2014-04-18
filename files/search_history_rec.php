@@ -1,5 +1,5 @@
 <?php
-include_once "./config.php";
+include_once "../config/config.php";
 
 $username = constant("USERNAME");                                                                // database connection
 $password = constant("PASS");
@@ -16,7 +16,7 @@ $total_tag = array('Mobiles','Computers','Tablets','Mobile Accessories','Compute
 'Pens','Calculator','Drafters','College Supplies','s.others','pendrive','Electronics');
 $total_tag = array_map('strtolower',$total_tag);
 $sep = array();
-$result6 = mysql_query("SELECT search_text FROM search_history WHERE user_nm= 'Sathwik'");       // getting all the search text for a particular user over time
+$result6 = mysql_query("SELECT search_text FROM search_history WHERE user_nm= '".$_SESSION["user_nm"]."'");       // getting all the search text for a particular user over time
 while ($row = mysql_fetch_array($result6)) {
    $sep1 = explode(" ",$row{'search_text'});                                                     // seperating all the search words
    for($z = 0;$z < count($sep1); $z++)
@@ -29,7 +29,7 @@ while ($row = mysql_fetch_array($result6)) {
 }
 print_r($sep);
 echo "<br>";
-$result = mysql_query("SELECT tag_values from rec_pre where user_nm = 'Sathwik'");               // getting corresponding tag_values for the same user
+$result = mysql_query("SELECT tag_values from rec_pre where user_nm = '".$_SESSION["user_nm"]."'");               // getting corresponding tag_values for the same user
 while($row = mysql_fetch_array($result)){
 	$mstr2 = explode(",",$row{'tag_values'});
   	
@@ -76,5 +76,5 @@ for($y = 0; $y < count($newArray); $y++){
 echo "<br>";
 echo $string;
 $string1 = substr($string ,0 ,strlen($string)-1);
-$some = mysql_query("UPDATE rec_pre SET tag_values = '".$string1."' where user_nm = 'sathwik'");
+$some = mysql_query("UPDATE rec_pre SET tag_values = '".$string1."' where user_nm = '".$_SESSION["user_nm"]."'");
 ?>

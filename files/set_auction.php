@@ -95,9 +95,33 @@
                         $close_date = $_POST['close_date'];
                         $start_date = $_POST['start_date'];
                         $category=$category1.":".$type_1;
-
+                        $string5 = "";
+                        if (isset($_POST['Mobiles'])){
+                            $string5=$string5."mobiles,";
+                        }
+                        if(isset($_POST['Computers'])){
+                            $string5=$string5."computers,";
+                        }
+                        if(isset($_POST['Tablets'])){
+                            $string5=$string5."tablets,";
+                        }
+                        if(isset($_POST['Mobile Accessories'])){
+                            $string5=$string5."mobile accessories,";
+                        }
+                         if (isset($_POST['Computer Accessories'])){
+                            $string5=$string5."computer accessories,";
+                        }
+                        if(isset($_POST['Speakers'])){
+                            $string5=$string5."speakers,";
+                        }
+                        if(isset($_POST['cameras and accessories'])){
+                            $string5=$string5."cameras and accessories,";
+                        }
+                        if(isset($_POST['Audio and Video players'])){
+                            $string5=$string5."audio and video players,";
+                        }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
-            $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'last_date'=>$_POST['close_date'],'start_date'=>$start_date,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
+            $vars = array('tags'=>$string5,'user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'last_date'=>$_POST['close_date'],'start_date'=>$start_date,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
             $test->Insert($vars,"items");
             
             // echo $test->lastQuery;
@@ -170,8 +194,22 @@
                         $close_date = $_POST['close_date'];
                         $start_date = $_POST['start_date'];
                         $category=$category1.":".$type_1;
+                        $string4 = "";
+                        if (isset($_POST['Textbooks'])){
+                            $string4=$string4."textbooks,";
+                        }
+                        if(isset($_POST['Literature'])){
+                            $string4=$string4."literature,";
+                        }
+                        if(isset($_POST['Bussiness Magazines'])){
+                            $string4=$string4."business magazines,";
+                        }
+                        if(isset($_POST['Science journals'])){
+                            $string4=$string4."science journals,";
+                        }
+                       // echo $string4;
                          $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."author: ".$author." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date;
-                        $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('tags'=>$string4,'user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
                         
@@ -244,29 +282,23 @@
                         $close_date = $_POST['close_date'];
                         $start_date = $_POST['start_date'];
                         $category=$category1.":".$type_1;
-                        $cookers=$_POST['Cookers'].",";
-                        $irons = $_POST['Irons'].",";
-                        $Coffee_Makers = $_POST['Coffee Makers'].",";
-                        $others = $_POST['Others'].",";
-                        echo "hello";
-                        echo $cookers;
-                        echo "<br>";
-                        echo $irons;
-                        if(!$others){
-                            echo "defined";
+                        $string1 = "";
+                        if (isset($_POST['Cookers'])){
+                            $string1=$string1."cookers,";
                         }
-                        /*if(!$cookers){
-                            $tag1 = "cookers,";
+                        if(isset($_POST['Irons'])){
+                            $string1=$string1."irons,";
                         }
-                        else{
-                            $tag1="";
+                        if(isset($_POST['Coffee Makers'])){
+                            $string1=$string1."coffeemakers,";
                         }
-                        echo $tag1;*/
-                       // $tag=$cookers.$irons.$Coffee_Makers.$others;//   'tags'=>$tag,'
-                       // echo $tags;
+                        if(isset($_POST['Others'])){
+                            $string1=$string1."a.others,";
+                        }
+                       // echo $string1;
                          $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
                         
-                        $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('tags'=>$string1,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
                         
@@ -341,9 +373,26 @@
                         $close_date = $_POST['close_date'];
                         $start_date = $_POST['start_date'];
                         $category=$category1.":".$type_1;
+                        $string2 = "";
+                        if (isset($_POST['Pens'])){
+                            $string2=$string2."pens,";
+                        }
+                        if(isset($_POST['Calculator'])){
+                            $string2=$string2."calculator,";
+                        }
+                        if(isset($_POST['Drafters'])){
+                            $string2=$string2."drafters,";
+                        }
+                        if(isset($_POST['College Supplies'])){
+                            $string2=$string2."college supplies,";
+                        }
+                        if(isset($_POST['Others'])){
+                            $string2=$string2."s.others,";
+                        }
+                     //   echo $string2;
                          $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
                         
-                        $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('tags'=>$string2,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                                  }
                             }
@@ -415,8 +464,22 @@
                         $close_date = $_POST['close_date'];
                         $start_date = $_POST['start_date'];
                         $category=$category1;
+                        $string3 = "";
+                        if (isset($_POST['Cycles'])){
+                            $string3=$string3."cycles,";
+                        }
+                        if(isset($_POST['Plants and Shrubs'])){
+                            $string3=$string3."plants and shrubs,";
+                        }
+                        if(isset($_POST['Room docorators'])){
+                            $string3=$string3."room decorators,";
+                        }
+                        if(isset($_POST['Others'])){
+                            $string3=$string3."o.others,";
+                        }
+                    //    echo $string3;
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
-                        $vars = array('user_nm'=>$usrnm,'type'=>$type,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$_POST['close_date'],'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('tags'=>$string3,'user_nm'=>$usrnm,'type'=>$type,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$_POST['close_date'],'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                                 }
                             }
@@ -427,10 +490,13 @@
     
                        }
                     }
-                    include_once "insert_search_index.php";
- header("Location: myitems.php");
 
+                    include_once "insert_search_index.php";
+                    header("Location: myitems.php");
+                    
 		               ?>
                        </div>
                        </body>
                        </html>
+
+                    

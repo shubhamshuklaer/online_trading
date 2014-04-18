@@ -116,7 +116,7 @@
 		            <div class="form-group">
 		            <label class="col-sm-2 control-label" for="select05">M.R.P.</label>
 		           <div class="col-sm-5">
-		            <input type = "number" class="form-control" id="mrp" name="mrp_1">
+		            <input type = "number" class="form-control" id="mrp" name="mrp_1" min="1">
 		            </div>
 		      
 		            </div>
@@ -153,7 +153,7 @@
 		             <div class="form-group">
 		            <label class="col-sm-2 control-label" for="select08">Base Price</label>
 		            <div class="col-sm-5">
-		            <input class="form-control" name="base_price_1" id="base_price" type = "number" />
+		            <input class="form-control" name="base_price_1" id="base_price" type = "number" min="1" />
 
 
 		            </div>
@@ -205,43 +205,43 @@
                   <ul style="list-style-type: none;">
                     <li>
                    <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox1" value="option1"> Mobiles
+                      <input type="checkbox" name="Mobiles" value="Mobiles"> Mobiles
                 
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox2" value="option1"> Computers
+                      <input type="checkbox" name="Computers" value="Computers"> Computers
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox3" value="option1"> Tablets
+                      <input type="checkbox" name="Tablets" value="Tablets"> Tablets
                     </label>
                    </li>
                    <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Mobile Accessories
+                      <input type="checkbox" name="Mobile Accessories" value="Mobile Accessories"> Mobile Accessories
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Computer Accessories
+                      <input type="checkbox" name="Computer Accessories" value="Computer Accessories"> Computer Accessories
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Speakers
+                      <input type="checkbox" name="Speakers" value="Speakers"> Speakers
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Cameras and Accessories
+                      <input type="checkbox" name="Cameras and Accessories" value="Cameras and Accessories"> Cameras and Accessories
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="inlineCheckbox5" value="option1"> Audio and Video players
+                      <input type="checkbox" name="Audio and Video players" value="Audio and Video players"> Audio and Video players
                     </label>
                   </li>
                   </ul>

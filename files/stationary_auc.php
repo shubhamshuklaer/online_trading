@@ -246,28 +246,28 @@
                   <ul style="list-style-type: none;">
                     <li>
                    <label class="checkbox inline">
-                      <input type="checkbox" id="Pens" value="Pens"> Pens
+                      <input type="checkbox" name="Pens" value="Pens"> Pens
                 
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="Calculator" value="Calculator"> Calculator
+                      <input type="checkbox" name="Calculator" value="Calculator"> Calculator
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="Drafters" value="Drafters"> Drafters
+                      <input type="checkbox" name="Drafters" value="Drafters"> Drafters
                     </label>
                    </li>
                    <li> 
                     <label class="checkbox inline">
-                      <input type="checkbox" id="College Supplies" value="College Supplies"> College Supplies
+                      <input type="checkbox" name="College Supplies" value="College Supplies"> College Supplies
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="Others" value="S.Others"> Others
+                      <input type="checkbox" name="Others" value="S.Others"> Others
                     </label>
                   </li>
                   </ul>

@@ -1,5 +1,5 @@
 <?php
-include_once "./config.php";
+include_once "../config/config.php";
 
 $username = constant("USERNAME");                                                                   // connection to database 
 $password = constant("PASS");
@@ -11,7 +11,7 @@ $selected = mysql_select_db("online_trading",$dbhandle)
 	or die("Could not select examples");
 $watch_pre = 5;
 
-$result = mysql_query("SELECT tag_values from rec_pre where user_nm = 'sathwik'");                  // getting the tag_values string for the corresponding user
+$result = mysql_query("SELECT tag_values from rec_pre where user_nm ='".$_SESSION["user_nm"]."'");                  // getting the tag_values string for the corresponding user
 while($row = mysql_fetch_array($result)){
 	$mstr2 = explode(",",$row{'tag_values'});
   	
@@ -29,7 +29,7 @@ echo "<br>";
 
 $mstr3 = array();
 $mstr4 = array();
-$result7 = mysql_query("SELECT item_id from watch_list where user_nm = 'Sathwik'");                       // getting the item_id for all the items in the watchlist 
+$result7 = mysql_query("SELECT item_id from watch_list where user_nm = '".$_SESSION["user_nm"]."'");                       // getting the item_id for all the items in the watchlist 
 while($row = mysql_fetch_array($result7)){                                                            //  of corresponding user 
 	print_r($row);                                                                                    // for every item_id we get its tags from the items table 
 	$results = mysql_query("SELECT tags from items where item_id = '".$row['item_id']."'");           // explode this tags and pushing them into into array mstr4

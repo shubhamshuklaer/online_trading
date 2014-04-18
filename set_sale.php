@@ -78,33 +78,8 @@
                         $description = $_POST['description_1'];
                         $base_price = $_POST['base_price_1'];
                         $category=$category1.":".$type_1;
-                        $string5 = "";
-                        if (isset($_POST['Mobiles'])){
-                            $string5=$string5."mobiles,";
-                        }
-                        if(isset($_POST['Computers'])){
-                            $string5=$string5."computers,";
-                        }
-                        if(isset($_POST['Tablets'])){
-                            $string5=$string5."tablets,";
-                        }
-                        if(isset($_POST['Mobile Accessories'])){
-                            $string5=$string5."mobile accessories,";
-                        }
-                         if (isset($_POST['Computer Accessories'])){
-                            $string5=$string5."computer accessories,";
-                        }
-                        if(isset($_POST['Speakers'])){
-                            $string5=$string5."speakers,";
-                        }
-                        if(isset($_POST['cameras and accessories'])){
-                            $string5=$string5."cameras and accessories,";
-                        }
-                        if(isset($_POST['Audio and Video players'])){
-                            $string5=$string5."audio and video players,";
-                        }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
-            $vars = array('tags'=>$string5,'user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
+            $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
             $test->Insert($vars,"items");
 
             // echo $test->lastQuery;
@@ -172,21 +147,8 @@
                         $description = $_POST['description_2'];
                         $base_price = $_POST['base_price_2'];
                         $category=$category1.":".$type_1;
-                        $string4 = "";
-                        if (isset($_POST['Textbooks'])){
-                            $string4=$string4."textbooks,";
-                        }
-                        if(isset($_POST['Literature'])){
-                            $string4=$string4."literature,";
-                        }
-                        if(isset($_POST['Bussiness Magazines'])){
-                            $string4=$string4."business magazines,";
-                        }
-                        if(isset($_POST['Science journals'])){
-                            $string4=$string4."science journals,";
-                        }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."author: ".$author." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price;
-                        $vars = array('tags'=>$string4,'user_nm'=>$usrnm,'type'=>$type, 'quantity'=>$quantity ,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category, 'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('user_nm'=>$usrnm,'type'=>$type, 'quantity'=>$quantity ,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category, 'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
                                 }
@@ -254,21 +216,8 @@
                         $description = $_POST['description_4'];
                         $base_price = $_POST['base_price_4'];
                         $category=$category1.":".$type_1;
-                        $string1 = "";
-                        if (isset($_POST['Cookers'])){
-                            $string1=$string1."cookers,";
-                        }
-                        if(isset($_POST['Irons'])){
-                            $string1=$string1."irons,";
-                        }
-                        if(isset($_POST['Coffee Makers'])){
-                            $string1=$string1."coffeemakers,";
-                        }
-                        if(isset($_POST['Others'])){
-                            $string1=$string1."a.others,";
-                        }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type:".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
-                        $vars = array('tags'=>$string1,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
                                 }
@@ -338,25 +287,9 @@
                         $condition = $_POST['condition_3'];
                         $description = $_POST['description_3'];
                         $base_price = $_POST['base_price_3'];
-                        $string2 = "";
-                        if (isset($_POST['Pens'])){
-                            $string2=$string2."pens,";
-                        }
-                        if(isset($_POST['Calculator'])){
-                            $string2=$string2."calculator,";
-                        }
-                        if(isset($_POST['Drafters'])){
-                            $string2=$string2."drafters,";
-                        }
-                        if(isset($_POST['College Supplies'])){
-                            $string2=$string2."college supplies,";
-                        }
-                        if(isset($_POST['Others'])){
-                            $string2=$string2."s.others,";
-                        }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
                         $category=$category1.":".$type_1;
-                        $vars = array('tags'=>$string2,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
+                        $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                                 }
                             }
@@ -425,21 +358,8 @@
                         $description = $_POST['description_5'];
                         $base_price = $_POST['base_price_5'];
                         $category=$category1.":".$type_1;
-                        $string3 = "";
-                        if (isset($_POST['Cycles'])){
-                            $string3=$string3."cycles,";
-                        }
-                        if(isset($_POST['Plants and Shrubs'])){
-                            $string3=$string3."plants and shrubs,";
-                        }
-                        if(isset($_POST['Room docorators'])){
-                            $string3=$string3."room decorators,";
-                        }
-                        if(isset($_POST['Others'])){
-                            $string3=$string3."o.others,";
-                        }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
-                        $vars = array('tags'=>$string3,'user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'sale_type'=>$sale_type);
+                        $vars = array('user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                                 }
                             }
@@ -453,10 +373,12 @@
     
                        }
                     }
-                    include_once "insert_search_index.php";
-                    header("Location: myitems.php");
+                    header("Location: myitems.php")
                        ?>
 
                        </div>
                        </body>
                        </html>
+
+                       <?php include_once "insert_search_index.php";?>
+                       <?php header("Location: myitems.php");?>

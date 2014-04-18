@@ -71,7 +71,7 @@
 		            
 		            
 		            <div class="col-sm-5">
-		             <input type = "text" class="form-control"  id="name" name="name_2" style="height:30px;font-size:14pt;" >
+		             <input type = "text" class="form-control"  id="name" name="name_2" style="height:30px;font-size:14pt;"  >
 		             
 		             </div>
 		             </div>
@@ -107,7 +107,7 @@
 		            <div class="form-group">
 		            <label class="col-sm-2 control-label" for="select05">M.R.P.</label>
 		           <div class="col-sm-5">
-		            <input type = "number" class="form-control" id="mrp" name="mrp_2">
+		            <input type = "number" class="form-control" id="mrp" name="mrp_2" min="1">
 		            </div>
 		      
 		            </div>
@@ -123,7 +123,7 @@
 		            <div class="form-group">
 		            <label class="col-sm-2 control-label" for="select03">Quantity</label>
 		         <div class="col-sm-5">
-		            <input type = "number" class="form-control"  id="quantity" name="quantity_2">
+		            <input type = "number" class="form-control"  id="quantity" name="quantity_2" min="1">
                    </div>
 		            </div>
 
@@ -144,7 +144,7 @@
 		             <div class="form-group">
 		            <label class="col-sm-2 control-label" for="select08">Base Price</label>
 		            <div class="col-sm-5">
-		            <input class="form-control" name="base_price_2" id="base_price" type = "number" />
+		            <input class="form-control" name="base_price_2" id="base_price" type = "number" min="1" />
 
 
 		            </div>
@@ -245,23 +245,23 @@
                   <ul style="list-style-type: none;">
                     <li>
                    <label class="checkbox inline">
-                      <input type="checkbox" id="Literature" value="Literature"> Literature
+                      <input type="checkbox" name="Literature" value="Literature"> Literature
                 
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="Textbooks" value="Textbooks"> Textbooks
+                      <input type="checkbox" name="Textbooks" value="Textbooks"> Textbooks
                     </label>
                   </li>
                   <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="Bussiness Magazines" value="Bussiness Magazines"> Bussiness Magazines
+                      <input type="checkbox" name="Bussiness Magazines" value="Bussiness Magazines"> Bussiness Magazines
                     </label>
                    </li>
                    <li>
                     <label class="checkbox inline">
-                      <input type="checkbox" id="Science journals" value="Science journals"> Science journals
+                      <input type="checkbox" name="Science journals" value="Science journals"> Science journals
                     </label>
                   </li>
                   

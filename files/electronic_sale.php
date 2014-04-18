@@ -194,10 +194,7 @@
 		           </div>  
 		           </div>
 
-                      
-		              </fieldset>
-                      </form>
-		              
+                 
 		             
 
 		             </div>
@@ -246,6 +243,10 @@
                   </li>
                   </ul>
                  </div>
+                      
+                  </fieldset>
+                      </form>
+                  
 	    		</div>
 
 

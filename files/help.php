@@ -15,7 +15,14 @@
 	
 		<div class="container"><!-- you can delete this div if you don't want the side bar-->
 				<!--Navigation sidebar-->
-				
+				<div class="col-sm-3 col-md-2 sidebar">
+	                <ul class="nav nav-sidebar">
+		                <li class="active"><a href="#">Search</a></li>
+		                <li><a href="#">Profile</a></li>
+		                <li><a href="#">Bulk Order</a></li>
+		                <li><a href="#">Auction</a></li>
+	                </ul>
+                </div>
 				<!--Main Content area--> 
 		        <div class="container-fluid col-sm-9 col-md-9">
 		        	
@@ -84,7 +91,13 @@
 		        		<dl>
 		        		  <dt> <a href="#" onclick="toggle('box5')">How do I pay for a purchase?</a> </dt>
                             <div id="box5" style="display: none;">
-                            <p></p> 
+                            <p>You don’t have to explicitly pay for an order, when you checkout and confirm an order
+                             your credits are automatically held.</p> 
+                            </div>
+                            <dt> <a href="#" onclick="toggle('box11')">How are my credits redeemed when I cancel an order?</a> </dt>
+                            <div id="box11" style="display: none;">
+                            <p>Whenever you cancel an order, your credits are automatically redeemed instantly. 
+                            You are saved from any further hard work! </p> 
                             </div>
                           
                         </dl>
@@ -120,7 +133,65 @@
 
 
 							<hr>
+    
+                    <div>
+		        		<div>
+		        		 <a name="Order Delivery"> </a>
+		        		 <h2>Order Delivery</h2>
+		        	    </div>
 
+		        	 <div class="lastUnit tmargin20">
+		        		<dl>
+		        		  <dt> <a href="#" onclick="toggle('box12')">I want to know my order status?</a> </dt>
+                            <div id="box12" style="display: none;">
+                            <p>You can review the Status of your orders and other related information in the Orders page.</p> 
+                            </div>
+                          <dt> <a href="#" onclick="toggle('box13')">How is my order delivery acknowledgement confirmed?</a> </dt>
+                            <div id="box13" style="display: none;">
+                            <p>You may confirm your order by visiting the Orders page within 10 days of placing the order otherwise it
+                             is automatically confirmed on the 11th day. </p>
+                            </div>
+                            <dt> <a href="#" onclick="toggle('box14')">When can I cancel an order?</a> </dt>
+                            <div id="box14" style="display: none;">
+                            <p>A. If you had chosen the order’s delivery type as “Normal” only then can you cancel the order else not.
+                             The order can be cancelled within 2 days of placing the order. </p>
+                            </div>
+
+                        </dl>
+                      </div>
+					</div>
+
+
+							<hr>
+
+
+					<div>
+		        		<div>
+		        		 <a name="Cart"> </a>
+		        		 <h2>Cart</h2>
+		        	    </div>
+
+		        	 <div class="lastUnit tmargin20">
+		        		<dl>
+		        		  <dt> <a href="#" onclick="toggle('box15')">How can I save an item for later and not check it out?</a> </dt>
+                            <div id="box15" style="display: none;">
+                            <p>Its very simple, if the item is in your cart then just click the “save for later” link and
+                             whenever you want to purchase that item, go to the saved list section displayed below 
+                             “Your Shopping Cart” and click the “add to cart” link. That is all!</p> 
+                            </div>
+                         <dt> <a href="#" onclick="toggle('box16')">What are the various delivery types?</a> </dt>
+                            <div id="box16" style="display: none;">
+                            <p>The delivery types are differentiated on the basis of the time taken to deliver an order placed. 
+                            There are 2 delivery types:</p> 
+                            <li>Normal Delivery: The order is delivered within the next 10 days at maximum and
+                             cancellation of delivery is allowed. </li>
+                             <li>Instant Delivery: The order is delivered within a day but the order cannot be cancelled.</li>
+                            </div>
+
+                        </dl>
+                      </div>
+					</div>
+							<hr>		
 
 		           <!--
 						Write all

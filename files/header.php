@@ -40,6 +40,18 @@
                     <?php }?>
                 </li>
 
+
+                <li>
+                    <?php if(isset($_SESSION["authentication"])){?>
+                    <a href="logout.php" class="custom_icon_link">
+                        <span class="glyphicon glyphicon-log-out custom_navbar_icon"></span>
+                    Logout</a>
+                    <?php }else{?>
+                
+                    <?php }?>
+                </li>
+
+
                 <li class="dropdown">
                 <a class="dropdown-toggle" class="custom_icon_link" data-toggle="dropdown"  href="#" >
                     <span class="glyphicon glyphicon-globe custom_navbar_icon"></span>

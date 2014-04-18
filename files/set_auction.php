@@ -114,7 +114,7 @@
                         if(isset($_POST['Speakers'])){
                             $string5=$string5."speakers,";
                         }
-                        if(isset($_POST['cameras_and_accessories'])){
+                        if(isset($_POST['Cameras_and_Accessories'])){
                             $string5=$string5."cameras and accessories,";
                         }
                         if(isset($_POST['Audio_and_Video_players'])){

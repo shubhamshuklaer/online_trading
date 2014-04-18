@@ -24,12 +24,14 @@ if($omysql_insert_index->records>0){
 	//echo $get_item_description[$i]."<br>";
 	}
 	for($i=0;$i<count($get_item_tags);$i++){
-		$get_item_tags[$i]=$oporter_stemmer->Stem($get_item_description[$i]);
+		$get_item_tags[$i]=$oporter_stemmer->Stem($get_item_tags[$i]);
 	}
+	// print_r($get_item_tags);
 	$unique_terms=array_unique(array_merge(array_merge($get_item_nm,$get_item_description),$get_item_tags));
 	$value_count_item_nm=array_count_values($get_item_nm);
 	$value_count_item_description=array_count_values($get_item_description);
 	$value_count_item_tags=array_count_values($get_item_tags);
+	print_r($value_count_item_tags);
 	$insert_data_structure=array();
 	$temp=array();
 	foreach ($unique_terms as $value) {

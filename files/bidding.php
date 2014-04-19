@@ -85,10 +85,20 @@
                 <td class="model">'.$row[0]['category'].'</td>
                 <td class="current">'.$curr_bid.'</td>
                 <td class="current">'.$ids[$i]['bid'] .'</td>
-                <td class="total">
-                <a  href="auction.php?item_id='.$row[0]['item_id'].'">Change Bid<span class="glyphicon glyphicon-sort"></span></a>
-                <a onclick="remove_entry(';echo ($count-1);echo')" href="#">     Delete  <span class="glyphicon glyphicon-trash"></span></a>
-                </td></tr>';
+                <td class="total">';
+                date_default_timezone_set('Asia/Calcutta');
+                $date = '20'.date('y-M-d h:i:s a', time());
+                if(strtotime($date)>strtotime($row[0]['last_date']))
+                  {
+                    echo 'You have won this bid <br><a onclick="accept(';echo ($count-1);echo')" href="#">Accept<span class="glyphicon glyphicon-ok"></span></a>
+                <a onclick="remove_entry(';echo ($count-1);echo')" href="#">Reject<span class="glyphicon glyphicon-remove"></span></a>';
+                  }
+                else
+                {
+                  echo '<a  href="auction.php?item_id='.$row[0]['item_id'].'">Change Bid<span class="glyphicon glyphicon-sort"></span></a>
+                <a onclick="remove_entry(';echo ($count-1);echo')" href="#">     Delete  <span class="glyphicon glyphicon-trash"></span></a>';
+                }
+                echo '</td></tr>';
                 $i=$j;
                  }
               ?>
@@ -126,11 +136,11 @@
 $("#side_bidding").toggleClass("active");
 function remove_entry(id)
  {
-  var r=confirm("Are you sure you want to remove this item from your Watchlist ?");
+  var r=confirm("Are you sure you don't want to buy this item ?");
   if(r==true){  
   var temp=item_ids[id];
   var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open("GET","remove_item_bidding.php?id="+temp,false);
+  xmlhttp.open("GET","remove_bidder.php?id="+temp,false);
   xmlhttp.send();
      var row=document.getElementById(id+1);
      row.parentNode.removeChild(row);  

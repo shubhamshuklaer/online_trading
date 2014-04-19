@@ -17,6 +17,29 @@
             <?php include_once "header.php";?> 
         </div>
 
+<?php 
+                    $user_nm = $_SESSION["user_nm"];
+                require_once "class.MySQL.php";
+                  $object = new MySQL();
+    $where=array("user_nm like"=>$user_nm);
+    $object->Select("user",$where);
+     if($object->records>0){
+                        $result = $object->arrayedResult;
+                        foreach($result as $row){
+                          //$pic = $row["pic_loc"];
+                          $credits = (int)$row["credit"];
+                      }
+                      }
+                        $promotion=(int)$_POST['promotion'];
+                         $credit_new = $credits - $promotion;
+                          
+                         $new = new MySQL();
+                         $set = array('credit'=>$credit_new);
+                      $where = array("user_nm like"=>$user_nm);
+            $new->Update("user",$set,$where);
+                      ?>
+
+
 <?php  
             require_once "class.MySQL.php";           
             $test = new MySQL(); 
@@ -104,7 +127,7 @@
                             $string5=$string5."audio and video players,";
                         }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
-            $vars = array('tags'=>$string5,'user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
+            $vars = array('promotion_amnt'=>$promotion,'tags'=>$string5,'user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
             $test->Insert($vars,"items");
 
             // echo $test->lastQuery;
@@ -186,7 +209,7 @@
                             $string4=$string4."science journals,";
                         }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."author: ".$author." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price;
-                        $vars = array('tags'=>$string4,'user_nm'=>$usrnm,'type'=>$type, 'quantity'=>$quantity ,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category, 'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('promotion_amnt'=>$promotion,'tags'=>$string4,'user_nm'=>$usrnm,'type'=>$type, 'quantity'=>$quantity ,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category, 'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
                                 }
@@ -268,7 +291,7 @@
                             $string1=$string1."a.others,";
                         }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type:".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
-                        $vars = array('tags'=>$string1,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('promotion_amnt'=>$promotion,'tags'=>$string1,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
                                 }
@@ -356,7 +379,7 @@
                         }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
                         $category=$category1.":".$type_1;
-                        $vars = array('tags'=>$string2,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
+                        $vars = array('promotion_amnt'=>$promotion,'tags'=>$string2,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'type'=>$type,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                                 }
                             }
@@ -439,7 +462,7 @@
                             $string3=$string3."o.others,";
                         }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."model: ".$model;
-                        $vars = array('tags'=>$string3,'user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'sale_type'=>$sale_type);
+                        $vars = array('promotion_amnt'=>$promotion,'tags'=>$string3,'user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'base_price'=>$base_price,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'sale_type'=>$sale_type);
                         $test->Insert($vars,"items");
                                 }
                             }

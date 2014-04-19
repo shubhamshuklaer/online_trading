@@ -159,7 +159,32 @@
 		            </div>
 		            </div>
 
+               <div class="form-group">
+                <label class="col-sm-2 control-label" for="select03">Promotion</label>
+             <div class="col-sm-5">
+                <input type = "number" class="form-control"  id="promotion" name="promotion" min="0">
+                   </div>
+                </div>
+
+
               
+    
+               <?php 
+                    $user_nm = $_SESSION["user_nm"];
+                require_once "class.MySQL.php";
+                  $object = new MySQL();
+    $where=array("user_nm like"=>$user_nm);
+    $object->Select("user",$where);
+     if($object->records>0){
+                        $result = $object->arrayedResult;
+                        foreach($result as $row){
+                          //$pic = $row["pic_loc"];
+                          $credits = $row["credit"];
+                        
+                          
+                        }
+                      }
+                      ?>
 
                   
 
@@ -236,8 +261,7 @@
 		           </div>
 
                       
-		              </fieldset>
-                      </form>
+		           
 		              
 		             
 
@@ -273,6 +297,9 @@
                   </ul>
                  </div>
 
+
+   </fieldset>
+                      </form>
 		        
 	    		</div>
 
@@ -338,79 +365,109 @@
 	 <script type="text/javascript">
  function verify(){
      
+verify2();
 
-
- 	 if(!document.getElementById('type').value.trim().length){
- 	 	 alert("Please enter the type");
+   if(!document.getElementById('type').value.trim().length){
+     alert("Please enter the type");
         $( "#usrform" ).submit(function( event ) {
        alert( "Handler for .submit() called." );
+      
        event.preventDefault();
+        location.reload();
 });
    }else if(!document.getElementById('name').value.trim().length){
         alert("Please enter the name");
         $( "#usrform" ).submit(function( event ) {
   alert( "Handler for .submit() called." );
-  document.getElementById('name').style.color="red";
+  
+  
   event.preventDefault();
+  location.reload();
 });
     }
     else if(!document.getElementById('mrp').value.trim().length){
         alert("Please enter the mrp");
         $( "#usrform" ).submit(function( event ) {
   alert( "Handler for .submit() called." );
+
   event.preventDefault();
+  location.reload();
 });
     }
     else if(!document.getElementById('quantity').value.trim().length){
         alert("Please enter the quantity");
         $( "#usrform" ).submit(function( event ) {
-  alert( "Handler for .submit() called." );
+
   event.preventDefault();
+  location.reload();
 });
     }
     else if(!document.getElementById('brand').value.trim().length){
         alert("Please enter the brand");
         $( "#usrform" ).submit(function( event ) {
   alert( "Handler for .submit() called." );
+
   event.preventDefault();
+  location.reload();
 });
     }
     else if(!document.getElementById('model').value.trim().length){
         alert("Please enter the model");
         $( "#usrform" ).submit(function( event ) {
   alert( "Handler for .submit() called." );
+ 
   event.preventDefault();
+  location.reload();
 });
     }
     else if(!document.getElementById('description').value.trim().length){
         alert("Please enter the description");
         $( "#usrform" ).submit(function( event ) {
   alert( "Handler for .submit() called." );
+ 
   event.preventDefault();
+  location.reload();
 });
     }
     else if(!document.getElementById('base_price').value.trim().length){
         alert("Please enter the base_price");
         $( "#usrform" ).submit(function( event ) {
   alert( "Handler for .submit() called." );
+  
   event.preventDefault();
+  location.reload();
 });
     }
     else if(!document.getElementById('start_date').value.trim().length){
         alert("Please enter the start_date");
         $( "#usrform" ).submit(function( event ) {
   alert( "Handler for .submit() called." );
+  
   event.preventDefault();
+  location.reload();
 });
     }
     else if(!document.getElementById('close_date').value.trim().length){
         alert("Please enter the close_date");
         $( "#usrform" ).submit(function( event ) {
   alert( "Handler for .submit() called." );
+
   event.preventDefault();
+  location.reload();
 });
     }
  }</script>
+ <script type="text/javascript">
+ function verify2(){
+if((parseInt(document.getElementById('promotion').value)>parseInt(crd))){
+      alert("You don't have enough credits");
+        $( "#usrform" ).submit(function( event ) {
+  alert( "Handler for .submit() called." );
+  event.preventDefault();
+});}
+    }
+        </script>
+  
 	
     
 	<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>

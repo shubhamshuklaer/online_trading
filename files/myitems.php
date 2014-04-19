@@ -85,7 +85,7 @@
                   $temp=strtotime($row[$i]['last_date']);
                   if($date>$temp)
                   {
-                  echo '<a  href="#">   Send <span class="glyphicon glyphicon-send"></span></a><br>';    
+                  echo '<a  href="#" onclick="contact_next(';echo ($count-1);echo')">Contact next highest bidder<span class="glyphicon glyphicon-send"></span></a><br>';    
                   }
                 }
                 echo '<a onclick="edit_entry(';echo ($count-1);echo')" href="#">  Edit <span class="glyphicon glyphicon-pencil"></span></a><br>
@@ -150,6 +150,23 @@ function edit_entry(id)
              }
      xmlhttp.open("GET","add_item_session_variable.php?id="+temp,true);
      xmlhttp.send();
+  }
+  function contact_next(id)
+  {
+    var r=confirm("Are you sure you want to contact next bidder");
+    if(r==true)
+  {
+    var temp=item_ids[id];
+    alert(temp);
+     var xmlhttp=new XMLHttpRequest();xmlhttp.onreadystatechange=function()
+             {
+             if (xmlhttp.readyState==4 && xmlhttp.status==200)
+               {
+                alert("Next highest bidder has been contacted");
+               }
+             }
+     xmlhttp.open("GET","remove_next.php?id="+temp,true);
+     xmlhttp.send();}
   }
 </script>
 </body>

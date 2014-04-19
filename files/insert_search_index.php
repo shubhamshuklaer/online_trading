@@ -48,8 +48,8 @@ if($omysql_insert_index->records>0){
 		else
 			$temp["rep_description"]=0;
 		///////////////////////in item tags
-		if(isset($value_count_item_description[$value]))
-			$temp["rep_tags"]=$value_count_item_description[$value];
+		if(isset($value_count_item_tags[$value]))
+			$temp["rep_tags"]=$value_count_item_tags[$value];
 		else
 			$temp["rep_tags"]=0;
 		$insert_data_structure[]=$temp;

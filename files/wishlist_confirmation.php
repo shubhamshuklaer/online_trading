@@ -68,6 +68,7 @@
                       {
                 $row=$object->ExecuteSQL("SELECT * from items where item_id='$tok'");
                   ++$count;
+                  $path=$row[0]["type"].'.php?item_id='.$row[0]["item_id"];
                     echo '<script type="text/javascript">
                          item_ids[i]=';
                          echo $row[0]['item_id'];
@@ -84,7 +85,7 @@
                 <td class="type">'.$row[0]['type'].'</td>
                 <td class="total">
                 <div class="pull-left">
-                <a onclick="edit_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-ok"></span></a>
+                <a onclick="accept_entry(';echo ($count-1);echo',';echo "'$path'"; echo')" href="#"><span class="glyphicon glyphicon-ok"></span></a>
                 </div>
                 <a onclick="remove_entry(';echo ($count-1);echo')" href="#"><span class="glyphicon glyphicon-remove"></span></a>
                 </td></tr>';
@@ -124,7 +125,6 @@
 <script type="text/javascript"  src="js/jquery.ba-throttle-debounce.min.js"></script>
 <script defer src="js/custom.js"></script>
 <script type="text/javascript">
-
 function remove_entry(id)
  {
   var r=confirm("Is this not the item you wanted ?");
@@ -137,19 +137,19 @@ function remove_entry(id)
    row.parentNode.removeChild(row);
   }
 }
-// function edit_entry(id)
-//  {
-//      var temp=item_ids[id];
-//      var xmlhttp=new XMLHttpRequest();xmlhttp.onreadystatechange=function()
-//              {
-//              if (xmlhttp.readyState==4 && xmlhttp.status==200)
-//                {
-//                  window.location.href="http://localhost/online_trading/files/Profile/editmyitems.php";
-//                }
-//              }
-//      xmlhttp.open("GET","add_exception.php?id="+temp,true);
-//      xmlhttp.send();
-//   }
+function accept_entry(id,path)
+{
+  var temp=item_ids[id];
+  var xmlhttp=new XMLHttpRequest(); xmlhttp.onreadystatechange=function()
+             {
+             if (xmlhttp.readyState==4 && xmlhttp.status==200)
+               {
+     window.location.href=path;
+               }
+             }
+  xmlhttp.open("GET","add_exception.php?id="+temp,false);
+  xmlhttp.send();
+}
 </script>
 </body>
 </html>

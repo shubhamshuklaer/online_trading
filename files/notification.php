@@ -143,6 +143,18 @@
 				$type[$i]="bid";
 				++$i;
 		}
+		date_default_timezone_set('Asia/Calcutta');
+		$date = '20'.date('y-M-d h:i:s a', time());
+		if(strtotime($date)>strtotime($krow[0]['last_date']))
+		{
+			if($curr_bid==$row[$j]['bid'])
+			{
+				$notifications[$i]="You have won the bid for ".$krow[0]['item_nm']."";
+				$link[$i]="bidding.php";
+				$type[$i]="bid_won";
+				++$i;
+			}
+		}
 		$j=$k;
 	}
 	$_SESSION['wishlist_found']=$result;

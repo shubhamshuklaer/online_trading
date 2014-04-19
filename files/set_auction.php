@@ -29,6 +29,30 @@
         </div>
 
 
+<?php 
+                    $user_nm = $_SESSION["user_nm"];
+                require_once "class.MySQL.php";
+                  $object = new MySQL();
+    $where=array("user_nm like"=>$user_nm);
+    $object->Select("user",$where);
+     if($object->records>0){
+                        $result = $object->arrayedResult;
+                        foreach($result as $row){
+                          //$pic = $row["pic_loc"];
+                          $credits = (int)$row["credit"];
+                      }
+                      }
+                        $promotion=(int)$_POST['promotion'];
+                         $credit_new = $credits - $promotion;
+                          
+                         $new = new MySQL();
+                         $set = array('credit'=>$credit_new);
+                      $where = array("user_nm like"=>$user_nm);
+            $new->Update("user",$set,$where);
+                      ?>
+
+
+
 
 
 <?php  
@@ -37,9 +61,24 @@
             $type = "auction";
            // session_start();
             $usrnm=$_SESSION["user_nm"];
+            $date1 = $_POST['start_date_1'];
+            $date2 = $_POST['close_date_1'];
+            $datetime1 = new DateTime($date1);
+            $datetime2 = new DateTime($date2);
+            $f=$datetime2->diff($datetime1);
+            $fy = $f->y;
+            $fm = $f->m;
+            $fd = $f->d;
+            $fh = $f->h;
+            $fi = $f->i;
+            $fs = $f->s;
+            $g=($fy*31536000)+($fm*2592000)+($fd*86400)+($fh*3600)+($fi*60)+$fs;
+            //echo $g;
+            if($datetime2->format('U') > $datetime1->format('U') && $g>=7200){
+
             if(isset($_POST["base_price_1"]) && isset($_POST['close_date']) && isset($_POST['type_1']) && isset($_POST['condition_1']) && isset($_POST['name_1']) && isset($_POST['description_1']) && isset($_POST['mrp_1']) && isset($_POST['model_1']) && isset($_POST['brand_1']) && isset($_POST['quantity_1']))
             {
-     
+                
            
            //echo "mittal1";
                 $allowedExts = array("gif", "jpeg", "jpg", "png");
@@ -121,7 +160,7 @@
                             $string5=$string5."audio and video players,";
                         }
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
-            $vars = array('tags'=>$string5,'user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'last_date'=>$_POST['close_date'],'start_date'=>$start_date,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
+            $vars = array('promotion_amnt'=>$promotion,'tags'=>$string5,'user_nm'=>$usrnm,'quantity'=>$quantity,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'type'=>$type,'category'=>$category,'last_date'=>$_POST['close_date'],'start_date'=>$start_date,'model'=>$model,'sale_type'=>$sale_type,'base_price'=>$base_price);
             $test->Insert($vars,"items");
             
             // echo $test->lastQuery;
@@ -209,7 +248,7 @@
                         }
                        // echo $string4;
                          $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."author: ".$author." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date;
-                        $vars = array('tags'=>$string4,'user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('promotion_amnt'=>$promotion,'tags'=>$string4,'user_nm'=>$usrnm,'quantity'=>$quantity,'type'=>$type,'author_nm'=>$author,'pic_loc'=>$_FILES["file"]["name"],'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'genre'=>$genre,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
                         
@@ -298,7 +337,7 @@
                        // echo $string1;
                          $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
                         
-                        $vars = array('tags'=>$string1,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('promotion_amnt'=>$promotion,'tags'=>$string1,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                         echo "wow";
                         
@@ -392,7 +431,7 @@
                      //   echo $string2;
                          $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
                         
-                        $vars = array('tags'=>$string2,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('promotion_amnt'=>$promotion,'tags'=>$string2,'user_nm'=>$usrnm,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$close_date,'type'=>$type,'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                                  }
                             }
@@ -479,7 +518,7 @@
                         }
                     //    echo $string3;
                         $x="description: ".$description." ;"."category: ".$category." ;"."type: ".$type." ;"."brand: ".$brand." ;"."name: ".$name." ;"."mrp: ".$mrp." ;"."base_price: ".$base_price." ;"."start_date: ".$start_date." ;"."close_date: ".$close_date." ;"."model: ".$model;
-                        $vars = array('tags'=>$string3,'user_nm'=>$usrnm,'type'=>$type,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$_POST['close_date'],'sale_type'=>$sale_type,'base_price'=>$base_price);
+                        $vars = array('promotion_amnt'=>$promotion,'tags'=>$string3,'user_nm'=>$usrnm,'type'=>$type,'quantity'=>$quantity,'brand'=>$brand,'pic_loc'=>$_FILES["file"]["name"],'model'=>$model,'item_nm'=>$name,'cost'=>$mrp,'item_condition'=>$condition,'description'=>$x,'category'=>$category,'start_date'=>$start_date,'last_date'=>$_POST['close_date'],'sale_type'=>$sale_type,'base_price'=>$base_price);
                         $test->Insert($vars,"items");
                                 }
                             }
@@ -490,9 +529,13 @@
     
                        }
                     }
+                } 
+                else{
+                echo "Please check the dates";
+            }   
 
                     include_once "insert_search_index.php";
-                    header("Location: myitems.php");
+                    // header("Location: myitems.php");
                     
 		               ?>
                        </div>

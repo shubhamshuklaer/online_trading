@@ -1,5 +1,6 @@
 online_trading
 ==============
+A course project where we have to implement something similar to ebay.
 
 1. The structure of project(main folders)
       1. css folder- contain all css files(ready made+ made by us)

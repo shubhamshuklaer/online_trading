@@ -38,3 +38,8 @@ online_trading
       4. cart-vrinda
       5. bulk order- praveen
       6. Recommendation- Swapnil
+11. How to install(Ubuntu)
+      1. mysql username "team" and password "team"
+      2. database name "online_trading"
+      3. Final sql file is "online_trading_merged_version.sql" import it into online_trading database
+      4. after hosting the website one online_trading/files/index.php

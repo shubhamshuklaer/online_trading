@@ -39,7 +39,7 @@ online_trading
       5. bulk order- praveen
       6. Recommendation- Swapnil
 11. How to install
-      1. mysql username "team" and password "team"
-      2. database name "online_trading"
-      3. Final sql file is "online_trading_merged_version.sql" import it into "online_trading" database
-      4. after hosting the website onpen "files/index.php"
+      1. Add mysql user "team" with password "team" and grant it all privilages.
+      2. create database name "online_trading"
+      3. Final sql file is "online_trading_merged_version.sql", import it into "online_trading" database
+      4. after hosting the website open url for "files/index.php" eg http://localhost/online_trading/files/index.php
